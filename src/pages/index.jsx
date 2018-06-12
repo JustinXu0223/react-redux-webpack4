@@ -5,12 +5,17 @@
  * @author JUSTIN XU
  */
 import React from 'react';
+import styled from 'styled-components';
+
+const ContainerDiv = styled.div`
+  text-align: right;
+`;
 
 class App extends React.Component {
-  state = {}
+  state = {};
   render() {
     return (
-      <div>App App</div>
+      <ContainerDiv>App App</ContainerDiv>
     );
   }
 }

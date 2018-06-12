@@ -20,6 +20,13 @@ module.exports = {
     filename: '[name].[hash:8].js',
     chunkFilename: 'chunks/[name].[hash:8].chunk.js',
   },
+  resolve: {
+    modules: [resolve('node_modules')],
+    extensions: ['.js', '.jsx', '.json', '.css', '.less'],
+    alias: {
+      '@': resolve('src'),
+    },
+  },
   module: {
     rules: [
       {
@@ -59,7 +66,6 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              // limit: 0,
               limit: 10240,
               name: '[name].[hash:8].[ext]',
             },
@@ -94,13 +100,6 @@ module.exports = {
         ],
       },
     ],
-  },
-  resolve: {
-    modules: [resolve('node_modules')],
-    extensions: ['.js', '.jsx', '.json', '.css', '.less'],
-    alias: {
-      '@': resolve('src'),
-    },
   },
   plugins: [
     new HtmlWebpackPlugin({

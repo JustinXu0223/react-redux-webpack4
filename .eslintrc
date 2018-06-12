@@ -49,7 +49,6 @@
     "import/no-extraneous-dependencies": [0],
     "import/no-unresolved": [0],
     "react/prop-types": [0],
-    "react/sort-comp": [0],
     "object-curly-newline": [0],
     "no-param-reassign": [0],
     "no-debugger": [0],
@@ -63,7 +62,6 @@
     "no-plusplus": [0],
     "camelcase": [0],
     "react/no-string-refs": [0],
-    "no-unused-expressions": [0],
-    "max-len": [0]
+    "no-unused-expressions": [0]
   }
 }
