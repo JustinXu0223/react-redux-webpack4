@@ -13,7 +13,10 @@ module.exports = merge(common, {
   mode: 'production',
   devtool: 'cheap-source-map',
   plugins: [
-    new CleanWebpackPlugin([resolve('dist')]),
+    new CleanWebpackPlugin(['dist'], {
+      root: resolve('/'),
+      verbose: true,
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production'),

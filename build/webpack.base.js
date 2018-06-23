@@ -10,6 +10,10 @@ function resolve(dir) {
   return path.join(__dirname, '../', dir);
 }
 
+function isProd() {
+  return process.env.NODE_ENV === 'production';
+}
+
 const themeVariables = lessToJs(fs.readFileSync(resolve('./config/ant-theme-vars.less'), 'utf8'));
 
 module.exports = {
@@ -17,8 +21,8 @@ module.exports = {
   output: {
     path: resolve('dist'),
     publicPath: '/',
-    filename: '[name].[hash:8].js',
-    chunkFilename: 'chunks/[name].[hash:8].chunk.js',
+    filename: isProd ? '[name].[hash:8].js' : '[name].js',
+    chunkFilename: isProd ? 'chunks/[name].[hash:8].chunk.js' : 'chunks/[name].chunk.js',
   },
   resolve: {
     modules: [resolve('node_modules')],
@@ -67,7 +71,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 10240,
-              name: '[name].[hash:8].[ext]',
+              name: isProd ? '[name].[hash:8].[ext]' : '[name].[ext]',
             },
           },
         ],
@@ -79,8 +83,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 0,
-              // limit: 10240,
+              limit: 10240,
             },
           },
         ],
