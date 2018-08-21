@@ -3,13 +3,13 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const common = require('./webpack.base.js');
+const base = require('./webpack.base.js');
 
 function resolve(dir) {
   return path.join(__dirname, '../', dir);
 }
 
-module.exports = merge(common, {
+module.exports = merge(base, {
   mode: 'production',
   devtool: 'cheap-source-map',
   plugins: [

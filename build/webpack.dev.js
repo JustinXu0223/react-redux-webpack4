@@ -1,12 +1,12 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 const merge = require('webpack-merge');
 const webpack = require('webpack');
-const common = require('./webpack.base.js');
+const base = require('./webpack.base.js');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 const port = 8080;
 
-module.exports = merge(common, {
+module.exports = merge(base, {
   mode: 'development',
   module: {
     rules: [

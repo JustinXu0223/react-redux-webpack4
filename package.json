@@ -8,14 +8,16 @@
   "license": "Private",
   "private": true,
   "scripts": {
+    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "lint": "eslint \"**/*.{js,jsx}\" --quiet",
     "dev": "webpack-dev-server --progress --colors --config build/webpack.dev.js",
     "start": "./node_modules/.bin/env-cmd start:dev yarn dev",
     "release": "webpack --progress --colors --config build/webpack.prod.js --profile --json > stats.json",
     "build": "./node_modules/.bin/env-cmd build:prod yarn release",
-    "build:stage": "./node_modules/.bin/env-cmd build:staging yarn release"
+    "build:staging": "./node_modules/.bin/env-cmd build:staging yarn release"
   },
   "pre-commit": [
+    "precommit-msg",
     "lint"
   ],
   "dependencies": {
@@ -24,7 +26,6 @@
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "bizcharts": "^3.1.7",
-    "env-cmd": "^8.0.2",
     "history": "^4.7.2",
     "immutable": "^3.8.2",
     "moment": "^2.22.1",
@@ -57,6 +58,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.11",
+    "env-cmd": "^8.0.2",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-loader": "^2.0.0",

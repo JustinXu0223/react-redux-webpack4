@@ -10,9 +10,7 @@ function resolve(dir) {
   return path.join(__dirname, '../', dir);
 }
 
-function isProd() {
-  return process.env.NODE_ENV === 'production';
-}
+const isProd = process.env.NODE_ENV === 'production';
 
 const themeVariables = lessToJs(fs.readFileSync(resolve('./config/ant-theme-vars.less'), 'utf8'));
 
