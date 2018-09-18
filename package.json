@@ -2,7 +2,7 @@
   "name": "react-redux-webpack4",
   "version": "0.1.0",
   "description": "react redux webpack",
-  "main": "src/index.js",
+  "main": "src/index.jsx",
   "repository": {
     "type": "git",
     "url": "https://gitee.com/details/react-redux-webpack4.git"
