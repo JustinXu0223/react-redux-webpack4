@@ -7,14 +7,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ContainerDiv = styled.div`
+const ContainerView = styled.div`
 `;
 
 class App extends React.Component {
   state = {};
   render() {
     return (
-      <ContainerDiv>App App</ContainerDiv>
+      <ContainerView>App App</ContainerView>
     );
   }
 }

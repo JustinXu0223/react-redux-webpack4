@@ -1,36 +1,49 @@
-# react-redux-webpack4
+## react-redux-webpack4
 
-#### Description
-basic antd, react@16, redux@4, webpack@4
-
-#### Software Architecture
-Software architecture description
-
-#### Installation
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### Instructions
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### Contribution
-
-1. Fork the project
-2. Create Feat_xxx branch
-3. Commit your code
-4. Create Pull Request
+* Bale 'webpack@4 + babel'
+* Eslint 'airbnb + babel-eslint'
+* Ui 'react@16 + antd-mobile + rem + styled-components'
+* Router 'react-router-dom@4 + history@4'
+* Xhr 'axios'
+* Handle state 'redux + redux-sage + reselect + immutable'
+* Other library '...'
 
 
-#### Gitee Feature
+### Version
+```html
+node 8.0+(v8.11.1)
+npm 5.0+(v5.6.0)
+```
 
-1. You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2. Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3. Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4. The most valuable open source project [GVP](https://gitee.com/gvp)
-5. The manual of Gitee [http://git.mydoc.io/](http://git.mydoc.io/)
-6. The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+
+### Dos development
+1. Run 'yarn'
+2. Run 'yarn start'
+
+
+### Dos production
+* Run 'yarn build'
+
+* OR
+
+* Run 'yarn build:(any)'
+
+
+### Project structure
+```html
+|--src              Source dir
+  |--assets         Static source
+  |--components     Only common & Layout
+  |--constants     
+  |--i18n
+  |--pages          Container & Self component
+    |--Eos
+  |--redux
+  |--styles         Common style
+  |--templates      Activity pages
+  |--utils
+  |--index.jsx      Entry of Program
+  |--router.js      Top Router        
+
+|--.env-cmdrc       Base url config
+```
