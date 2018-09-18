@@ -5,6 +5,7 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const fs = require('fs');
 const lessToJs = require('less-vars-to-js');
+const CopyWebpackPlugin = require('copy-webpack-plugin'); // copy
 
 function resolve(dir) {
   return path.join(__dirname, '../', dir);
@@ -63,25 +64,12 @@ module.exports = {
       },
       {
         test: /\.(eot|woff|woff2|ttf|png|jpg|jpeg|gif|svg|mp4|webm|ico)$/,
-        include: /src\/assets/,
         use: [
           {
             loader: 'url-loader',
             options: {
               limit: 10240,
               name: isProd ? '[name].[hash:8].[ext]' : '[name].[ext]',
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(eot|woff|woff2|ttf|png|jpg|jpeg|gif|svg|mp4|webm|ico)$/,
-        exclude: /src\/assets/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10240,
             },
           },
         ],
@@ -103,6 +91,11 @@ module.exports = {
     ],
   },
   plugins: [
+    new CopyWebpackPlugin([{
+      from: resolve('./public'),
+      to: '',
+      force: true,
+    }]),
     new HtmlWebpackPlugin({
       title: 'BTCC Mining Pool',
       template: path.resolve(resolve('public'), 'index.html'),

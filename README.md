@@ -2,7 +2,7 @@
 
 * Bale 'webpack@4 + babel'
 * Eslint 'airbnb + babel-eslint'
-* Ui 'react@16 + antd-mobile + rem + styled-components'
+* Ui 'react@16 + antd + styled-components'
 * Router 'react-router-dom@4 + history@4'
 * Xhr 'axios'
 * Handle state 'redux + redux-sage + reselect + immutable'
@@ -37,7 +37,6 @@ npm 5.0+(v5.6.0)
   |--constants     
   |--i18n
   |--pages          Container & Self component
-    |--Eos
   |--redux
   |--styles         Common style
   |--templates      Activity pages

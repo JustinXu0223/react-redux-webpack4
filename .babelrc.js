@@ -16,8 +16,7 @@ module.exports = {
     "stage-2"
   ],
   env: {
-    production: {
-    },
+    production: {},
     development: {
       "plugins": [
         ["react-transform", {

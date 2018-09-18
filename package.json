@@ -1,20 +1,23 @@
 {
-  "name": "miningpool-web",
-  "version": "1.0.0",
-  "description": "BTCC Mining Pool Web",
-  "main": "index.js",
-  "repository": "git@github.com:btccpool/miningpool-web.git",
-  "author": "BTCC Pool Team",
-  "license": "Private",
+  "name": "react-redux-webpack4",
+  "version": "0.1.0",
+  "description": "react redux webpack",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/details/react-redux-webpack4.git"
+  },
+  "author": "JUSTIN XU",
+  "license": "UNLICENSED",
   "private": true,
   "scripts": {
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "lint": "eslint \"**/*.{js,jsx}\" --quiet",
     "dev": "webpack-dev-server --progress --colors --config build/webpack.dev.js",
-    "start": "./node_modules/.bin/env-cmd start:dev yarn dev",
+    "start": "env-cmd start:dev yarn dev",
     "release": "webpack --progress --colors --config build/webpack.prod.js --profile --json > stats.json",
-    "build": "./node_modules/.bin/env-cmd build:prod yarn release",
-    "build:staging": "./node_modules/.bin/env-cmd build:staging yarn release"
+    "build": "env-cmd build:prod yarn release",
+    "build:staging": "env-cmd build:staging yarn release"
   },
   "pre-commit": [
     "precommit-msg",
@@ -25,6 +28,7 @@
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
+    "big.js": "^5.1.2",
     "bizcharts": "^3.1.7",
     "history": "^4.7.2",
     "immutable": "^3.8.2",
@@ -57,6 +61,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^0.28.11",
     "env-cmd": "^8.0.2",
     "eslint": "^4.19.1",
@@ -82,5 +87,13 @@
     "webpack-cli": "^2.1.2",
     "webpack-dev-server": "^3.1.3",
     "webpack-merge": "^4.1.2"
-  }
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "webpack",
+    "axios",
+    "immutable",
+    "style-components"
+  ]
 }

@@ -6,8 +6,10 @@ const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 const port = 8080;
 
+const init_mode = 'development';
+
 module.exports = merge(base, {
-  mode: 'development',
+  mode: init_mode,
   module: {
     rules: [
       {
@@ -31,8 +33,8 @@ module.exports = merge(base, {
     new OpenBrowserPlugin({ url: `http://localhost:${port}` }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('development'),
-        'BABEL_ENV': JSON.stringify('development'),
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV || init_mode),
+        'BABEL_ENV': JSON.stringify(process.env.BABEL_ENV || init_mode),
         'REACT_APP_BASE_API': JSON.stringify(process.env.REACT_APP_BASE_API),
       },
     }),
