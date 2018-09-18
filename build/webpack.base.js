@@ -20,8 +20,8 @@ module.exports = {
   output: {
     path: resolve('dist'),
     publicPath: '/',
-    filename: isProd ? '[name].[hash:8].js' : '[name].js',
-    chunkFilename: isProd ? 'chunks/[name].[hash:8].chunk.js' : 'chunks/[name].chunk.js',
+    filename: isProd ? 'js/[name].[chunkhash:8].js' : '[name].js',
+    chunkFilename: isProd ? 'js/[name].[chunkhash:8].js' : '[name].js',
   },
   resolve: {
     modules: [resolve('node_modules')],
@@ -63,16 +63,28 @@ module.exports = {
         ],
       },
       {
-        test: /\.(eot|woff|woff2|ttf|png|jpg|jpeg|gif|svg|mp4|webm|ico)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10240,
-              name: isProd ? '[name].[hash:8].[ext]' : '[name].[ext]',
-            },
-          },
-        ],
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: isProd ? 'img/[name].[hash:8].[ext]' : '[name].[ext]',
+        },
+      },
+      {
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: isProd ? 'media/[name].[hash:8].[ext]' : '[name].[ext]',
+        },
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: isProd ? 'fonts/[name].[hash:8].[ext]' : '[name].[ext]',
+        },
       },
       {
         test: /\.less$/,
