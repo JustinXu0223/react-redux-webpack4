@@ -42,9 +42,11 @@ export function numberFormat(val, len = 0) {
       return '';
     }
   }
-  let res = 0;
-  if (num) { // remove zero
+  let res;
+  if (num && len) {
     res = new Big(num).toFixed(len);
+  } else {
+    res = num;
   }
   if (num < 1000) return res;
   const parsedArr = res.split('.');
