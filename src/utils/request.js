@@ -5,7 +5,6 @@
  * @author JUSTIN XU
  */
 import axios from 'axios';
-import { message as AntdMessage } from 'antd';
 import history from './history';
 
 const BASE_URL = process.env.REACT_APP_BASE_API;
@@ -21,9 +20,46 @@ function getServeError() {
   };
 }
 
+class ResponseError extends Error {
+  constructor(message, code, response = {}) {
+    super(message);
+    this.code = code;
+    this.response = response;
+  }
+}
+
+function reloadHttp(config) {
+  if (!config || !config.retry) return Promise.resolve(null);
+
+  // Set the variable for keeping track of the retry count
+  config.last_retryCount = config.last_retryCount || 0;
+
+  // Check if we've maxed out the total number of retries
+  if (config.last_retryCount >= config.retry) {
+    // Reject with the error
+    return Promise.resolve(null);
+  }
+
+  // Increase the retry count
+  config.last_retryCount += 1;
+
+  // Create new promise to handle exponential backoff
+  return new Promise(((resolve) => {
+    setTimeout(() => {
+      resolve(config);
+    }, config.retryDelay || 1);
+  }));
+}
+
 const instance = axios.create({
   baseURL: BASE_URL,
-  timeout: 10000,
+  timeout: 5000,
+
+  withCredentials: true,
+
+  // 设置全局的请求次数，请求的间隙
+  retry: 2,
+  retryDelay: 1000,
 });
 
 // Add a request interceptor
@@ -48,37 +84,37 @@ instance.interceptors.response.use(response => {
     }
     return data;
   }
-  const res = new Error(data.code);
-  res.response = response;
-  throw res;
-}, (err) => {
-  const { status, data: { msg, message } = {}, config = {} } = err.response || {};
+  throw new ResponseError(getServeError().SERVE_ERROR, Number(data.code), response);
+}, async (err) => {
+  const { status, data: { msg, message, code } = {}, config = {} } = err.response || {};
   const errMsg = msg || message;
+  // check reload http
+  if (err.code === 'ECONNABORTED' || err.message === 'Network Error') {
+    const reloadConfig = await reloadHttp(err.config);
+    if (reloadConfig) return instance(reloadConfig);
+  }
+  // handle auth
   if (Object.is(401, status) && !config.removeAuth) {
     localStorage.removeItem('token');
     history.replace('/login');
-    const result = errMsg || getServeError().SERVE_TOKEN_ERROR;
-    AntdMessage.error(result);
-    throw new Error(result);
+    const message = errMsg || getServeError().SERVE_TOKEN_ERROR;
+    throw new ResponseError(message, Number(code), err.response);
   }
   // handle network timeout
   if (Object.is('ECONNABORTED', err.code)) {
-    const errMsg = getServeError().TIMEOUT_ERROR;
-    AntdMessage.error(errMsg);
-    throw new Error(errMsg);
+    throw new ResponseError(getServeError().TIMEOUT_ERROR, null, err.response);
   }
   // handle network error
   if (Object.is('Network Error', err.message)) {
-    const errMsg = getServeError().NETWORK_ERROR;
-    AntdMessage.error(errMsg);
-    throw new Error(errMsg);
+    throw new ResponseError(getServeError().NETWORK_ERROR, null, err.response);
   }
   if (Object.is('arraybuffer', config.responseType)) {
     const data = err.response.data || '';
     const result = Buffer.from(data, 'binary').toString() || '{}';
-    throw new Error(JSON.parse(result).msg || getServeError().SERVE_ERROR);
+    const message = JSON.parse(result).msg || getServeError().SERVE_ERROR;
+    throw new ResponseError(message, null, err.response);
   }
-  throw new Error(errMsg || getServeError().SERVE_ERROR);
+  throw new ResponseError(errMsg || getServeError().SERVE_ERROR, null, err.response);
 });
 
 export default instance;
