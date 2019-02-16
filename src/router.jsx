@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { ConnectedRouter } from 'react-router-redux';
 import { Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
-import routers from '@/constants/routers';
+import routers from 'constants/routers';
 
 import LoadingComponent from './components/Loading';
 

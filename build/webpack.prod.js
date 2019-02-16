@@ -1,30 +1,19 @@
 /* eslint import/no-extraneous-dependencies: 0 */
-const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const base = require('./webpack.base.js');
-
-function resolve(dir) {
-  return path.join(__dirname, '../', dir);
-}
-
-const init_mode = 'production';
+const packjson = require('../package');
+const utils = require('./webpack.util.js');
 
 module.exports = merge(base, {
-  mode: init_mode,
+  mode: 'production',
   devtool: 'cheap-source-map',
   plugins: [
-    new CleanWebpackPlugin(['dist'], {
-      root: resolve('/'),
+    new CleanWebpackPlugin([process.env.OUTPUT_DIR], {
+      root: utils.resolvePath('/'),
       verbose: true,
     }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV || init_mode),
-        'BABEL_ENV': JSON.stringify(process.env.BABEL_ENV || init_mode),
-        'REACT_APP_BASE_API': JSON.stringify(process.env.REACT_APP_BASE_API),
-      },
-    }),
+    new webpack.BannerPlugin(`${packjson.name}: version(${packjson.version})`),
   ],
 });

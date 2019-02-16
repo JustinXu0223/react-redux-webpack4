@@ -4,17 +4,20 @@
  * @time 2018/5/7
  * @author JUSTIN XU
  */
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Button } from 'antd';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
-import history from '@/utils/history';
-import errorImage from '../../assets/404.svg';
+import { Button } from 'antd';
+import { connect } from 'react-redux';
 
-const ContainerDiv = styled.div`
+// static source
+import errorImage from 'assets/404.svg';
+
+// utils
+import history from 'utils/history';
+
+const ContainerView = styled.div`
   text-align: center;
   height: 100%;
   display: flex;
@@ -22,42 +25,42 @@ const ContainerDiv = styled.div`
   align-items: center;
 `;
 
-const SectionDiv = styled.div`
+const SectionView = styled.div`
   width: 400px;
   padding-top: 80px;
   padding-left: 60px;
 `;
 
-const TitleH2 = styled.h2`
+const TitleView = styled.h2`
   font-size: 72px;
   font-weight: 600;
   line-height: 72px;
   margin-bottom: 24px;
 `;
 
-const MessageP = styled.p`
+const MessageView = styled.p`
   color: rgba(0, 0, 0, 0.45);
   font-size: 20px;
   line-height: 28px;
   margin-bottom: 16px;
 `;
 
-const ButtonDiv = styled.div`
+const ButtonView = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const NotFound = ({ language: { i18n = {} } }) => (
-  <ContainerDiv>
+  <ContainerView>
     <img src={errorImage} alt="404" />
     <Helmet>
       <title>{i18n.helmet_title('Not Found')}</title>
     </Helmet>
-    <SectionDiv>
-      <TitleH2>404</TitleH2>
-      <MessageP>{i18n.not_found_message}</MessageP>
-      <ButtonDiv>
+    <SectionView>
+      <TitleView>404</TitleView>
+      <MessageView>{i18n.not_found_message}</MessageView>
+      <ButtonView>
         <Button
           style={{ marginRight: '7px' }}
           onClick={() => {
@@ -69,9 +72,9 @@ const NotFound = ({ language: { i18n = {} } }) => (
         <Button type="primary">
           <a href={`${window.location.origin}`}>{i18n.not_found_home_button}</a>
         </Button>
-      </ButtonDiv>
-    </SectionDiv>
-  </ContainerDiv>
+      </ButtonView>
+    </SectionView>
+  </ContainerView>
 );
 
 const mapStateToProps = (state) => ({

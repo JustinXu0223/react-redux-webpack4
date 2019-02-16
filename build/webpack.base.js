@@ -1,33 +1,45 @@
 /* eslint import/no-extraneous-dependencies: 0 */
-const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const fs = require('fs');
 const lessToJs = require('less-vars-to-js');
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // copy
+const utils = require('./webpack.util.js');
 
-function resolve(dir) {
-  return path.join(__dirname, '../', dir);
-}
+const {
+  NODE_ENV,
+  BABEL_ENV,
+  OUTPUT_DIR = '',
+} = process.env;
 
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = NODE_ENV === 'production';
 
-const themeVariables = lessToJs(fs.readFileSync(resolve('./config/ant-theme-vars.less'), 'utf8'));
+const themeVariables = lessToJs(fs.readFileSync(utils.resolvePath('./config/ant-theme-vars.less'), 'utf8'));
 
 module.exports = {
-  entry: ['babel-polyfill', resolve('./src/index.jsx')],
+  entry: ['@babel/polyfill', utils.resolvePath('./src/index.jsx')],
   output: {
-    path: resolve('dist'),
+    path: utils.resolvePath(OUTPUT_DIR),
     publicPath: '/',
     filename: isProd ? 'js/[name].[chunkhash:8].js' : '[name].js',
     chunkFilename: isProd ? 'js/[name].[chunkhash:8].js' : '[name].js',
   },
   resolve: {
-    modules: [resolve('node_modules')],
+    modules: [utils.resolvePath('node_modules')],
     extensions: ['.js', '.jsx', '.json', '.css', '.less'],
     alias: {
-      '@': resolve('src'),
+      assets: utils.resolvePath('src/assets'),
+      components: utils.resolvePath('src/components'),
+      config: utils.resolvePath('src/config'),
+      constants: utils.resolvePath('src/constants'),
+      i18n: utils.resolvePath('src/i18n'),
+      mock: utils.resolvePath('src/mock'),
+      pages: utils.resolvePath('src/pages'),
+      reduxs: utils.resolvePath('src/reduxs'),
+      services: utils.resolvePath('src/services'),
+      styles: utils.resolvePath('src/styles'),
+      utils: utils.resolvePath('src/utils'),
     },
   },
   module: {
@@ -36,7 +48,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: [
-          'babel-loader',
+          'babel-loader?cacheDirectory',
         ],
       },
       {
@@ -92,6 +104,14 @@ module.exports = {
           { loader: 'style-loader' },
           { loader: 'css-loader' },
           {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [
+                autoprefixer,
+              ],
+            },
+          },
+          {
             loader: 'less-loader',
             options: {
               modifyVars: themeVariables,
@@ -104,13 +124,13 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([{
-      from: resolve('./public'),
+      from: utils.resolvePath('./public'),
       to: '',
       force: true,
+      ignore: ['*.html'],
     }]),
     new HtmlWebpackPlugin({
-      title: 'BTCC Mining Pool',
-      template: path.resolve(resolve('public'), 'index.html'),
+      template: utils.resolvePath('public/index.html'),
       filename: 'index.html',
       // 要把script插入到标签里
       inject: 'body',
@@ -128,6 +148,12 @@ module.exports = {
       },
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(NODE_ENV),
+        BABEL_ENV: JSON.stringify(BABEL_ENV),
+      },
+    }),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

@@ -4,7 +4,7 @@
  * @time 2018/5/11
  * @author JUSTIN XU
  */
-import axios from '@/utils/request';
+import axios from 'utils/request';
 import MockAdapter from 'axios-mock-adapter';
 import { getCountryList, getUserInfo } from './account';
 

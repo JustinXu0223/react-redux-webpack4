@@ -17,7 +17,7 @@ const initLanguageSaga = function* saga() {
 
 const changeLanguageSaga = function* saga({ payload }) {
   yield localStorage.setItem('language', payload);
-  const i18n = yield import(`@/i18n/${payload}`);
+  const i18n = yield import(`i18n/${payload}`);
   yield put({ type: Types.CHANGE_I18N, payload: i18n.default });
 };
 

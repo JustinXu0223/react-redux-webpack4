@@ -4,7 +4,7 @@
  * @time 2018/5/2
  * @author JUSTIN XU
  */
-import i18n from '@/i18n/zh';
+import i18n from 'i18n/zh';
 import * as Types from '../actions/global';
 
 const initValues = {

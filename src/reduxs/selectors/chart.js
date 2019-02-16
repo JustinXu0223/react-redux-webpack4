@@ -9,7 +9,7 @@ import moment from 'moment';
 
 const getHashrate = (state, type) => state[type];
 
-// one miner example: chart @/components/LineChart.jsx
+// one miner example: chart components/LineChart.jsx
 export const hashrateSelector = createSelector(
   [getHashrate],
   (hashrate) => {

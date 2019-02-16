@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider, injectGlobal } from 'styled-components';
 import history from './utils/history';
-import store from './redux/store';
+import store from './reduxs/store';
 import Router from './router';
 import theme from './styles';
 
