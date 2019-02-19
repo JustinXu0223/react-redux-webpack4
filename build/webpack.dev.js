@@ -1,11 +1,29 @@
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const base = require('./webpack.base.js');
 const utils = require('./webpack.util.js');
 
 const port = 8080;
+
+const plugins = [
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NamedModulesPlugin(),
+  new OpenBrowserPlugin({ url: `http://localhost:${port}` }),
+];
+
+const {
+  OUTPUT_DIR = '',
+  BUNDLE,
+} = process.env;
+
+if (BUNDLE) {
+  plugins.push(
+    new BundleAnalyzerPlugin(),
+  );
+}
 
 module.exports = merge(base, {
   mode: 'development',
@@ -27,14 +45,10 @@ module.exports = merge(base, {
       },
     ],
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
-    new OpenBrowserPlugin({ url: `http://localhost:${port}` }),
-  ],
+  plugins,
   devServer: {
     headers: { 'Access-Control-Allow-Origin': '*' },
-    contentBase: utils.resolvePath(process.env.OUTPUT_DIR),
+    contentBase: utils.resolvePath(OUTPUT_DIR),
     publicPath: '/',
     clientLogLevel: 'error',
     hot: true,

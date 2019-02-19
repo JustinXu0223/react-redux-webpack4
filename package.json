@@ -17,6 +17,7 @@
     "build-dll": "webpack --config build/webpack_dll.config.js --mode production",
     "dev": "webpack-dev-server --progress --colors --config build/webpack.dev.js",
     "start": "env-cmd start:dev yarn dev",
+    "start-b": "BUNDLE=1 yarn dev",
     "release": "webpack --progress --colors --config build/webpack.prod.js --profile --json > stats.json",
     "build-s": "env-cmd build:staging yarn release",
     "build-p": "env-cmd build:prod yarn release"
@@ -94,6 +95,7 @@
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
     "webpack": "^4.29.4",
+    "webpack-bundle-analyzer": "^3.0.4",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14",
     "webpack-merge": "^4.2.1",

@@ -15,7 +15,7 @@ module.exports = merge(base, {
     }),
     new webpack.BannerPlugin(`${packjson.name}: version(${packjson.version})`),
     new ParallelUglifyPlugin({
-      workerCount: 4,
+      cacheDir: '.cache/',
       uglifyJS: {
         output: {
           beautify: false, // 不需要格式化
