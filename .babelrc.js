@@ -15,11 +15,6 @@ const plugins = [
   "@babel/plugin-proposal-throw-expressions"
 ];
 
-// 生产
-if (!isDev) {
-  plugins.push(["transform-remove-console", { "exclude": ["error", "warn"] }]);
-}
-
 module.exports = {
   presets: [
     [

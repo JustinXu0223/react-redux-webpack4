@@ -15,9 +15,10 @@ node 8.0+(v8.11.1)
 npm 5.0+(v5.6.0)
 ```
 
+### Start
+1. Run 'yarn setup'
 
 ### Dos development
-1. Run 'yarn'
 2. Run 'yarn start'
 
 

@@ -2,8 +2,8 @@ const path = require('path');
 
 /** resolve文件路径
  * */
-function resolvePath(dir) {
-  return path.join(__dirname, '../', dir);
+function resolvePath(dir, ...rest) {
+  return path.join(__dirname, '../', dir, ...rest);
 }
 
 exports.resolvePath = resolvePath;

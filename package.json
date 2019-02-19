@@ -12,12 +12,14 @@
   "private": true,
   "scripts": {
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
-    "lint": "eslint \"**/*.{js,jsx}\" --quiet",
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+    "setup": "yarn && yarn build-dll",
+    "build-dll": "webpack --config build/webpack_dll.config.js --mode production",
     "dev": "webpack-dev-server --progress --colors --config build/webpack.dev.js",
     "start": "env-cmd start:dev yarn dev",
     "release": "webpack --progress --colors --config build/webpack.prod.js --profile --json > stats.json",
-    "build": "env-cmd build:prod yarn release",
-    "build:staging": "env-cmd build:staging yarn release"
+    "build-s": "env-cmd build:staging yarn release",
+    "build-p": "env-cmd build:prod yarn release"
   },
   "pre-commit": [
     "precommit-msg",
@@ -68,7 +70,7 @@
     "babel-plugin-import": "^1.7.0",
     "babel-plugin-styled-components": "^1.7.1",
     "clean-webpack-plugin": "^0.1.19",
-    "copy-webpack-plugin": "^4.5.2",
+    "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^0.28.11",
     "env-cmd": "^8.0.2",
     "eslint": "^4.19.1",
@@ -78,6 +80,8 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "file-loader": "^1.1.11",
+    "happypack": "^5.0.0-beta.4",
+    "html-webpack-include-assets-plugin": "^1.0.7",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.0.2",
     "less-loader": "^4.1.0",
@@ -92,7 +96,8 @@
     "webpack": "^4.29.4",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14",
-    "webpack-merge": "^4.2.1"
+    "webpack-merge": "^4.2.1",
+    "webpack-parallel-uglify-plugin": "^1.1.0"
   },
   "keywords": [
     "react",

@@ -1,8 +1,8 @@
-/* eslint import/no-extraneous-dependencies: 0 */
 const merge = require('webpack-merge');
 const webpack = require('webpack');
-const base = require('./webpack.base.js');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+
+const base = require('./webpack.base.js');
 const utils = require('./webpack.util.js');
 
 const port = 8080;

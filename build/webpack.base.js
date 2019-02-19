@@ -1,11 +1,19 @@
-/* eslint import/no-extraneous-dependencies: 0 */
+/* eslint import/no-dynamic-require: 0 */
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const fs = require('fs');
 const lessToJs = require('less-vars-to-js');
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // copy
+const HappyPack = require('happypack');
+const os = require('os'); // node 提供的系统操作模块
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+
 const utils = require('./webpack.util.js');
+const config = require('./webpack.config');
+
+// 根据我的系统的内核数量 指定线程池个数 也可以其他数量
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 const {
   NODE_ENV,
@@ -25,31 +33,40 @@ module.exports = {
     filename: isProd ? 'js/[name].[chunkhash:8].js' : '[name].js',
     chunkFilename: isProd ? 'js/[name].[chunkhash:8].js' : '[name].js',
   },
-  resolve: {
-    modules: [utils.resolvePath('node_modules')],
-    extensions: ['.js', '.jsx', '.json', '.css', '.less'],
-    alias: {
-      assets: utils.resolvePath('src/assets'),
-      components: utils.resolvePath('src/components'),
-      config: utils.resolvePath('src/config'),
-      constants: utils.resolvePath('src/constants'),
-      i18n: utils.resolvePath('src/i18n'),
-      mock: utils.resolvePath('src/mock'),
-      pages: utils.resolvePath('src/pages'),
-      reduxs: utils.resolvePath('src/reduxs'),
-      services: utils.resolvePath('src/services'),
-      styles: utils.resolvePath('src/styles'),
-      utils: utils.resolvePath('src/utils'),
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          name: 'commons',
+          chunks: 'initial',
+          minChunks: 2,
+          maxInitialRequests: 5,
+          minSize: 0,
+        },
+        vendor: {
+          test: /node_modules/,
+          chunks: 'initial',
+          name: 'vendor',
+          priority: 10,
+          enforce: true,
+        },
+      },
     },
+  },
+  resolve: {
+    modules: [
+      utils.resolvePath('src'), // use modules replace alias
+      utils.resolvePath('node_modules'),
+    ],
+    extensions: ['.js', '.jsx', '.json', '.css', '.less'],
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader?cacheDirectory',
-        ],
+        include: utils.resolvePath('src'),
+        use: 'happypack/loader?id=babel',
       },
       {
         test: /\.css$/,
@@ -123,16 +140,32 @@ module.exports = {
     ],
   },
   plugins: [
-    new CopyWebpackPlugin([{
-      from: utils.resolvePath('./public'),
-      to: '',
-      force: true,
-      ignore: ['*.html'],
-    }]),
+    new HappyPack({ // 基础参数设置
+      id: 'babel', // 上面loader?后面指定的id
+      loaders: ['babel-loader?cacheDirectory'], // 实际匹配处理的loader
+      threadPool: happyThreadPool,
+      verbose: true,
+    }),
+    new webpack.DllReferencePlugin({
+      manifest: require(`../${config.DIST_DLL_OUTPUT}/${config.DIST_DLL_JSON_NAME}${config.DIST_DLL_JSON_SUFFIX}`),
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: utils.resolvePath('./public'),
+        to: '',
+        force: true,
+        ignore: ['*.html'],
+      },
+      {
+        from: utils.resolvePath(config.DIST_DLL_OUTPUT),
+        to: '',
+        force: true,
+      },
+    ]),
     new HtmlWebpackPlugin({
       template: utils.resolvePath('public/index.html'),
       filename: 'index.html',
-      // 要把script插入到标签里
+      // add script
       inject: 'body',
       minify: {
         removeComments: true,
@@ -146,6 +179,10 @@ module.exports = {
         minifyCSS: true,
         minifyURLs: true,
       },
+    }),
+    new HtmlIncludeAssetsPlugin({
+      assets: ['react.dll.js'], //  添加的资源相对html的路径
+      append: false, // false 在其他资源的之前添加 true 在其他资源之后添加
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.DefinePlugin({
