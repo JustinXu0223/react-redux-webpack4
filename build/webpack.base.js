@@ -55,10 +55,22 @@ module.exports = {
   },
   resolve: {
     modules: [
-      utils.resolvePath('src'), // use modules replace alias
       utils.resolvePath('node_modules'),
     ],
     extensions: ['.js', '.jsx', '.json', '.css', '.less'],
+    alias: {
+      assets: utils.resolvePath('src/assets'),
+      components: utils.resolvePath('src/components'),
+      config: utils.resolvePath('src/config'),
+      constants: utils.resolvePath('src/constants'),
+      i18n: utils.resolvePath('src/i18n'),
+      mock: utils.resolvePath('src/mock'),
+      pages: utils.resolvePath('src/pages'),
+      reduxs: utils.resolvePath('src/reduxs'),
+      services: utils.resolvePath('src/services'),
+      styles: utils.resolvePath('src/styles'),
+      utils: utils.resolvePath('src/utils'),
+    },
   },
   module: {
     rules: [
