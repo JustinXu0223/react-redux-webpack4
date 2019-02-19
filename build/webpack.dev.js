@@ -7,10 +7,6 @@ const utils = require('./webpack.util.js');
 
 const port = 8080;
 
-const {
-  OUTPUT_DIR = '',
-} = process.env;
-
 module.exports = merge(base, {
   mode: 'development',
   devtool: 'inline-source-map',
@@ -38,7 +34,7 @@ module.exports = merge(base, {
   ],
   devServer: {
     headers: { 'Access-Control-Allow-Origin': '*' },
-    contentBase: utils.resolvePath(OUTPUT_DIR),
+    contentBase: utils.resolvePath(process.env.OUTPUT_DIR),
     publicPath: '/',
     clientLogLevel: 'error',
     hot: true,
