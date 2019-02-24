@@ -7,7 +7,7 @@ const utils = require('./webpack.util.js');
 
 const {
   npm_package_name,
-  npm_package_version = '',
+  npm_package_version,
 } = process.env;
 
 module.exports = merge(base, {
