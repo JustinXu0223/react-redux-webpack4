@@ -3,8 +3,12 @@ const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const base = require('./webpack.base.js');
-const packjson = require('../package');
 const utils = require('./webpack.util.js');
+
+const {
+  npm_package_name,
+  npm_package_version = '',
+} = process.env;
 
 module.exports = merge(base, {
   mode: 'production',
@@ -13,7 +17,6 @@ module.exports = merge(base, {
       root: utils.resolvePath('/'),
       verbose: true,
     }),
-    new webpack.BannerPlugin(`${packjson.name}: version(${packjson.version})`),
     new ParallelUglifyPlugin({
       cacheDir: '.cache/',
       uglifyJS: {
@@ -29,5 +32,6 @@ module.exports = merge(base, {
         },
       },
     }),
+    new webpack.BannerPlugin(`${npm_package_name}: version(${npm_package_version})`),
   ],
 });
