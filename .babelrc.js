@@ -16,8 +16,14 @@ module.exports = {
     "@babel/preset-react"
   ],
   env: {
-    production: {},
-    development: {}
+    development: {},
+    production: {
+      "plugins": [
+        ["transform-react-remove-prop-types", {
+          "ignoreFilenames": ["node_modules"]
+        }]
+      ]
+    },
   },
   plugins: [
     ["@babel/plugin-proposal-decorators", { legacy: true }],

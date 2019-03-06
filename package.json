@@ -5,7 +5,7 @@
   "main": "src/index.jsx",
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/details/react-redux-webpack4.git"
+    "url": "https://github.com/JustinXu0223/react-redux-webpack4.git"
   },
   "author": "JUSTIN XU",
   "license": "UNLICENSED",
@@ -70,6 +70,7 @@
     "babel-loader": "^8.0.0",
     "babel-plugin-import": "^1.7.0",
     "babel-plugin-styled-components": "^1.7.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^0.28.11",
