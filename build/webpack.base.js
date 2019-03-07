@@ -108,7 +108,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: isProd ? 'img/[name].[hash:8].[ext]' : '[name].[ext]',
+          name: 'img/[name].[hash:8].[ext]',
         },
       },
       {
@@ -116,7 +116,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: isProd ? 'media/[name].[hash:8].[ext]' : '[name].[ext]',
+          name: 'media/[name].[hash:8].[ext]',
         },
       },
       {
@@ -124,7 +124,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: isProd ? 'fonts/[name].[hash:8].[ext]' : '[name].[ext]',
+          name: 'fonts/[name].[hash:8].[ext]',
         },
       },
       {
