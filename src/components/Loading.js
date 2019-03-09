@@ -1,5 +1,5 @@
 /**
- * @component Loading.jsx
+ * @component Loading.js
  * @description 加载组件
  * @time 2018/5/2
  * @author JUSTIN XU

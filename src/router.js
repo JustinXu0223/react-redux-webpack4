@@ -1,5 +1,5 @@
 /**
- * @component router.jsx
+ * @component router.js
  * @description 顶层路由配置
  * @time 2018/5/2
  * @author JUSTIN XU
@@ -14,18 +14,18 @@ import routers from 'constants/routers';
 import LoadingComponent from './components/Loading';
 
 const AsyncApp = Loadable({
-  loader: () => import('./pages'),
+  loader: () => import('./pages/index'),
   loading: LoadingComponent,
 });
 const AsyncNotFound = Loadable({
-  loader: () => import('./pages/NotFound'),
+  loader: () => import('./pages/NotFound/index'),
   loading: LoadingComponent,
 });
 
 const Router = ({ history = {} }) => (
   <ConnectedRouter history={history}>
     <Switch>
-      <Route exact path={routers.not_found} component={AsyncNotFound} />
+      <Route exact path={routers.notFound} component={AsyncNotFound} />
       <Route path={routers.app} component={AsyncApp} />
     </Switch>
   </ConnectedRouter>

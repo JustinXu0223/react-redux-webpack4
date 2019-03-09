@@ -42,7 +42,7 @@ npm 5.0+(v5.6.0)
   |--styles         Common style
   |--templates      Activity pages
   |--utils
-  |--index.jsx      Entry of Program
+  |--index.js      Entry of Program
   |--router.js      Top Router        
 
 |--.env-cmdrc       Base url config

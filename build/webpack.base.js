@@ -19,6 +19,7 @@ const {
   NODE_ENV,
   BABEL_ENV,
   OUTPUT_DIR = '',
+  npm_package_version,
 } = process.env;
 
 const isProd = NODE_ENV === 'production';
@@ -26,7 +27,7 @@ const isProd = NODE_ENV === 'production';
 const themeVariables = lessToJs(fs.readFileSync(utils.resolvePath('./config/ant-theme-vars.less'), 'utf8'));
 
 module.exports = {
-  entry: ['@babel/polyfill', utils.resolvePath('./src/index.jsx')],
+  entry: ['@babel/polyfill', utils.resolvePath('./src/index.js')],
   output: {
     path: utils.resolvePath(OUTPUT_DIR),
     publicPath: '/',
@@ -201,6 +202,7 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify(NODE_ENV),
         BABEL_ENV: JSON.stringify(BABEL_ENV),
+        APP_VERSION: JSON.stringify(npm_package_version),
       },
     }),
   ],

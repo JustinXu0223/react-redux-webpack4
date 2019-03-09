@@ -8,7 +8,9 @@
 export default {
   // app container
   app: '/',
-  sign_in: '/login',
-  not_found: '/404',
+  home: '/home',
+  demo: '/demo',
+  signIn: '/signIn',
+  notFound: '/404',
 };
 

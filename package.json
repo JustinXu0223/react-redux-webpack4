@@ -1,8 +1,8 @@
 {
   "name": "react-redux-webpack4",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "react redux webpack",
-  "main": "src/index.jsx",
+  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/JustinXu0223/react-redux-webpack4.git"

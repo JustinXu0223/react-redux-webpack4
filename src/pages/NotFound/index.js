@@ -1,5 +1,5 @@
 /**
- * @component index.jsx
+ * @component index.js
  * @description 错误页
  * @time 2018/5/7
  * @author JUSTIN XU
