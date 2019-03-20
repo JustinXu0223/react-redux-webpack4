@@ -13,6 +13,7 @@
   "scripts": {
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+    "jison": "cd jsonlint && jison jsonlint.y jsonlint.l",
     "setup": "yarn && yarn build-dll",
     "build-dll": "webpack --config build/webpack_dll.config.js --mode production",
     "dev": "webpack-dev-server --progress --colors --config build/webpack.dev.js",
@@ -35,6 +36,7 @@
     "bizcharts": "^3.1.7",
     "history": "^4.7.2",
     "immutable": "^3.8.2",
+    "jison": "^0.4.18",
     "moment": "^2.22.1",
     "rc-queue-anim": "^1.6.0",
     "react": "^16.3.2",

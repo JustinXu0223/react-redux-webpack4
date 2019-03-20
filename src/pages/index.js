@@ -73,7 +73,6 @@ class App extends React.Component {
   async componentDidMount() {
     const data = await getUser();
     console.log(data);
-    debugger;
   }
   renderHeaderView = () => {
     return (

@@ -1,4 +1,3 @@
-/* eslint-disable */
 export const pinyin = (function () {
   let Pinyin = function (ops) {
       this.initialize(ops);

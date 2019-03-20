@@ -8,6 +8,5 @@ stats.json
 *.iml
 .idea/
 .cache/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+*.log*
+jsonlint/jsonlint.js

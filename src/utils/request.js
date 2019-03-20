@@ -6,6 +6,7 @@
  */
 import axios from 'axios';
 import history from './history';
+import jsonlint from '../library/jsonlint';
 
 const BASE_URL = process.env.REACT_APP_BASE_API;
 
@@ -60,12 +61,9 @@ const instance = axios.create({
   // 设置全局的请求次数，请求的间隙
   retry: 2,
   retryDelay: 1000,
-  transformResponse: [function (data) {
+  transformResponse: [(data) => {
     // Do whatever you want to transform the data
-    debugger;
-    const a = JSON.parse(data);
-    debugger;
-    return a;
+    return jsonlint.parse(data);
   }],
 });
 
