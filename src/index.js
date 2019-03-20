@@ -14,11 +14,11 @@ import Router from './router';
 import theme from './styles';
 
 // you can open local mock
-// import mock from './mock';
-//
-// if (process.env.NODE_ENV !== 'production') {
-//   mock.start();
-// }
+import mock from './mock';
+
+if (process.env.NODE_ENV !== 'production') {
+  mock.start();
+}
 
 injectGlobal`
   html, body, #root {

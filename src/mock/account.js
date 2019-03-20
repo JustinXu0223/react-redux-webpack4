@@ -17,12 +17,5 @@ export function getCountryList() {
 }
 
 export function getUserInfo() {
-  return {
-    mobile: 18696790771,
-    mobile_code: 86,
-    real_name: Mock.Random.cname(3),
-    email: Mock.Random.email(),
-    device_type: null,
-    device_token: null,
-  };
+  return '{"mobile": 2440.3499999999999,"mobile_code":86,"device_type":null,"device_token":null}';
 }

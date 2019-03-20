@@ -13,6 +13,8 @@ import Loadable from 'react-loadable';
 import LoadingComponent from 'components/Loading';
 import routers from 'constants/routers';
 
+import { getUser } from 'services/demo';
+
 const ContainerView = styled.div`
   display: flex;
   flex-direction: column;
@@ -68,6 +70,11 @@ const AsyncDemo = Loadable({
 
 class App extends React.Component {
   state = {};
+  async componentDidMount() {
+    const data = await getUser();
+    console.log(data);
+    debugger;
+  }
   renderHeaderView = () => {
     return (
       <HeaderView>

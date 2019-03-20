@@ -60,6 +60,13 @@ const instance = axios.create({
   // 设置全局的请求次数，请求的间隙
   retry: 2,
   retryDelay: 1000,
+  transformResponse: [function (data) {
+    // Do whatever you want to transform the data
+    debugger;
+    const a = JSON.parse(data);
+    debugger;
+    return a;
+  }],
 });
 
 // Add a request interceptor

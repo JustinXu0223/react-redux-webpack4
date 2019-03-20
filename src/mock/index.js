@@ -69,9 +69,7 @@ export default {
     mock.onGet('/user').reply(() => {
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve([200, {
-            data: { ...getUserInfo() },
-          }]); // 200 为返回状态码
+          resolve([200, getUserInfo()]); // 200 为返回状态码
         }, 600);
       });
     });
