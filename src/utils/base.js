@@ -4,6 +4,9 @@
  * @time 2017/4/3
  * @author JOKER XU
  */
+export function delay(time = 300) {
+  return new Promise((resolve) => setTimeout(() => resolve(time), time));
+}
 
 /** * 根据数组对象排序 默认升序
  * @param prop 属性值
@@ -121,3 +124,69 @@ export function uniqueArr(arr = [], type = 'name') {
   }, []);
 }
 
+
+/**
+ * 格式化money 适用于numberInput
+ * @param {*} value
+ * return 1,000
+ */
+export function formatMoney(value) {
+  if (!value && value !== 0) return null;
+  if (typeof value === 'number') {
+    value = String(value);
+  }
+  return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+/**
+ * 解析money 1,000,000 适用于numberInput
+ * @param {*} value
+ */
+export function parserMoney(value) {
+  if (!value && value !== 0) return null;
+  if (typeof value === 'number') {
+    value = String(value);
+  }
+  const res = value.replace(/\$\s?|(,*)/g, '');
+  if (Number.isNaN(Number(res))) return value;
+  return Number(res);
+}
+
+/**
+ * 递归查询tree path
+ * @param {Array} list
+ * @param {String} value
+ * @param options 配置
+ * {
+ *   {String} equalKey 比对key
+ *   {String} returnKey 返回key
+ *   {Bool} returnIndex 是否返回index
+ * }
+ * @return [*] 从顶层到当前层级
+ */
+export function getTreePathList(list, value, {
+  equalKey = 'name',
+  returnKey = 'uid',
+  returnIndex = false,
+} = {}) {
+  for (let i = 0; i < list.length; i++) {
+    const { children = [], [equalKey]: name, [returnKey]: uid } = list[i];
+    const returnMap = returnIndex ? {
+      [returnKey]: uid,
+      index: i,
+    } : uid;
+    if (name === value) {
+      return [returnMap];
+    }
+    if (children && children.length) {
+      const res = getTreePathList(children, value, {
+        equalKey,
+        returnKey,
+        returnIndex,
+      });
+      if (res) {
+        return [returnMap, res].flat();
+      }
+    }
+  }
+}
