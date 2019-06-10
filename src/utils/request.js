@@ -61,14 +61,14 @@ const instance = axios.create({
   // 设置全局的请求次数，请求的间隙
   retry: 2,
   retryDelay: 1000,
-  transformResponse: [(data) => {
+  transformResponse: [data =>
     // Do whatever you want to transform the data
-    return jsonlint.parse(data);
-  }],
+    jsonlint.parse(data),
+  ],
 });
 
 // Add a request interceptor
-instance.interceptors.request.use(config => {
+instance.interceptors.request.use((config) => {
   const language = localStorage.getItem('language');
   config.headers['X-Pool-Language'] = language || 'zh';
   const token = localStorage.getItem('token');
@@ -80,7 +80,7 @@ instance.interceptors.request.use(config => {
 });
 
 // Add a response interceptor
-instance.interceptors.response.use(response => {
+instance.interceptors.response.use((response) => {
   const { data, status } = response;
   if ((status >= 200 && status < 300) || status === 304) {
     if (Object.is('arraybuffer', response.config.responseType)) {

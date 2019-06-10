@@ -62,6 +62,7 @@
     "camelcase": [0],
     "react/no-string-refs": [0],
     "no-unused-expressions": [0],
-    "no-continue": [0]
+    "no-continue": [0],
+    "array-callback-return": 0 // 递归不要求必须返回
   }
 }

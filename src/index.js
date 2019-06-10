@@ -7,16 +7,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ThemeProvider, injectGlobal } from 'styled-components';
+import { injectGlobal } from 'styled-components';
+import { isDev } from 'config';
 import history from './utils/history';
 import store from './reduxs/store';
 import Router from './router';
-import theme from './styles';
 
 // you can open local mock
 import mock from './mock';
 
-if (process.env.NODE_ENV !== 'production') {
+if (isDev) {
   mock.start();
 }
 
@@ -34,12 +34,9 @@ injectGlobal`
   }
 `;
 
-console.log(process.env);
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <Router history={history} />
-    </ThemeProvider>
+    <Router history={history} />
   </Provider>,
   document.getElementById('root'),
 );

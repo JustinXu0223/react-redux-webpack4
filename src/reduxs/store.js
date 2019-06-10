@@ -8,6 +8,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware, { END } from 'redux-saga';
+import { isDev } from 'config';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
 import history from '../utils/history';
@@ -18,7 +19,7 @@ const navigationMiddleware = routerMiddleware(history);
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [navigationMiddleware, sagaMiddleware];
 
-const composeEnhancers = process.env.NODE_ENV !== 'production' ? win.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose : compose;
+const composeEnhancers = isDev ? win.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose : compose;
 const storeEnhancers = composeEnhancers(applyMiddleware(...middlewares));
 
 const store = createStore(rootReducer, {}, storeEnhancers);

@@ -24,7 +24,7 @@ const {
 
 const isProd = NODE_ENV === 'production';
 
-const themeVariables = lessToJs(fs.readFileSync(utils.resolvePath('./config/ant-theme-vars.less'), 'utf8'));
+const themeVariables = lessToJs(fs.readFileSync(utils.resolvePath('./src/config/ant-theme-vars.less'), 'utf8'));
 
 module.exports = {
   entry: ['@babel/polyfill', utils.resolvePath('./src/index.js')],
@@ -65,11 +65,12 @@ module.exports = {
       config: utils.resolvePath('src/config'),
       constants: utils.resolvePath('src/constants'),
       i18n: utils.resolvePath('src/i18n'),
+      library: utils.resolvePath('src/library'),
       mock: utils.resolvePath('src/mock'),
       pages: utils.resolvePath('src/pages'),
       reduxs: utils.resolvePath('src/reduxs'),
       services: utils.resolvePath('src/services'),
-      styles: utils.resolvePath('src/styles'),
+      theme: utils.resolvePath('src/theme'),
       utils: utils.resolvePath('src/utils'),
     },
   },

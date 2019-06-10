@@ -2,10 +2,10 @@
  * @component Base.js
  * @description 基础方法库
  * @time 2017/4/3
- * @author JOKER XU
+ * @author JUSTIN XU
  */
 export function delay(time = 300) {
-  return new Promise((resolve) => setTimeout(() => resolve(time), time));
+  return new Promise(resolve => setTimeout(() => resolve(time), time));
 }
 
 /** * 根据数组对象排序 默认升序
@@ -29,7 +29,7 @@ export function compareProps(prop) {
  * */
 export function sliceBase64(baseString = '') {
   const str = 'data:image/jpeg;base64,';
-  if (!baseString) return;
+  if (!baseString) return null;
   if (baseString.startsWith(str)) {
     return baseString.replace(str, '');
   }

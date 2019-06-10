@@ -6,11 +6,6 @@
  */
 import axios from 'utils/request';
 
-export function delay(time = 3000) {
-  return new Promise(resolve => setTimeout(() => resolve(time), time));
-}
-
-
 export function getUser() {
   return axios.get('/user');
 }

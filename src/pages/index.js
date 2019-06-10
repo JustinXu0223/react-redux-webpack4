@@ -11,7 +11,9 @@ import Loadable from 'react-loadable';
 
 // components
 import LoadingComponent from 'components/Loading';
-import routers from 'constants/routers';
+
+// constants
+import routerId from 'constants/routerId';
 
 import { getUser } from 'services/demo';
 
@@ -28,7 +30,7 @@ const HeaderView = styled.div`
 `;
 
 const HeaderItemView = styled(NavLink)`
-  border: 1px solid red;
+  border: 1px solid ${props => props.theme.primaryColor};
   width: 80px;
   height: 100%;
   display: flex;
@@ -40,20 +42,20 @@ const SectionView = styled.div`
   max-width: 900px;
   min-height: 100px;
   width: 100vw;
-  border: 1px solid blue;
+  border: 1px solid ${props => props.theme.primaryColor};
 `;
 
 const HeaderList = [
   {
-    path: routers.home,
+    path: routerId.home,
     name: '首页',
   },
   {
-    path: routers.demo,
+    path: routerId.demo,
     name: 'demo',
   },
   {
-    path: routers.notFound,
+    path: routerId.notFound,
     name: '404',
   },
 ];
@@ -74,10 +76,9 @@ class App extends React.Component {
     const data = await getUser();
     console.log(data);
   }
-  renderHeaderView = () => {
-    return (
-      <HeaderView>
-        {
+  renderHeaderView = () => (
+    <HeaderView>
+      {
           HeaderList.map(v => (
             <HeaderItemView
               key={v.name}
@@ -87,19 +88,18 @@ class App extends React.Component {
             </HeaderItemView>
           ))
         }
-      </HeaderView>
-    );
-  };
+    </HeaderView>
+  );
   render() {
     return (
       <ContainerView>
         {this.renderHeaderView()}
         <SectionView>
           <Switch>
-            <Route exact path={routers.app} component={() => <Redirect to={routers.home} />} />
-            <Route exact path={routers.home} component={AsyncHome} />
-            <Route exact path={routers.demo} component={AsyncDemo} />
-            <Route path="*" render={() => <Redirect to={routers.notFound} />} />
+            <Route exact path={routerId.app} component={() => <Redirect to={routerId.home} />} />
+            <Route exact path={routerId.home} component={AsyncHome} />
+            <Route exact path={routerId.demo} component={AsyncDemo} />
+            <Route path="*" render={() => <Redirect to={routerId.notFound} />} />
           </Switch>
         </SectionView>
       </ContainerView>

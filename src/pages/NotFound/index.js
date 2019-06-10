@@ -77,7 +77,7 @@ const NotFound = ({ language: { i18n = {} } }) => (
   </ContainerView>
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   language: state.language,
 });
 

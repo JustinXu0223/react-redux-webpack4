@@ -1,18 +1,13 @@
 /**
- * @component variables.js
+ * @component variable.js
  * @description 变量文件
- * @time 2018/5/4
+ * @time 2019/6/11
  * @author JUSTIN XU
  */
 // Define what props.index will look like
 const fontFamily = '"PingFang SC", "Hiragino Sans GB", "Monospaced Number","Helvetica Neue", Helvetica, Arial, sans-serif';
 
 export default {
-  default: '#1890ff',
-  error: '#ea3d3d',
   fontPingFang: fontFamily,
   fontBasic: `"Microsoft YaHei", ${fontFamily}`,
-  fontColor: '#383838',
-  creditBorderColor: '#efefef',
-  creditDescColor: '#929292',
 };

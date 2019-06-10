@@ -27,61 +27,55 @@ function mapList(len = 5) {
 export default {
   start() {
     // APP相关
-    mock.onGet('/blockchains').reply(() => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve([200, {
-            data: [
-              {
-                name: 'bitcoin',
-                short_code: 'BTC',
-              },
-              {
-                name: 'litecoin',
-                short_code: 'LTC',
-              },
-              {
-                name: 'ethereumclassic',
-                short_code: 'ETC',
-              },
-              {
-                name: 'ethereum',
-                short_code: 'ETH',
-              },
-              {
-                name: 'bytom',
-                short_code: 'BTM',
-              },
-              {
-                name: 'bitcoincash',
-                short_code: 'BCH',
-              },
-              {
-                name: 'superbitcoin',
-                short_code: 'SBTC',
-              },
-            ],
-          }]); // 200 为返回状态码
-        }, 600);
-      });
-    });
+    mock.onGet('/blockchains').reply(() => new Promise((resolve) => {
+      setTimeout(() => {
+        resolve([200, {
+          data: [
+            {
+              name: 'bitcoin',
+              short_code: 'BTC',
+            },
+            {
+              name: 'litecoin',
+              short_code: 'LTC',
+            },
+            {
+              name: 'ethereumclassic',
+              short_code: 'ETC',
+            },
+            {
+              name: 'ethereum',
+              short_code: 'ETH',
+            },
+            {
+              name: 'bytom',
+              short_code: 'BTM',
+            },
+            {
+              name: 'bitcoincash',
+              short_code: 'BCH',
+            },
+            {
+              name: 'superbitcoin',
+              short_code: 'SBTC',
+            },
+          ],
+        }]); // 200 为返回状态码
+      }, 600);
+    }));
     // 用户信息
-    mock.onGet('/user').reply(() => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve([200, getUserInfo()]); // 200 为返回状态码
-        }, 600);
-      });
-    });
+    mock.onGet('/user').reply(() => new Promise((resolve) => {
+      setTimeout(() => {
+        resolve([200, getUserInfo()]); // 200 为返回状态码
+      }, 600);
+    }));
     // 登录相关
-    mock.onGet('/countries').reply(() => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve([200, {
-            data: [...mapList()(getCountryList)],
-          }]); // 200 为返回状态码
-        }, 600);
-      });
-    });
+    mock.onGet('/countries').reply(() => new Promise((resolve) => {
+      setTimeout(() => {
+        resolve([200, {
+          data: [...mapList()(getCountryList)],
+        }]); // 200 为返回状态码
+      }, 600);
+    }));
   },
 };

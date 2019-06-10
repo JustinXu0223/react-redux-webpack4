@@ -5,7 +5,7 @@
  * @author JUSTIN XU
  */
 export default {
-  helmet_title: (t) => `${t} - BTCC Pool`,
+  helmet_title: t => `${t} - BTCC Pool`,
   // not found page
   not_found_message: '抱歉,你访问的页面消失在未知的荒原',
   not_found_home_button: '返回首页',
