@@ -10,3 +10,4 @@ stats.json
 .cache/
 *.log*
 jsonlint/jsonlint.js
+www/

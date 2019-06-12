@@ -11,7 +11,6 @@ import * as Types from '../actions/global';
 const initLanguageSaga = function* saga() {
   const rawCode = localStorage.getItem('language') || 'zh';
   const code = ['en', 'zh'].includes(rawCode) ? rawCode : 'en';
-
   yield put({ type: Types.CHANGE_LANGUAGE_NAME, payload: code });
 };
 
@@ -25,7 +24,6 @@ const changeLanguageSaga = function* saga({ payload }) {
 const initStylesSaga = function* saga() {
   const rawCode = localStorage.getItem('styles') || 'light';
   const name = ['light', 'dark'].includes(rawCode) ? rawCode : 'light';
-
   yield put({ type: Types.CHANGE_THEME_NAME, payload: name });
 };
 

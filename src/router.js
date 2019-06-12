@@ -59,7 +59,6 @@ class Router extends React.Component {
         styles,
       },
     } = this;
-    console.log(this.props);
     return (
       <ConnectedRouter history={history}>
         <ThemeProvider theme={styles.theme}>

@@ -2,7 +2,7 @@
   "name": "react-redux-webpack4",
   "version": "1.0.0",
   "description": "react redux webpack",
-  "main": "src/index.js",
+  "main": "src/entries/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/JustinXu0223/react-redux-webpack4.git"
@@ -96,6 +96,7 @@
     "postcss-loader": "^2.1.4",
     "pre-commit": "^1.2.2",
     "prop-types": "^15.6.1",
+    "react-hot-loader": "^4.11.0",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
     "webpack": "^4.29.4",

@@ -1,5 +1,12 @@
-// react dll
-exports.DIST_DLL_OUTPUT = 'dist-dll';
-
-exports.DIST_DLL_JSON_NAME = 'react';
-exports.DIST_DLL_JSON_SUFFIX = '.manifest.json';
+module.exports = {
+  reactDll: {
+    output: 'dist-dll',
+    name: 'react',
+    suffix: '.manifest.json',
+  },
+  port: 8080,
+  output: {
+    path: 'www/main',
+    publicPath: '/',
+  },
+};

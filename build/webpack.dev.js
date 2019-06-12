@@ -5,8 +5,10 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const base = require('./webpack.base.js');
 const utils = require('./webpack.util.js');
-
-const port = 8080;
+const {
+  port,
+  output,
+} = require('./webpack.config.js');
 
 const plugins = [
   new webpack.HotModuleReplacementPlugin(),
@@ -15,7 +17,6 @@ const plugins = [
 ];
 
 const {
-  OUTPUT_DIR = '',
   BUNDLE,
 } = process.env;
 
@@ -27,7 +28,7 @@ if (BUNDLE) {
 
 module.exports = merge(base, {
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {
@@ -47,8 +48,7 @@ module.exports = merge(base, {
   },
   plugins,
   devServer: {
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    contentBase: utils.resolvePath(OUTPUT_DIR),
+    contentBase: utils.resolvePath(output.path),
     publicPath: '/',
     clientLogLevel: 'error',
     hot: true,
@@ -64,5 +64,19 @@ module.exports = merge(base, {
         secure: false,
       },
     },
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 1000,
+    },
+    headers: {
+      'X-Custom-Header': 'yes',
+      'Access-Control-Allow-Origin': '*',
+    },
+    overlay: {
+      warnings: false,
+      errors: true,
+    },
+    // 取消框架域名检测
+    disableHostCheck: true,
   },
 });

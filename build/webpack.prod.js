@@ -2,8 +2,12 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+
 const base = require('./webpack.base.js');
 const utils = require('./webpack.util.js');
+const {
+  output,
+} = require('./webpack.config.js');
 
 const {
   npm_package_name,
@@ -12,8 +16,9 @@ const {
 
 module.exports = merge(base, {
   mode: 'production',
+  devtool: 'nosources-source-map',
   plugins: [
-    new CleanWebpackPlugin([process.env.OUTPUT_DIR], {
+    new CleanWebpackPlugin([output.path], {
       root: utils.resolvePath('/'),
       verbose: true,
     }),
