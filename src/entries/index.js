@@ -12,7 +12,7 @@ import { injectGlobal } from 'styled-components';
 import { isDev } from 'config';
 import history from 'utils/history';
 import store from 'reduxs/store';
-import Router from '../router';
+import router from '../router';
 
 // mock
 import mock from '../mock';
@@ -21,6 +21,7 @@ if (isDev) {
   mock.start();
 }
 
+/* eslint-disable no-unused-expressions */
 injectGlobal`
   html, body, #root {
     width: 100%;
@@ -46,7 +47,7 @@ function renderApp(Router) {
   );
 }
 
-renderApp(Router);
+renderApp(router);
 
 if (module.hot) {
   module.hot.accept('../router.js', () => {

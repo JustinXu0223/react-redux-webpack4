@@ -17,10 +17,10 @@ export const hashrateSelector = createSelector(
     const loading = hashrate.get('loading') || false;
     const data = result.map((item) => {
       const time = moment.unix(item[0]).local().format('MM-DD HH:mm');
-      const hashrate = item[1];
+      const [, res] = item;
       return {
         time,
-        hashrate,
+        hashrate: res,
       };
     });
     return {

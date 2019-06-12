@@ -4,15 +4,14 @@
  * @time 2017/4/3
  * @author JUSTIN XU
  */
+
 export function delay(time = 300) {
   return new Promise(resolve => setTimeout(() => resolve(time), time));
 }
 
-/** * 根据数组对象排序 默认升序
- * @param prop 属性值
- * */
+// 根据数组对象排序 默认升序
 export function compareProps(prop) {
-  return function (obj1, obj2) {
+  return (obj1, obj2) => {
     const val1 = obj1[prop];
     const val2 = obj2[prop];
     if (val1 < val2) {
@@ -24,9 +23,7 @@ export function compareProps(prop) {
   };
 }
 
-/** * 切割base64字符串
- * @param baseString baseString64编码字符串
- * */
+// 切割base64字符串
 export function sliceBase64(baseString = '') {
   const str = 'data:image/jpeg;base64,';
   if (!baseString) return null;
@@ -119,17 +116,16 @@ export function uniqueArr(arr = [], type = 'name') {
   if (arr.length === 0) return arr;
   const hash = {};
   return arr.reduce((item, next) => {
-    hash[next[type]] ? '' : hash[next[type]] = true && item.push(next);
+    if (!hash[next[type]]) {
+      hash[next[type]] = true;
+      item.push(next);
+    }
     return item;
   }, []);
 }
 
 
-/**
- * 格式化money 适用于numberInput
- * @param {*} value
- * return 1,000
- */
+// 格式化money 适用于numberInput
 export function formatMoney(value) {
   if (!value && value !== 0) return null;
   if (typeof value === 'number') {
@@ -138,10 +134,7 @@ export function formatMoney(value) {
   return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
-/**
- * 解析money 1,000,000 适用于numberInput
- * @param {*} value
- */
+//  解析money 1,000,000 适用于numberInput
 export function parserMoney(value) {
   if (!value && value !== 0) return null;
   if (typeof value === 'number') {
@@ -154,22 +147,22 @@ export function parserMoney(value) {
 
 /**
  * 递归查询tree path
- * @param {Array} list
- * @param {String} value
- * @param options 配置
+ * @param {array} list 数组
+ * @param {string} value 比对值
+ * @param {object} options 配置
  * {
  *   {String} equalKey 比对key
  *   {String} returnKey 返回key
  *   {Bool} returnIndex 是否返回index
  * }
- * @return [*] 从顶层到当前层级
+ * @return {*} 从顶层到当前层级
  */
 export function getTreePathList(list, value, {
   equalKey = 'name',
   returnKey = 'uid',
   returnIndex = false,
 } = {}) {
-  for (let i = 0; i < list.length; i++) {
+  for (let i = 0; i < list.length; i += 1) {
     const { children = [], [equalKey]: name, [returnKey]: uid } = list[i];
     const returnMap = returnIndex ? {
       [returnKey]: uid,

@@ -11,6 +11,7 @@ const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 
 const utils = require('./webpack.util.js');
 const {
+  staticDir,
   output,
   reactDll,
 } = require('./webpack.config');
@@ -40,9 +41,10 @@ const entry = entryList.reduce((accumulator, currValue) => {
 const htmlPluginList = entryList.reduce((accumulator, currValue) => {
   accumulator.push(
     new HtmlWebpackPlugin({
-      template: utils.resolvePath('public/index.html'),
+      template: utils.resolvePath(`${staticDir}/index.html`),
       filename: `${currValue}.html`,
       inject: 'body',
+      title: 'react app',
       chunks: ['commons', 'vendor', currValue],
       minify: {
         removeComments: true,
@@ -73,7 +75,7 @@ const plugins = [
   }),
   new CopyWebpackPlugin([
     {
-      from: utils.resolvePath('./public'),
+      from: utils.resolvePath(staticDir),
       to: '',
       force: true,
       ignore: ['*.html'],

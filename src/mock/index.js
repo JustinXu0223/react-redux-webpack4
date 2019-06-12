@@ -17,7 +17,7 @@ function mapList(len = 5) {
       throw new Error('params must be function');
     }
     if (len === 0 || !len) return arr;
-    for (let i = 1; i <= len; i++) {
+    for (let i = 1; i <= len; i += 1) {
       arr.push(func());
       if (i === len) return arr;
     }

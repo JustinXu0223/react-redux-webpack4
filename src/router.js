@@ -40,10 +40,10 @@ const AsyncNotFound = Loadable({
     language: state.language,
     styles: state.styles,
   }),
-  (dispatch) => ({
+  dispatch => ({
     initLanguageReq: () => dispatch({ type: INIT_LANGUAGE }),
-    changeLanguageReq: (payload) => dispatch({ type: CHANGE_LANGUAGE_NAME, payload }),
-    changeThemeReq: (payload) => dispatch({ type: CHANGE_THEME_NAME, payload }),
+    changeLanguageReq: payload => dispatch({ type: CHANGE_LANGUAGE_NAME, payload }),
+    changeThemeReq: payload => dispatch({ type: CHANGE_THEME_NAME, payload }),
   }),
 )
 class Router extends React.Component {

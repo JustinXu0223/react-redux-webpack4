@@ -102,8 +102,7 @@ instance.interceptors.response.use((response) => {
   if (Object.is(401, status) && !config.removeAuth) {
     localStorage.removeItem('token');
     history.replace('/login');
-    const message = errMsg || getServeError().SERVE_TOKEN_ERROR;
-    throw new ResponseError(message, Number(code), err.response);
+    throw new ResponseError(errMsg || getServeError().SERVE_TOKEN_ERROR, Number(code), err.response);
   }
   // handle network timeout
   if (Object.is('ECONNABORTED', err.code)) {
@@ -116,8 +115,7 @@ instance.interceptors.response.use((response) => {
   if (Object.is('arraybuffer', config.responseType)) {
     const data = err.response.data || '';
     const result = Buffer.from(data, 'binary').toString() || '{}';
-    const message = JSON.parse(result).msg || getServeError().SERVE_ERROR;
-    throw new ResponseError(message, null, err.response);
+    throw new ResponseError(JSON.parse(result).msg || getServeError().SERVE_ERROR, null, err.response);
   }
   throw new ResponseError(errMsg || getServeError().SERVE_ERROR, null, err.response);
 });

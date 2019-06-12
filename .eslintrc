@@ -17,6 +17,13 @@
     "commonjs": true,
     "mocha": true
   },
+  "settings": {
+    "import/resolver": {
+      "webpack":{
+        "config": "build/webpack.base.js"
+      }
+    }
+  },
   "rules": {
     "react/jsx-filename-extension": [
       1,
@@ -42,27 +49,27 @@
         "components": 0
       }
     ],
-    "consistent-return": [0],
-    "generator-star-spacing": [0],
-    "global-require": [1],
-    "import/extensions": [0],
-    "import/no-extraneous-dependencies": [0],
-    "import/no-unresolved": [0],
-    "object-curly-newline": [0],
-    "no-param-reassign": [0],
-    "no-debugger": [0],
-    "arrow-parens": [0],
-    "no-trailing-spaces": [0],
-    "no-useless-constructor": [0],
-    "no-shadow": [0],
-    "quote-props": [0],
-    "arrow-body-style": [0],
-    "no-confusing-arrow": [0],
-    "no-plusplus": [0],
-    "camelcase": [0],
-    "react/no-string-refs": [0],
-    "no-unused-expressions": [0],
-    "no-continue": [0],
-    "array-callback-return": 0 // 递归不要求必须返回
+    "global-require": [0], // 允许require动态导入
+    "max-len": [2, { // 强制行的最大长度
+      "code": 160,
+      "tabWidth": 4,
+      "ignoreUrls": true,
+      "ignoreTrailingComments": true,
+      "ignoreTemplateLiterals": true
+    }],
+    "consistent-return": [0], // 递归 和 throw情况下 不需要函数一定有返回值
+    "array-callback-return": 0, // 递归不要求必须返回
+    "no-param-reassign": [0], // 函数参数再赋值
+    "valid-jsdoc": 2, // 强制使用有效的 JSDoc 注释
+    "no-unused-expressions": [
+      "error",
+      {
+        "allowShortCircuit": false, // 不允许短路逻辑
+        "allowTernary": true, // 允许三元表达式
+        "allowTaggedTemplates": false // 不允许标记的模板文字
+      }
+    ],
+    "no-debugger": [1],
+    "no-console": [1]
   }
 }
