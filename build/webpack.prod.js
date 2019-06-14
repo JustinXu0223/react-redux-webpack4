@@ -1,7 +1,12 @@
+/* eslint camelcase: 0 */
+/* eslint import/no-extraneous-dependencies: 0 */
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const CompressionPlugin = require('compression-webpack-plugin');
+const FileManagerPlugin = require('filemanager-webpack-plugin');
 
 const base = require('./webpack.base.js');
 const utils = require('./webpack.util.js');
@@ -38,5 +43,30 @@ module.exports = merge(base, {
       },
     }),
     new webpack.BannerPlugin(`${npm_package_name}: version(${npm_package_version})`),
+    new ImageminPlugin({
+      pngquant: {
+        quality: '95-100', // 图片质量
+      },
+    }),
+    new CompressionPlugin({ // gzip 压缩
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: new RegExp( // 压缩 js 与 css
+        '\\.(js|css)$',
+      ),
+      compressionOptions: { level: 9 },
+      threshold: 10240,
+      minRatio: 0.8,
+    }),
+    new FileManagerPlugin({
+      onEnd: {
+        archive: [
+          {
+            source: utils.resolvePath(output.entryPath),
+            destination: utils.resolvePath(`${output.entryPath}.zip`),
+          },
+        ],
+      },
+    }),
   ],
 });

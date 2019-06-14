@@ -1,3 +1,5 @@
+/* eslint camelcase: 0 */
+/* eslint import/no-extraneous-dependencies: 0 */
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
@@ -48,7 +50,7 @@ module.exports = merge(base, {
   },
   plugins,
   devServer: {
-    contentBase: utils.resolvePath(output.path),
+    contentBase: utils.resolvePath(output.entryPath),
     publicPath: '/',
     clientLogLevel: 'error',
     hot: true,

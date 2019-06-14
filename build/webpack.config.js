@@ -7,7 +7,8 @@ module.exports = {
   port: 8080,
   staticDir: './public',
   output: {
-    path: 'www/main',
+    path: 'www/',
+    entryPath: 'www/main',
     publicPath: '/',
   },
 };

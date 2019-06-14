@@ -35,14 +35,20 @@ npm 5.0+(v5.6.0)
 |--src              Source dir
   |--assets         Static source
   |--components     Only common & Layout
+  |--config              
   |--constants     
+  |--entries        Multi-page entry     
+    |--index.js       Entry of Program
   |--i18n
+  |--library        
+  |--mock        
   |--pages          Container & Self component
-  |--redux
-  |--styles         Common style
-  |--templates      Activity pages
+  |--reduxs
+  |--services
+  |--theme          
+    |--dark.js          
+    |--light.js   
   |--utils
-  |--index.js      Entry of Program
   |--router.js      Top Router        
 
 |--.env-cmdrc       Base url config

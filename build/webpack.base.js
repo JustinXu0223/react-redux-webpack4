@@ -1,3 +1,5 @@
+/* eslint camelcase: 0 */
+/* eslint import/no-extraneous-dependencies: 0 */
 /* eslint import/no-dynamic-require: 0 */
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
@@ -185,8 +187,8 @@ const modules = {
 module.exports = {
   entry,
   output: {
-    path: utils.resolvePath(output.path),
-    publicPath: '/',
+    path: utils.resolvePath(output.entryPath),
+    publicPath: output.publicPath,
     filename: isProd ? 'js/[name].[chunkhash:8].js' : '[name].js',
     chunkFilename: isProd ? 'js/[name].[chunkhash:8].js' : '[name].js',
   },
