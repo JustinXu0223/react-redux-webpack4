@@ -34,6 +34,10 @@ injectGlobal`
   a:focus {
     text-decoration: none;
   }
+  div {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 function renderApp(Router) {

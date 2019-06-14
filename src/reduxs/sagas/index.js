@@ -6,10 +6,9 @@
  */
 import { all, fork } from 'redux-saga/effects';
 
-import globalFlow from './global';
+const req = require.context('./', false, /\.js$/);
+const context = req.keys().filter(item => item !== './index.js');
 
 export default function* rootSaga() {
-  yield all([
-    fork(globalFlow),
-  ]);
+  yield all(context.map(key => fork(req(key).default)));
 }

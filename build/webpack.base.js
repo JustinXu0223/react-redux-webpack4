@@ -33,6 +33,10 @@ const themeVariables = lessToJs(fs.readFileSync(utils.resolvePath('./src/config/
 
 const entryList = utils.getEntryMap(utils.getAllFileList('./src/entries'));
 
+// svg config file
+const svgoConfig = require('../svgo-config');
+const svgoColorfulConfig = require('../svgo-colorful-config');
+
 // ==============entry================
 const entry = entryList.reduce((accumulator, currValue) => {
   accumulator[currValue] = ['@babel/polyfill', utils.resolvePath(`./src/entries/${currValue}.js`)];
@@ -136,14 +140,6 @@ const modules = {
       ],
     },
     {
-      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      loader: 'url-loader',
-      options: {
-        limit: 10000,
-        name: 'img/[name].[hash:8].[ext]',
-      },
-    },
-    {
       test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
       loader: 'url-loader',
       options: {
@@ -158,6 +154,44 @@ const modules = {
         limit: 10000,
         name: 'fonts/[name].[hash:8].[ext]',
       },
+    },
+    {
+      test: /\.(png|jpe?g|gif)(\?.*)?$/,
+      loader: 'url-loader',
+      options: {
+        limit: 10000,
+        name: 'img/[name].[hash:8].[ext]',
+      },
+    },
+    {
+      test: /\.svg$/,
+      include: [utils.resolvePath('src/assets/svg/colorful')],
+      use: [{
+        loader: 'svg-sprite-loader',
+        options: {
+          symbolId: 'icon-[name]',
+        },
+      },
+      {
+        loader: 'svgo-loader',
+        options: svgoColorfulConfig,
+      },
+      ],
+    },
+    {
+      test: /\.svg$/,
+      include: [utils.resolvePath('src/assets/svg/single')],
+      use: [{
+        loader: 'svg-sprite-loader',
+        options: {
+          symbolId: 'icon-[name]',
+        },
+      },
+      {
+        loader: 'svgo-loader',
+        options: svgoConfig,
+      },
+      ],
     },
     {
       test: /\.less$/,

@@ -6,9 +6,11 @@
  */
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import * as global from './global';
+
+const req = require.context('./', false, /\.js$/);
+const context = req.keys().filter(item => item !== './initialState.js');
 
 export default combineReducers({
   routes: routerReducer,
-  ...global,
+  ...context.reduce((prevValue, currValue) => Object.assign(prevValue, req(currValue)), {}),
 });

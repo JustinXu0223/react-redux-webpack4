@@ -1,6 +1,6 @@
 /**
  * @component global.js
- * @description App 动作
+ * @description global saga
  * @time 2018/5/2
  * @author JUSTIN XU
  */

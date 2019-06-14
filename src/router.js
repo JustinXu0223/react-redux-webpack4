@@ -6,22 +6,20 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ConnectedRouter } from 'react-router-redux';
 import { Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { ThemeProvider } from 'styled-components';
 import Loadable from 'react-loadable';
-import routerId from 'constants/routerId';
+import { ThemeProvider } from 'styled-components';
 
-// action
-import {
-  INIT_LANGUAGE,
-  CHANGE_LANGUAGE_NAME,
-  CHANGE_THEME_NAME,
-} from 'reduxs/actions/global';
+// constants
+import routerId from 'constants/routerId';
 
 // utils
 import { delay } from 'utils/base';
+
+// reduxs
+import { ConnectedRouter } from 'react-router-redux';
+import { connect } from 'react-redux';
+import { INIT_LANGUAGE } from 'reduxs/actions/global';
 
 // components
 import LoadingComponent from './components/Loading';
@@ -42,15 +40,12 @@ const AsyncNotFound = Loadable({
   }),
   dispatch => ({
     initLanguageReq: () => dispatch({ type: INIT_LANGUAGE }),
-    changeLanguageReq: payload => dispatch({ type: CHANGE_LANGUAGE_NAME, payload }),
-    changeThemeReq: payload => dispatch({ type: CHANGE_THEME_NAME, payload }),
   }),
 )
 class Router extends React.Component {
   async componentDidMount() {
     await delay(2000);
-    this.props.changeLanguageReq('zh');
-    this.props.changeThemeReq('dark');
+    this.props.initLanguageReq('zh');
   }
   render() {
     const {
@@ -87,8 +82,7 @@ Router.propTypes = {
     name: PropTypes.string,
     theme: PropTypes.object,
   }).isRequired,
-  changeThemeReq: PropTypes.func.isRequired,
-  changeLanguageReq: PropTypes.func.isRequired,
+  initLanguageReq: PropTypes.func.isRequired,
 };
 
 export default Router;

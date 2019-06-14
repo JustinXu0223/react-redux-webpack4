@@ -5,8 +5,11 @@
  * @author JUSTIN XU
  */
 import axios from 'utils/request';
+import { delay } from 'utils/base';
 
 export function getUser() {
   return axios.get('/user');
 }
+
+export { delay };
 

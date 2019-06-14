@@ -18,14 +18,12 @@ import routerId from 'constants/routerId';
 import { getUser } from 'services/demo';
 
 const ContainerView = styled.div`
-  display: flex;
-  flex-direction: column;
   align-items: center;
 `;
 
 const HeaderView = styled.div`
   height: 40px;
-  display: flex;
+  flex-direction: row;
   justify-content: center;
 `;
 

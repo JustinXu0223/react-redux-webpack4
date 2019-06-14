@@ -20,7 +20,7 @@ import history from 'utils/history';
 const ContainerView = styled.div`
   text-align: center;
   height: 100%;
-  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 `;
@@ -46,7 +46,7 @@ const MessageView = styled.p`
 `;
 
 const ButtonView = styled.div`
-  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 `;
