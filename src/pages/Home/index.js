@@ -10,6 +10,7 @@ import { Button } from 'antd';
 
 // components
 import { ContainerView } from 'components/Layout/Styles';
+import SvgIcon from 'components/SvgIcon';
 
 class Home extends React.Component {
   render() {
@@ -17,6 +18,9 @@ class Home extends React.Component {
       <ContainerView>
         HomeHome
         <Button type="primary">按钮</Button>
+        <div>
+          <SvgIcon iconClass="delete" fill="blue" />
+        </div>
       </ContainerView>
     );
   }

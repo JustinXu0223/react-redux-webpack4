@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>icon/delete_solid</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/delete_solid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M7,22.0048 L5,8.0048 L19,8.0048 L17,22.0048 L7,22.0048 Z M15,4.0048 L21,4.0048 L21,6.0048 L15,6.0048 L9,6.0048 L3,6.0048 L3,4.0048 L9,4.0048 C9,2.9008 9.897,2.0048 11,2.0048 L13,2.0048 C14.103,2.0048 15,2.9008 15,4.0048 Z" id="shape" fill="#000000"></path>
+    </g>
+</svg>

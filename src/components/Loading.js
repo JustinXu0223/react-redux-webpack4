@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { Spin } from 'antd';
 import styled from 'styled-components';
 
-const BasicDiv = styled.div`
+const ContainerView = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
@@ -21,14 +21,14 @@ const LoadingComponent = ({ isLoading, error }) => {
   // Handle the loading state
   if (isLoading) {
     return (
-      <BasicDiv>
+      <ContainerView>
         <Spin size="large" />
-      </BasicDiv>
+      </ContainerView>
     );
   }
   // Handle the error state
   if (error) {
-    return <BasicDiv>Sorry, there was a problem loading the page...</BasicDiv>;
+    return <ContainerView>Sorry, there was a problem loading the page...</ContainerView>;
   }
 
   return null;

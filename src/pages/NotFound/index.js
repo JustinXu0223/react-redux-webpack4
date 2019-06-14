@@ -11,8 +11,8 @@ import { Helmet } from 'react-helmet';
 import { Button } from 'antd';
 import { connect } from 'react-redux';
 
-// static source
-import errorImage from 'assets/404.svg';
+// components
+import SvgIcon from 'components/SvgIcon';
 
 // utils
 import history from 'utils/history';
@@ -53,7 +53,7 @@ const ButtonView = styled.div`
 
 const NotFound = ({ language: { i18n = {} } }) => (
   <ContainerView>
-    <img src={errorImage} alt="404" />
+    <SvgIcon iconClass="not-found" width={250} />
     <Helmet>
       <title>{i18n.helmet_title('Not Found')}</title>
     </Helmet>
