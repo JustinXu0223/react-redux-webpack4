@@ -13,7 +13,6 @@
   "scripts": {
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
-    "jison": "cd jsonlint && jison jsonlint.y jsonlint.l",
     "setup": "yarn && yarn build-dll",
     "build-dll": "webpack --config build/webpack_dll.config.js --mode production",
     "dev": "webpack-dev-server --progress --colors --config build/webpack.dev.js",
@@ -38,7 +37,6 @@
     "fingerprintjs": "^0.5.3",
     "history": "^4.7.2",
     "immutable": "^3.8.2",
-    "jison": "^0.4.18",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.22.1",
     "prop-types": "15.6.1",
