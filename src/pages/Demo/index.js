@@ -11,6 +11,7 @@ import styled from 'styled-components';
 // components
 import { Button } from 'antd';
 import { ContainerView } from 'components/Layout/Styles';
+import HocBasic from 'components/HocBasic';
 
 // reduxs
 import { connect } from 'react-redux';
@@ -52,6 +53,10 @@ class Demo extends React.Component {
   state = {
     backgroundColor: 'red',
   };
+
+  componentDidMount() {
+    console.log(this.props);
+  }
 
   onToggleBg = () => {
     this.setState({
@@ -130,4 +135,4 @@ Demo.propTypes = {
   decreaseReq: PropTypes.func.isRequired,
 };
 
-export default Demo;
+export default HocBasic(Demo);

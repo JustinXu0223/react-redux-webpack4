@@ -5,17 +5,18 @@
  * @author JUSTIN XU
  */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // components
 import { Button } from 'antd';
 import { ContainerView } from 'components/Layout/Styles';
 import SvgIcon from 'components/SvgIcon';
+import HocBasic from 'components/HocBasic';
 
 // reduxs
-import { connect } from 'react-redux';
-import { CHANGE_THEME_NAME } from 'reduxs/actions/global';
+// import { connect } from 'react-redux';
+// import { CHANGE_THEME_NAME } from 'reduxs/actions/global';
 
 const ButtonView = styled.div`
   flex-direction: row;
@@ -23,14 +24,6 @@ const ButtonView = styled.div`
   justify-content: center;
 `;
 
-@connect(
-  state => ({
-    styles: state.styles,
-  }),
-  dispatch => ({
-    changeThemeReq: payload => dispatch({ type: CHANGE_THEME_NAME, payload }),
-  }),
-)
 class Home extends React.Component {
   onToggleTheme = (theme) => {
     this.props.changeThemeReq(theme);
@@ -66,12 +59,6 @@ class Home extends React.Component {
 
 Home.defaultProps = {};
 
-Home.propTypes = {
-  styles: PropTypes.shape({
-    name: PropTypes.string,
-    theme: PropTypes.object,
-  }).isRequired,
-  changeThemeReq: PropTypes.func.isRequired,
-};
+Home.propTypes = {};
 
-export default Home;
+export default HocBasic(Home);

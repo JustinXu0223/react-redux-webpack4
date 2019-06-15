@@ -26,7 +26,7 @@
   },
   "rules": {
     "react/jsx-filename-extension": [ // 允许以js文件 默认react相关只支持jsx
-      1,
+      2,
       {
         "extensions": [
           ".js",
@@ -38,7 +38,7 @@
     "jsx-a11y/click-events-have-key-events": 0, // onClick 不需要onKeyUp，onKeyDown，onKeyPress以支持盲人设备
     "import/prefer-default-export": 0, // 不需要默认导出
     "react/prefer-stateless-function": [
-      1,
+      2,
       {
         "ignorePureComponents": true
       }
@@ -47,6 +47,15 @@
       "error", {
         "components": [ "Link" ],
         "specialLink": [ "to" ]
+      }
+    ],
+    "react/prop-types": [ // 忽略高阶组件中连接的props
+      2,
+      {
+        "ignore": [
+          "styles",
+          "changeThemeReq"
+        ]
       }
     ],
     "global-require": [0], // 允许require动态导入
