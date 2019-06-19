@@ -49,3 +49,32 @@ export function getScrollBarWidth() {
   el.remove();
   return scrollBarWidth;
 }
+
+// 处理手势
+// export const modalHelper = {
+//   preventFun: e => e.preventDefault(),
+//
+//   handleStopScroll() {
+//     document.body.addEventListener('touchmove', this.preventFun, { passive: false });
+//   },
+//
+//   handleOpenScroll() {
+//     document.body.removeEventListener('touchmove', this.preventFun, { passive: false });
+//   },
+// };
+export const modalHelper = {
+  bodyEl: document.body,
+  top: 0,
+
+  handleStopScroll() {
+    this.top = window.scrollY;
+    this.bodyEl.style.position = 'fixed';
+    this.bodyEl.style.top = `${-this.top}px`;
+  },
+  handleOpenScroll() {
+    this.bodyEl.style.position = '';
+    this.bodyEl.style.top = '';
+    window.scrollTo(0, this.top); // 回到原先的top
+  },
+};
+
