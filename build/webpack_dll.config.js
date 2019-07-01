@@ -1,3 +1,4 @@
+/* eslint import/no-extraneous-dependencies: 0 */
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -12,15 +13,15 @@ module.exports = {
       'react',
       'react-dom',
       'react-helmet',
-      'react-loadable',
-      'react-router-dom',
-      'history',
-      'react-redux',
-      'react-router-redux',
-      'redux',
-      'redux-saga',
-      'reselect',
-      'immutable',
+      // 'react-loadable',
+      // 'react-router-dom',
+      // 'history',
+      // 'react-redux',
+      // 'react-router-redux',
+      // 'redux',
+      // 'redux-saga',
+      // 'reselect',
+      // 'immutable',
     ],
   },
   output: {

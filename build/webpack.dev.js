@@ -23,9 +23,7 @@ const {
 } = process.env;
 
 if (BUNDLE) {
-  plugins.push(
-    new BundleAnalyzerPlugin(),
-  );
+  plugins.push(new BundleAnalyzerPlugin());
 }
 
 module.exports = merge(base, {

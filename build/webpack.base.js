@@ -45,27 +45,25 @@ const entry = entryList.reduce((accumulator, currValue) => {
 
 // ==============plugin================
 const htmlPluginList = entryList.reduce((accumulator, currValue) => {
-  accumulator.push(
-    new HtmlWebpackPlugin({
-      template: utils.resolvePath(`${staticDir}/index.html`),
-      filename: `${currValue}.html`,
-      inject: 'body',
-      title: 'react app',
-      chunks: ['commons', 'vendor', currValue],
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true,
-      },
-    }),
-  );
+  accumulator.push(new HtmlWebpackPlugin({
+    template: utils.resolvePath(`${staticDir}/index.html`),
+    filename: `${currValue}.html`,
+    inject: 'body',
+    title: 'react app',
+    chunks: ['commons', 'vendor', currValue],
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeRedundantAttributes: true,
+      useShortDoctype: true,
+      removeEmptyAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      keepClosingSlash: true,
+      minifyJS: true,
+      minifyCSS: true,
+      minifyURLs: true,
+    },
+  }));
   return accumulator;
 }, []);
 
