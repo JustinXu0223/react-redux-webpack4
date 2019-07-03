@@ -39,7 +39,7 @@ module.exports = merge(base, {
           {
             loader: 'eslint-loader',
             options: {
-              configFile: './.eslintrc',
+              configFile: './.eslintrc.js',
             },
           },
         ],

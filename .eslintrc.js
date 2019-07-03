@@ -1,4 +1,6 @@
-{
+const isProd = process.env.NODE_ENV === 'production';
+
+module.exports = {
   "parser": "babel-eslint",
   "extends": "airbnb",
   "plugins": [
@@ -78,7 +80,7 @@
         "allowTaggedTemplates": false // 不允许标记的模板文字
       }
     ],
-    "no-debugger": [1],
-    "no-console": [1]
+    "no-debugger": isProd ? 2 : 0,
+    "no-console": isProd ? 2 : 0
   }
-}
+};
