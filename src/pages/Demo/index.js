@@ -54,10 +54,6 @@ class Demo extends React.Component {
     backgroundColor: 'red',
   };
 
-  componentDidMount() {
-    console.log(this.props);
-  }
-
   onToggleBg = () => {
     this.setState({
       backgroundColor: this.state.backgroundColor === 'red' ? 'blue' : 'red',
