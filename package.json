@@ -23,11 +23,6 @@
     "build-p": "env-cmd build:prod yarn release",
     "ws": "ws -d www/main"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn precommit-msg && yarn lint"
-    }
-  },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@babel/runtime": "^7.0.0",
