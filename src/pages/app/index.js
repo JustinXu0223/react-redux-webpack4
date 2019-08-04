@@ -59,20 +59,20 @@ const HeaderList = [
 ];
 
 const AsyncHome = Loadable({
-  loader: () => import('./Home'),
+  loader: () => import('./Home/index'),
   loading: LoadingComponent,
 });
 
 const AsyncDemo = Loadable({
-  loader: () => import('./Demo'),
+  loader: () => import('./Demo/index'),
   loading: LoadingComponent,
 });
 
-class App extends React.Component {
+class Index extends React.Component {
   state = {};
   async componentDidMount() {
     const data = await getUser();
-    alert(data);
+    alert(JSON.stringify(data));
   }
   renderHeaderView = () => (
     <HeaderView>
@@ -105,6 +105,6 @@ class App extends React.Component {
   }
 }
 
-App.propTypes = {};
+Index.propTypes = {};
 
-export default App;
+export default Index;

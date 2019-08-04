@@ -1,4 +1,4 @@
-## react-redux-webpack4
+>  react-redux-webpack4
 
 * Bale 'webpack@4 + babel'
 * Eslint 'airbnb + babel-eslint'
@@ -8,21 +8,26 @@
 * Handle state 'redux + redux-sage + reselect + immutable'
 * Other library '...'
 
+> 目录说明，
 
-### Version
+多入口配置在pages下面，每个入口为一个新文件夹，并且在索引文件夹第一层, 并且以entry_开头，
+并截取_后的名字为文件名，对于在public下新建对应的html文件名
+
+
+>  Version
 ```html
-node 8.0+(v8.11.1)
-npm 5.0+(v5.6.0)
+node 8.0+(v10.9.0)
+npm 5.0+(v6.2.0)
 ```
 
-### Start
+>  Start
 1. Run 'yarn setup'
 
 ### Dos development
 2. Run 'yarn start'
 
 
-### Dos production
+>  Dos production
 * Run 'yarn build'
 
 * OR
@@ -30,7 +35,7 @@ npm 5.0+(v5.6.0)
 * Run 'yarn build:(any)'
 
 
-### Project structure
+>  Project structure
 ```html
 |--src              Source dir
   |--assets         Static source

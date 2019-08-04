@@ -22,14 +22,14 @@ import { connect } from 'react-redux';
 import { INIT_LANGUAGE } from 'reduxs/actions/global';
 
 // components
-import LoadingComponent from './components/Loading';
+import LoadingComponent from '../../components/Loading';
 
 const AsyncApp = Loadable({
-  loader: () => import('./pages'),
+  loader: () => import('./index'),
   loading: LoadingComponent,
 });
 const AsyncNotFound = Loadable({
-  loader: () => import('./pages/NotFound'),
+  loader: () => import('./NotFound'),
   loading: LoadingComponent,
 });
 

@@ -6,19 +6,12 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { AppContainer } from 'react-hot-loader';
 import { injectGlobal } from 'styled-components';
 import { isDev } from 'config';
-import history from 'utils/history';
-import store from 'reduxs/store';
-import router from '../router';
+import { disableReactDevTools } from 'utils/base';
 
-// mock
-import mock from '../mock';
-
-if (isDev) {
-  mock.start();
+if (!isDev) {
+  disableReactDevTools();
 }
 
 /* eslint-disable no-unused-expressions */
@@ -40,22 +33,13 @@ injectGlobal`
   }
 `;
 
-function renderApp(Router) {
+function renderApp() {
   ReactDOM.render(
-    <AppContainer>
-      <Provider store={store}>
-        <Router history={history} />
-      </Provider>
-    </AppContainer>,
+    <div>
+      下载页面
+    </div>,
     document.getElementById('root'),
   );
 }
 
-renderApp(router);
-
-if (module.hot) {
-  module.hot.accept('../router.js', () => {
-    const Router = require('../router.js').default;
-    renderApp(Router);
-  });
-}
+renderApp();

@@ -2,7 +2,7 @@
   "name": "react-redux-webpack4",
   "version": "1.0.0",
   "description": "react redux webpack",
-  "main": "src/entries/index.js",
+  "main": "src/pages/app/entry_index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/JustinXu0223/react-redux-webpack4.git"
@@ -20,7 +20,8 @@
     "start-b": "BUNDLE=1 yarn dev",
     "release": "webpack --progress --colors --config build/webpack.prod.js --profile --json > stats.json",
     "build-s": "env-cmd build:staging yarn release",
-    "build-p": "env-cmd build:prod yarn release"
+    "build-p": "env-cmd build:prod yarn release",
+    "ws": "ws -d www/main"
   },
   "husky": {
     "hooks": {
@@ -98,6 +99,7 @@
     "less": "^3.0.2",
     "less-loader": "^4.1.0",
     "less-vars-to-js": "^1.2.1",
+    "local-web-server": "^3.0.7",
     "open-browser-webpack-plugin": "^0.0.5",
     "postcss-loader": "^2.1.4",
     "style-loader": "^0.21.0",

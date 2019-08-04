@@ -31,26 +31,25 @@ const isProd = NODE_ENV === 'production';
 
 const themeVariables = lessToJs(fs.readFileSync(utils.resolvePath('./src/config/ant-theme-vars.less'), 'utf8'));
 
-const entryList = utils.getEntryMap(utils.getAllFileList('./src/entries'));
+const entryList = utils.getEntryMap(utils.getAllFileList('./src/pages'));
 
 // svg config file
 const svgoConfig = require('../svgo-config');
 const svgoColorfulConfig = require('../svgo-colorful-config');
 
 // ==============entry================
-const entry = entryList.reduce((accumulator, currValue) => {
-  accumulator[currValue] = ['@babel/polyfill', utils.resolvePath(`./src/entries/${currValue}.js`)];
+const entry = entryList.reduce((accumulator, { name, currPath }) => {
+  accumulator[name] = ['@babel/polyfill', utils.resolvePath(currPath)];
   return accumulator;
 }, {});
 
 // ==============plugin================
-const htmlPluginList = entryList.reduce((accumulator, currValue) => {
+const htmlPluginList = entryList.reduce((accumulator, { name }) => {
   accumulator.push(new HtmlWebpackPlugin({
-    template: utils.resolvePath(`${staticDir}/index.html`),
-    filename: `${currValue}.html`,
+    template: utils.resolvePath(`${staticDir}/${name}.html`),
+    filename: `${name}.html`,
     inject: 'body',
-    title: 'react app',
-    chunks: ['commons', 'vendor', currValue],
+    chunks: ['commons', 'vendor', name],
     minify: {
       removeComments: true,
       collapseWhitespace: true,
