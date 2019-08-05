@@ -34,12 +34,7 @@ injectGlobal`
 `;
 
 function renderApp() {
-  ReactDOM.render(
-    <div>
-      下载页面
-    </div>,
-    document.getElementById('root'),
-  );
+  ReactDOM.render(<div>下载页面</div>, document.getElementById('root'));
 }
 
 renderApp();

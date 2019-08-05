@@ -53,7 +53,7 @@ const ButtonView = styled.div`
 
 const NotFound = ({ language: { i18n = {} } }) => (
   <ContainerView>
-    <SvgIcon iconClass="not-found" width={250} />
+    <SvgIcon iconClass='not-found' width={250} />
     <Helmet>
       <title>{i18n.helmet_title('Not Found')}</title>
     </Helmet>
@@ -69,7 +69,7 @@ const NotFound = ({ language: { i18n = {} } }) => (
         >
           {i18n.not_found_back_button}
         </Button>
-        <Button type="primary">
+        <Button type='primary'>
           <a href={`${window.location.origin}`}>{i18n.not_found_home_button}</a>
         </Button>
       </ButtonView>
@@ -88,5 +88,7 @@ NotFound.propTypes = {
   }).isRequired,
 };
 
-export default connect(mapStateToProps, null)(NotFound);
-
+export default connect(
+  mapStateToProps,
+  null,
+)(NotFound);

@@ -33,7 +33,6 @@ const changeStylesSaga = function* saga({ payload }) {
   yield put({ type: Types.CHANGE_THEME, payload: theme.default });
 };
 
-
 export default function* rootFlow() {
   yield all([
     takeEvery(Types.INIT_LANGUAGE, initLanguageSaga),

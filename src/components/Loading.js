@@ -21,7 +21,7 @@ const LoadingComponent = ({ isLoading, error }) => {
   if (isLoading) {
     return (
       <ContainerView>
-        <Spin size="large" />
+        <Spin size='large' />
       </ContainerView>
     );
   }
@@ -39,10 +39,7 @@ LoadingComponent.defaultProps = {
 
 LoadingComponent.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  error: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]),
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 export default LoadingComponent;

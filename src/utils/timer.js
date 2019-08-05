@@ -1,5 +1,6 @@
 export const startCountdown = ({ seconds, loopFunc, doneFunc }) => {
-  if (Number.isNaN(Number(seconds))) throw TypeError('First parameter cannot be converted to number');
+  if (Number.isNaN(Number(seconds)))
+    throw TypeError('First parameter cannot be converted to number');
   if (typeof loopFunc !== 'function') throw TypeError('Second Parameter should be a function');
   if (typeof doneFunc !== 'function') throw TypeError('Third Parameter should be a function');
   let countdown = seconds;

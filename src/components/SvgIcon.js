@@ -23,24 +23,11 @@ const ContainerView = styled.svg.attrs({
 class SvgIcon extends React.PureComponent {
   render() {
     const {
-      props: {
-        iconClass,
-        fill,
-        children,
-        width,
-        height,
-      },
+      props: { iconClass, fill, children, width, height },
     } = this;
     return (
-      <ContainerView
-        className="svg-icon"
-        width={width}
-        height={height || width}
-      >
-        <use
-          xlinkHref={`#icon-${iconClass}`}
-          style={{ fill }}
-        />
+      <ContainerView className='svg-icon' width={width} height={height || width}>
+        <use xlinkHref={`#icon-${iconClass}`} style={{ fill }} />
         {children}
       </ContainerView>
     );

@@ -76,16 +76,11 @@ class Index extends React.Component {
   }
   renderHeaderView = () => (
     <HeaderView>
-      {
-          HeaderList.map(v => (
-            <HeaderItemView
-              key={v.name}
-              to={v.path}
-            >
-              {v.name}
-            </HeaderItemView>
-          ))
-        }
+      {HeaderList.map(v => (
+        <HeaderItemView key={v.name} to={v.path}>
+          {v.name}
+        </HeaderItemView>
+      ))}
     </HeaderView>
   );
   render() {
@@ -97,7 +92,7 @@ class Index extends React.Component {
             <Route exact path={routerId.app} component={() => <Redirect to={routerId.home} />} />
             <Route exact path={routerId.home} component={AsyncHome} />
             <Route exact path={routerId.demo} component={AsyncDemo} />
-            <Route path="*" render={() => <Redirect to={routerId.notFound} />} />
+            <Route path='*' render={() => <Redirect to={routerId.notFound} />} />
           </Switch>
         </SectionView>
       </ContainerView>

@@ -13,4 +13,3 @@ export default {
   signIn: '/signIn',
   notFound: '/404',
 };
-
