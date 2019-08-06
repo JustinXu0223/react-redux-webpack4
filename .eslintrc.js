@@ -25,6 +25,7 @@ module.exports = {
     },
   },
   rules: {
+    'prettier/prettier': 'error',
     'react/jsx-filename-extension': [
       // 允许以js文件 默认react相关只支持jsx
       2,
