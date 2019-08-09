@@ -12,24 +12,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 
 const utils = require('./webpack.util.js');
-const {
-  staticDir,
-  output,
-  reactDll,
-} = require('./webpack.config');
+const { staticDir, output, reactDll } = require('./webpack.config');
 
 // 根据我的系统的内核数量 指定线程池个数 也可以其他数量
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
-const {
-  NODE_ENV,
-  BABEL_ENV,
-  npm_package_version,
-} = process.env;
+const { NODE_ENV, BABEL_ENV, npm_package_version } = process.env;
 
 const isProd = NODE_ENV === 'production';
 
-const themeVariables = lessToJs(fs.readFileSync(utils.resolvePath('./src/config/ant-theme-vars.less'), 'utf8'));
+const themeVariables = lessToJs(
+  fs.readFileSync(utils.resolvePath('./src/config/ant-theme-vars.less'), 'utf8'),
+);
 
 const entryList = utils.getEntryMap(utils.getAllFileList('./src/pages'));
 
@@ -45,29 +39,32 @@ const entry = entryList.reduce((accumulator, { name, currPath }) => {
 
 // ==============plugin================
 const htmlPluginList = entryList.reduce((accumulator, { name }) => {
-  accumulator.push(new HtmlWebpackPlugin({
-    template: utils.resolvePath(`${staticDir}/${name}.html`),
-    filename: `${name}.html`,
-    inject: 'body',
-    chunks: ['commons', 'vendor', name],
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeRedundantAttributes: true,
-      useShortDoctype: true,
-      removeEmptyAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-      keepClosingSlash: true,
-      minifyJS: true,
-      minifyCSS: true,
-      minifyURLs: true,
-    },
-  }));
+  accumulator.push(
+    new HtmlWebpackPlugin({
+      template: utils.resolvePath(`${staticDir}/${name}.html`),
+      filename: `${name}.html`,
+      inject: 'body',
+      chunks: ['commons', 'vendor', name],
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
+    }),
+  );
   return accumulator;
 }, []);
 
 const plugins = [
-  new HappyPack({ // 基础参数设置
+  new HappyPack({
+    // 基础参数设置
     id: 'babel', // 上面loader?后面指定的id
     loaders: ['babel-loader?cacheDirectory'], // 实际匹配处理的loader
     threadPool: happyThreadPool,
@@ -129,9 +126,7 @@ const modules = {
         {
           loader: 'postcss-loader',
           options: {
-            plugins: [
-              autoprefixer,
-            ],
+            plugins: [autoprefixer],
           },
         },
       ],
@@ -163,31 +158,33 @@ const modules = {
     {
       test: /\.svg$/,
       include: [utils.resolvePath('src/assets/svg/colorful')],
-      use: [{
-        loader: 'svg-sprite-loader',
-        options: {
-          symbolId: 'icon-[name]',
+      use: [
+        {
+          loader: 'svg-sprite-loader',
+          options: {
+            symbolId: 'icon-[name]',
+          },
         },
-      },
-      {
-        loader: 'svgo-loader',
-        options: svgoColorfulConfig,
-      },
+        {
+          loader: 'svgo-loader',
+          options: svgoColorfulConfig,
+        },
       ],
     },
     {
       test: /\.svg$/,
       include: [utils.resolvePath('src/assets/svg/single')],
-      use: [{
-        loader: 'svg-sprite-loader',
-        options: {
-          symbolId: 'icon-[name]',
+      use: [
+        {
+          loader: 'svg-sprite-loader',
+          options: {
+            symbolId: 'icon-[name]',
+          },
         },
-      },
-      {
-        loader: 'svgo-loader',
-        options: svgoConfig,
-      },
+        {
+          loader: 'svgo-loader',
+          options: svgoConfig,
+        },
       ],
     },
     {
@@ -198,9 +195,7 @@ const modules = {
         {
           loader: 'postcss-loader',
           options: {
-            plugins: [
-              autoprefixer,
-            ],
+            plugins: [autoprefixer],
           },
         },
         {
@@ -244,9 +239,7 @@ module.exports = {
     },
   },
   resolve: {
-    modules: [
-      utils.resolvePath('node_modules'),
-    ],
+    modules: [utils.resolvePath('node_modules')],
     extensions: ['.js', '.jsx', '.json', '.css', '.less'],
     alias: {
       assets: utils.resolvePath('src/assets'),

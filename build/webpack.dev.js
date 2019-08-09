@@ -7,10 +7,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const base = require('./webpack.base.js');
 const utils = require('./webpack.util.js');
-const {
-  port,
-  output,
-} = require('./webpack.config.js');
+const { port, output } = require('./webpack.config.js');
 
 const plugins = [
   new webpack.HotModuleReplacementPlugin(),
@@ -18,9 +15,7 @@ const plugins = [
   new OpenBrowserPlugin({ url: `http://localhost:${port}` }),
 ];
 
-const {
-  BUNDLE,
-} = process.env;
+const { BUNDLE } = process.env;
 
 if (BUNDLE) {
   plugins.push(new BundleAnalyzerPlugin());

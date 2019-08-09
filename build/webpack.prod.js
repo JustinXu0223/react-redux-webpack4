@@ -10,14 +10,9 @@ const FileManagerPlugin = require('filemanager-webpack-plugin');
 
 const base = require('./webpack.base.js');
 const utils = require('./webpack.util.js');
-const {
-  output,
-} = require('./webpack.config.js');
+const { output } = require('./webpack.config.js');
 
-const {
-  npm_package_name,
-  npm_package_version,
-} = process.env;
+const { npm_package_name, npm_package_version } = process.env;
 
 module.exports = merge(base, {
   mode: 'production',
@@ -34,7 +29,8 @@ module.exports = merge(base, {
           beautify: false, // 不需要格式化
           comments: false, // 保留注释
         },
-        compress: { // 压缩
+        compress: {
+          // 压缩
           warnings: false, // 删除无用代码时不输出警告
           drop_console: true, // 删除console语句
           collapse_vars: true, // 内嵌定义了但是只有用到一次的变量
