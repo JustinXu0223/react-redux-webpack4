@@ -58,8 +58,9 @@ module.exports = merge(base, {
     host: '0.0.0.0',
     port,
     proxy: {
-      '/api/**': {
+      '/api': {
         target: 'https://xxx.com/api/',
+        pathRewrite: { '^/api': '' },
         changeOrigin: true,
         secure: false,
       },
