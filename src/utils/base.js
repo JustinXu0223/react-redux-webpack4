@@ -154,6 +154,7 @@ export function parserMoney(value) {
  *   {String} equalKey 比对key
  *   {String} returnKey 返回key
  *   {Bool} returnIndex 是否返回index
+ *   {Bool} returnOnlyLast 只返回最后一个对象
  * }
  * @return {*} 从顶层到当前层级
  */
@@ -161,14 +162,19 @@ export function getTreePathList(list, value, {
   equalKey = 'name',
   returnKey = 'uid',
   returnIndex = false,
+  returnOnlyLast = false,
 } = {}) {
   for (let i = 0; i < list.length; i += 1) {
     const { children = [], [equalKey]: name, [returnKey]: uid } = list[i];
+    if (children) {
+      delete list[i].children;
+    }
     const returnMap = returnIndex ? {
-      [returnKey]: uid,
+      ...list[i],
       index: i,
     } : uid;
     if (name === value) {
+      if (returnOnlyLast) return returnMap;
       return [returnMap];
     }
     if (children && children.length) {
@@ -178,6 +184,7 @@ export function getTreePathList(list, value, {
         returnIndex,
       });
       if (res) {
+        if (returnOnlyLast) return res;
         return [returnMap, res].flat();
       }
     }

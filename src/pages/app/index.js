@@ -15,7 +15,7 @@ import LoadingComponent from 'components/Loading';
 // constants
 import routerId from 'constants/routerId';
 
-import { getUser } from 'services/demo';
+// import { getUser } from 'services/demo';
 
 const ContainerView = styled.div`
   align-items: center;
@@ -71,21 +71,21 @@ const AsyncDemo = Loadable({
 class Index extends React.Component {
   state = {};
   async componentDidMount() {
-    const data = await getUser();
-    alert(JSON.stringify(data));
+    // const data = await getUser();
+    // alert(JSON.stringify(data));
   }
   renderHeaderView = () => (
     <HeaderView>
       {
-          HeaderList.map(v => (
-            <HeaderItemView
-              key={v.name}
-              to={v.path}
-            >
-              {v.name}
-            </HeaderItemView>
-          ))
-        }
+        HeaderList.map(v => (
+          <HeaderItemView
+            key={v.name}
+            to={v.path}
+          >
+            {v.name}
+          </HeaderItemView>
+        ))
+      }
     </HeaderView>
   );
   render() {
