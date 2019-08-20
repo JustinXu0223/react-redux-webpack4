@@ -10,6 +10,7 @@ const HappyPack = require('happypack');
 const os = require('os'); // node 提供的系统操作模块
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin'); // 加速构建
 
 const utils = require('./webpack.util.js');
 const { staticDir, output, reactDll } = require('./webpack.config');
@@ -99,6 +100,7 @@ const plugins = [
       APP_VERSION: JSON.stringify(npm_package_version),
     },
   }),
+  new HardSourceWebpackPlugin(),
 ];
 
 // ==============modules================
