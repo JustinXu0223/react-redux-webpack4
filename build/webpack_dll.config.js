@@ -3,9 +3,7 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const utils = require('./webpack.util');
-const {
-  reactDll,
-} = require('./webpack.config');
+const { reactDll } = require('./webpack.config');
 
 module.exports = {
   entry: {

@@ -36,15 +36,20 @@ export function sliceBase64(baseString = '') {
   return null;
 }
 
-
 function padLeftZero(str) {
-  return (`00${str}`).substr(str.length);
+  return `00${str}`.substr(str.length);
 }
 
 // 格式化时间
 export function formatDate(date, fmt) {
   if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (date.getFullYear().toString()).substr(4 - RegExp.$1.length));
+    fmt = fmt.replace(
+      RegExp.$1,
+      date
+        .getFullYear()
+        .toString()
+        .substr(4 - RegExp.$1.length),
+    );
   }
   const o = {
     'M+': date.getMonth() + 1,
@@ -57,7 +62,7 @@ export function formatDate(date, fmt) {
   for (const k in o) {
     if (new RegExp(`(${k})`).test(fmt)) {
       const str = `${o[k]}`;
-      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? str : padLeftZero(str));
+      fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? str : padLeftZero(str));
     }
   }
   return fmt;
@@ -154,7 +159,6 @@ export function parserMoney(value) {
  *   {String} equalKey 比对key
  *   {String} returnKey 返回key
  *   {Bool} returnIndex 是否返回index
- *   {Bool} returnOnlyLast 只返回最后一个对象
  * }
  * @return {*} 从顶层到当前层级
  */
@@ -198,7 +202,7 @@ export const disableReactDevTools = () => {
   const DEV_TOOLS = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
 
   if (typeof DEV_TOOLS === 'object') {
-    for (const [key, value] of (Object).entries(DEV_TOOLS)) {
+    for (const [key, value] of Object.entries(DEV_TOOLS)) {
       DEV_TOOLS[key] = typeof value === 'function' ? noop : null;
     }
   }

@@ -25,17 +25,14 @@ const ButtonView = styled.div`
 `;
 
 class Home extends React.Component {
-  onToggleTheme = (theme) => {
+  onToggleTheme = theme => {
     this.props.changeThemeReq(theme);
   };
 
   render() {
     const {
       props: {
-        styles: {
-          name,
-          theme,
-        },
+        styles: { name, theme },
       },
     } = this;
     return (
@@ -45,12 +42,12 @@ class Home extends React.Component {
         <div>主题颜色: {theme.primaryColor}</div>
         <ButtonView>
           <Button
-            type="primary"
+            type='primary'
             onClick={() => this.onToggleTheme(name === 'dark' ? 'light' : 'dark')}
           >
             按钮
           </Button>
-          <SvgIcon iconClass="delete" fill="blue" />
+          <SvgIcon iconClass='delete' fill='blue' />
         </ButtonView>
       </ContainerView>
     );

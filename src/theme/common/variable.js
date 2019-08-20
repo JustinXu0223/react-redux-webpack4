@@ -5,7 +5,8 @@
  * @author JUSTIN XU
  */
 // Define what props.index will look like
-const fontFamily = '"PingFang SC", "Hiragino Sans GB", "Monospaced Number","Helvetica Neue", Helvetica, Arial, sans-serif';
+const fontFamily =
+  '"PingFang SC", "Hiragino Sans GB", "Monospaced Number","Helvetica Neue", Helvetica, Arial, sans-serif';
 
 export default {
   fontPingFang: fontFamily,

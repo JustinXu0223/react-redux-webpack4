@@ -45,11 +45,11 @@ function reloadHttp(config) {
   config.last_retryCount += 1;
 
   // Create new promise to handle exponential backoff
-  return new Promise(((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => {
       resolve(config);
     }, config.retryDelay || 1);
-  }));
+  });
 }
 
 const instance = axios.create({
@@ -61,14 +61,15 @@ const instance = axios.create({
   // 设置全局的请求次数，请求的间隙
   retry: 2,
   retryDelay: 1000,
-  transformResponse: [data =>
-    // Do whatever you want to transform the data
-    jsonlint.parse(data),
+  transformResponse: [
+    data =>
+      // Do whatever you want to transform the data
+      jsonlint.parse(data),
   ],
 });
 
 // Add a request interceptor
-instance.interceptors.request.use((config) => {
+instance.interceptors.request.use(config => {
   const language = localStorage.getItem('language');
   config.headers['X-Pool-Language'] = language || 'zh';
   const token = localStorage.getItem('token');
@@ -80,45 +81,56 @@ instance.interceptors.request.use((config) => {
 });
 
 // Add a response interceptor
-instance.interceptors.response.use((response) => {
-  const { data, status } = response;
-  if ((status >= 200 && status < 300) || status === 304) {
-    if (Object.is('arraybuffer', response.config.responseType)) {
-      const filename = response.headers['content-disposition'] || '';
-      return { filename, file: data };
+instance.interceptors.response.use(
+  response => {
+    const { data, status } = response;
+    if ((status >= 200 && status < 300) || status === 304) {
+      if (Object.is('arraybuffer', response.config.responseType)) {
+        const filename = response.headers['content-disposition'] || '';
+        return { filename, file: data };
+      }
+      return data;
     }
-    return data;
-  }
-  throw new ResponseError(getServeError().SERVE_ERROR, Number(data.code), response);
-}, async (err) => {
-  const { status, data: { msg, message, code } = {}, config = {} } = err.response || {};
-  const errMsg = msg || message;
-  // check reload http
-  if (err.code === 'ECONNABORTED' || err.message === 'Network Error') {
-    const reloadConfig = await reloadHttp(err.config);
-    if (reloadConfig) return instance(reloadConfig);
-  }
-  // handle auth
-  if (Object.is(401, status) && !config.removeAuth) {
-    localStorage.removeItem('token');
-    history.replace('/login');
-    throw new ResponseError(errMsg || getServeError().SERVE_TOKEN_ERROR, Number(code), err.response);
-  }
-  // handle network timeout
-  if (Object.is('ECONNABORTED', err.code)) {
-    throw new ResponseError(getServeError().TIMEOUT_ERROR, null, err.response);
-  }
-  // handle network error
-  if (Object.is('Network Error', err.message)) {
-    throw new ResponseError(getServeError().NETWORK_ERROR, null, err.response);
-  }
-  if (Object.is('arraybuffer', config.responseType)) {
-    const data = err.response.data || '';
-    const result = Buffer.from(data, 'binary').toString() || '{}';
-    throw new ResponseError(JSON.parse(result).msg || getServeError().SERVE_ERROR, null, err.response);
-  }
-  throw new ResponseError(errMsg || getServeError().SERVE_ERROR, null, err.response);
-});
+    throw new ResponseError(getServeError().SERVE_ERROR, Number(data.code), response);
+  },
+  async err => {
+    const { status, data: { msg, message, code } = {}, config = {} } = err.response || {};
+    const errMsg = msg || message;
+    // check reload http
+    if (err.code === 'ECONNABORTED' || err.message === 'Network Error') {
+      const reloadConfig = await reloadHttp(err.config);
+      if (reloadConfig) return instance(reloadConfig);
+    }
+    // handle auth
+    if (Object.is(401, status) && !config.removeAuth) {
+      localStorage.removeItem('token');
+      history.replace('/login');
+      throw new ResponseError(
+        errMsg || getServeError().SERVE_TOKEN_ERROR,
+        Number(code),
+        err.response,
+      );
+    }
+    // handle network timeout
+    if (Object.is('ECONNABORTED', err.code)) {
+      throw new ResponseError(getServeError().TIMEOUT_ERROR, null, err.response);
+    }
+    // handle network error
+    if (Object.is('Network Error', err.message)) {
+      throw new ResponseError(getServeError().NETWORK_ERROR, null, err.response);
+    }
+    if (Object.is('arraybuffer', config.responseType)) {
+      const data = err.response.data || '';
+      const result = Buffer.from(data, 'binary').toString() || '{}';
+      throw new ResponseError(
+        JSON.parse(result).msg || getServeError().SERVE_ERROR,
+        null,
+        err.response,
+      );
+    }
+    throw new ResponseError(errMsg || getServeError().SERVE_ERROR, null, err.response);
+  },
+);
 
 export default instance;
 

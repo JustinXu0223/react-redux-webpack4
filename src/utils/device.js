@@ -11,18 +11,21 @@ const ua = navigator.userAgent;
 // 是否为mac系统
 export const isMac = () => /macintosh|mac os x/i.test(ua);
 
-
 // 是否为windows系统
 export const isWindows = () => /windows|win32/i.test(ua);
 
 // 是否移动
-export const isMobile = () => // detection PC and Mobile
+export const isMobile = () =>
+  // detection PC and Mobile
   !!ua.match(/AppleWebKit.*Mobile.*/) && !!ua.match(/AppleWebKit/);
 export const isAndroid = () => /(?:Android)/.test(ua);
 
 export const isFireFox = () => /(?:Firefox)/.test(ua);
 
-export const isTablet = () => /(?:iPad|PlayBook)/.test(ua) || (isAndroid() && !/(?:Mobile)/.test(ua)) || (isFireFox() && /(?:Tablet)/.test(ua));
+export const isTablet = () =>
+  /(?:iPad|PlayBook)/.test(ua) ||
+  (isAndroid() && !/(?:Mobile)/.test(ua)) ||
+  (isFireFox() && /(?:Tablet)/.test(ua));
 
 export const isPC = () => !(isMobile() || isTablet());
 
@@ -77,4 +80,3 @@ export const modalHelper = {
     window.scrollTo(0, this.top); // 回到原先的top
   },
 };
-

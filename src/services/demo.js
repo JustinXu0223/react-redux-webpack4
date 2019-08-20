@@ -12,4 +12,3 @@ export function getUser() {
 }
 
 export { delay };
-

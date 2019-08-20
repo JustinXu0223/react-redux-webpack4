@@ -13,7 +13,7 @@ export function* incrementSaga({ payload }) {
   try {
     const demo = yield select(getDemo);
     yield call(delay, 1000);
-    const list = demo.get('list').map((value) => {
+    const list = demo.get('list').map(value => {
       if (value.get('id') !== payload) return value;
       return value.update('number', number => number + 1);
     });
@@ -33,7 +33,7 @@ export function* decreaseSaga({ payload }) {
   try {
     const demo = yield select(getDemo);
     yield call(delay, 1000);
-    const list = demo.get('list').map((value) => {
+    const list = demo.get('list').map(value => {
       if (value.get('id') !== payload) return value;
       return value.update('number', number => (number === 0 ? 0 : number - 1));
     });
@@ -49,7 +49,6 @@ export function* decreaseSaga({ payload }) {
     });
   }
 }
-
 
 export default function* rootFlow() {
   yield all([

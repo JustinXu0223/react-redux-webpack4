@@ -53,6 +53,8 @@ export function numberFormat(val, len = 0) {
   const integer = parsedArr[0];
   const fraction = parsedArr[1];
   const numArr = integer.split('');
-  const postInt = numArr.map((digit, index) => ((numArr.length - index) % 3 === 0 && index !== 0 ? `,${digit}` : digit)).join('');
+  const postInt = numArr
+    .map((digit, index) => ((numArr.length - index) % 3 === 0 && index !== 0 ? `,${digit}` : digit))
+    .join('');
   return fraction ? `${postInt}.${fraction}` : postInt;
 }

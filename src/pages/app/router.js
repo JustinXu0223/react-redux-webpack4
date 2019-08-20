@@ -49,10 +49,7 @@ class Router extends React.Component {
   }
   render() {
     const {
-      props: {
-        history,
-        styles,
-      },
+      props: { history, styles },
     } = this;
     return (
       <ConnectedRouter history={history}>

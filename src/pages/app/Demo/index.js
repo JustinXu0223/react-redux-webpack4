@@ -62,34 +62,22 @@ class Demo extends React.Component {
 
   renderList = () => {
     const {
-      props: {
-        demo,
-        incrementReq,
-        decreaseReq,
-      },
+      props: { demo, incrementReq, decreaseReq },
     } = this;
     const list = demo.get('list');
     const loading = demo.get('loading');
     if (!list.size) return null;
-    return list.map((value) => {
+    return list.map(value => {
       const id = value.get('id');
       return (
         <DemoItemView>
           <div> name: {value.get('name')}</div>
           <div> number: {value.get('number')}</div>
           <ButtonView>
-            <Button
-              type="primary"
-              loading={loading}
-              onClick={() => incrementReq(id)}
-            >
+            <Button type='primary' loading={loading} onClick={() => incrementReq(id)}>
               增加
             </Button>
-            <Button
-              type="danger"
-              loading={loading}
-              onClick={() => decreaseReq(id)}
-            >
+            <Button type='danger' loading={loading} onClick={() => decreaseReq(id)}>
               减少
             </Button>
           </ButtonView>
@@ -100,20 +88,13 @@ class Demo extends React.Component {
 
   render() {
     const {
-      state: {
-        backgroundColor,
-      },
-      props: {
-        counter,
-      },
+      state: { backgroundColor },
+      props: { counter },
     } = this;
     return (
       <ContainerView>
         Demo page
-        <CounterView
-          style={{ backgroundColor, height: '30px' }}
-          onClick={this.onToggleBg}
-        >
+        <CounterView style={{ backgroundColor, height: '30px' }} onClick={this.onToggleBg}>
           sum: {counter}
         </CounterView>
         {this.renderList()}
