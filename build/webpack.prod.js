@@ -7,6 +7,7 @@ const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CompressionPlugin = require('compression-webpack-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const base = require('./webpack.base.js');
 const utils = require('./webpack.util.js');
@@ -39,6 +40,24 @@ module.exports = merge(base, {
       },
     }),
     new webpack.BannerPlugin(`${npm_package_name}: version(${npm_package_version})`),
+    new OptimizeCssAssetsPlugin({
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: {
+        discardComments: {
+          removeAll: true,
+        },
+        // Run cssnano in safe mode to avoid
+        // potentially unsafe transformations.
+        safe: true,
+      },
+      canPrint: false,
+    }),
+    /**
+     * 为什么module id可能在修改代码后会有变动。见 https://webpack.js.org/guides/caching/#module-identifiers
+     * 为什么HashedModuleIdsPlugin不是webpack4的默认设置。见 https://github.com/webpack/webpack/issues/7421
+     * The caching document in webpack guide https://webpack.js.org/guides/caching
+     */
+    new webpack.HashedModuleIdsPlugin(),
     new ImageminPlugin({
       pngquant: {
         quality: '95-100', // 图片质量
@@ -48,7 +67,7 @@ module.exports = merge(base, {
       // gzip 压缩
       filename: '[path].gz[query]',
       algorithm: 'gzip',
-      test: new RegExp('\\.(js|css|html|svg)$'), // 压缩 js 与 css
+      test: new RegExp('\\.(js|css|html|svg)$'), // 压缩
       compressionOptions: { level: 9 },
       threshold: 8192,
       minRatio: 0.8,

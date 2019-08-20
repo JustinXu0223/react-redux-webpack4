@@ -2,12 +2,12 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 /* eslint import/no-dynamic-require: 0 */
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-const fs = require('fs');
-const lessToJs = require('less-vars-to-js');
+// const fs = require('fs');
+// const lessToJs = require('less-vars-to-js');
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // copy
 const HappyPack = require('happypack');
 const os = require('os'); // node 提供的系统操作模块
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin'); // 加速构建
@@ -22,9 +22,9 @@ const { NODE_ENV, BABEL_ENV, npm_package_version } = process.env;
 
 const isProd = NODE_ENV === 'production';
 
-const themeVariables = lessToJs(
-  fs.readFileSync(utils.resolvePath('./src/config/ant-theme-vars.less'), 'utf8'),
-);
+// const themeVariables = lessToJs(
+//   fs.readFileSync(utils.resolvePath('./src/config/ant-theme-vars.less'), 'utf8'),
+// );
 
 const entryList = utils.getEntryMap(utils.getAllFileList('./src/pages'));
 
@@ -100,6 +100,12 @@ const plugins = [
       APP_VERSION: JSON.stringify(npm_package_version),
     },
   }),
+  new MiniCssExtractPlugin({
+    // Options similar to the same options in webpackOptions.output
+    // both options are optional
+    filename: '[name].[contenthash:8].css',
+    chunkFilename: '[id].[contenthash:8].css',
+  }),
   new HardSourceWebpackPlugin(),
 ];
 
@@ -114,23 +120,43 @@ const modules = {
     },
     {
       test: /\.css$/,
-      exclude: /src/,
       use: [
-        {
-          loader: 'style-loader',
-        },
+        MiniCssExtractPlugin.loader,
         {
           loader: 'css-loader',
           options: {
             importLoaders: 1,
           },
         },
+        'postcss-loader',
+      ],
+    },
+    {
+      test: /\.less$/,
+      use: [
+        // MiniCssExtractPlugin.loader,
+        'style-loader',
         {
-          loader: 'postcss-loader',
+          loader: 'css-loader',
           options: {
-            plugins: [autoprefixer],
+            modules: true,
+            importLoaders: 2, // 关于该选项的解释 https://github.com/webpack-contrib/css-loader/issues/228#issuecomment-312885975
           },
         },
+        'postcss-loader', // 已经将postcss.config.js移动到项目根目录
+        {
+          loader: 'less-loader',
+          options: {
+            // modifyVars: themeVariables,
+            javascriptEnabled: true,
+          },
+        },
+        // {
+        //   loader: 'style-resources-loader',
+        //   options: {
+        //     patterns: ['./src/theme/index.less'],
+        //   },
+        // },
       ],
     },
     {
@@ -189,26 +215,6 @@ const modules = {
         },
       ],
     },
-    {
-      test: /\.less$/,
-      use: [
-        { loader: 'style-loader' },
-        { loader: 'css-loader' },
-        {
-          loader: 'postcss-loader',
-          options: {
-            plugins: [autoprefixer],
-          },
-        },
-        {
-          loader: 'less-loader',
-          options: {
-            modifyVars: themeVariables,
-            javascriptEnabled: true,
-          },
-        },
-      ],
-    },
   ],
 };
 
@@ -217,8 +223,8 @@ module.exports = {
   output: {
     path: utils.resolvePath(output.entryPath),
     publicPath: output.publicPath,
-    filename: isProd ? 'js/[name].[chunkhash:8].js' : '[name].js',
-    chunkFilename: isProd ? 'js/[name].[chunkhash:8].js' : '[name].js',
+    filename: isProd ? 'js/[name].[contenthash:8].js' : '[name].js',
+    chunkFilename: isProd ? 'js/[name].[contenthash:8].js' : '[name].js',
   },
   optimization: {
     splitChunks: {

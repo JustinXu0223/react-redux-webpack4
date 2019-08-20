@@ -5,7 +5,6 @@
  * @author JUSTIN XU
  */
 import React from 'react';
-import styled from 'styled-components';
 import { NavLink, Switch, Route, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
@@ -16,32 +15,7 @@ import LoadingComponent from 'components/Loading';
 import routerId from 'constants/routerId';
 
 // import { getUser } from 'services/demo';
-
-const ContainerView = styled.div`
-  align-items: center;
-`;
-
-const HeaderView = styled.div`
-  height: 40px;
-  flex-direction: row;
-  justify-content: center;
-`;
-
-const HeaderItemView = styled(NavLink)`
-  border: 1px solid ${props => props.theme.primaryColor};
-  width: 80px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SectionView = styled.div`
-  max-width: 900px;
-  min-height: 100px;
-  width: 100vw;
-  border: 1px solid ${props => props.theme.primaryColor};
-`;
+import styles from './styles.less';
 
 const HeaderList = [
   {
@@ -75,27 +49,27 @@ class Index extends React.Component {
     // alert(JSON.stringify(data));
   }
   renderHeaderView = () => (
-    <HeaderView>
+    <div className={styles.headerView}>
       {HeaderList.map(v => (
-        <HeaderItemView key={v.name} to={v.path}>
+        <NavLink className={styles.headerItemView} key={v.name} to={v.path}>
           {v.name}
-        </HeaderItemView>
+        </NavLink>
       ))}
-    </HeaderView>
+    </div>
   );
   render() {
     return (
-      <ContainerView>
+      <div className={styles.containerView}>
         {this.renderHeaderView()}
-        <SectionView>
+        <div className={styles.sectionView}>
           <Switch>
             <Route exact path={routerId.app} component={() => <Redirect to={routerId.home} />} />
             <Route exact path={routerId.home} component={AsyncHome} />
             <Route exact path={routerId.demo} component={AsyncDemo} />
             <Route path='*' render={() => <Redirect to={routerId.notFound} />} />
           </Switch>
-        </SectionView>
-      </ContainerView>
+        </div>
+      </div>
     );
   }
 }
