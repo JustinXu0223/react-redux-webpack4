@@ -5,7 +5,7 @@ const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
-// const CompressionPlugin = require('compression-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 
 const base = require('./webpack.base.js');
@@ -44,15 +44,15 @@ module.exports = merge(base, {
         quality: '95-100', // 图片质量
       },
     }),
-    // new CompressionPlugin({ // gzip 压缩
-    //   filename: '[path].gz[query]',
-    //   algorithm: 'gzip',
-    //   test: new RegExp( // 压缩 js 与 css
-    //     '\\.(js|css)$'),
-    //   compressionOptions: { level: 9 },
-    //   threshold: 10240,
-    //   minRatio: 0.8,
-    // }),
+    new CompressionPlugin({
+      // gzip 压缩
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: new RegExp('\\.(js|css|html|svg)$'), // 压缩 js 与 css
+      compressionOptions: { level: 9 },
+      threshold: 8192,
+      minRatio: 0.8,
+    }),
     new FileManagerPlugin({
       onEnd: {
         archive: [

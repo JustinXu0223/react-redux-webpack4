@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const requireAll = requireContext => requireContext.keys().map(requireContext);
-const req = require.context('assets/svg', true, /\.svg$/);
+const req = require.context('assets/svg', true, /\.svg$/, 'lazy');
 requireAll(req);
 
 const ContainerView = styled.svg.attrs({

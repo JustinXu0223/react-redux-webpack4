@@ -47,7 +47,7 @@ class Home extends React.Component {
           >
             按钮
           </Button>
-          <SvgIcon iconClass='delete' fill='blue' />
+          <SvgIcon iconClass='delete' fill={name === 'dark' ? 'red' : 'blue'} />
         </ButtonView>
       </ContainerView>
     );
