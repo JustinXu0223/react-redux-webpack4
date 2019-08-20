@@ -129,7 +129,6 @@ export function uniqueArr(arr = [], type = 'name') {
   }, []);
 }
 
-
 // 格式化money 适用于numberInput
 export function formatMoney(value) {
   if (!value && value !== 0) return null;
@@ -162,21 +161,22 @@ export function parserMoney(value) {
  * }
  * @return {*} 从顶层到当前层级
  */
-export function getTreePathList(list, value, {
-  equalKey = 'name',
-  returnKey = 'uid',
-  returnIndex = false,
-  returnOnlyLast = false,
-} = {}) {
+export function getTreePathList(
+  list,
+  value,
+  { equalKey = 'name', returnKey = 'uid', returnIndex = false, returnOnlyLast = false } = {},
+) {
   for (let i = 0; i < list.length; i += 1) {
     const { children = [], [equalKey]: name, [returnKey]: uid } = list[i];
     if (children) {
       delete list[i].children;
     }
-    const returnMap = returnIndex ? {
-      ...list[i],
-      index: i,
-    } : uid;
+    const returnMap = returnIndex
+      ? {
+          ...list[i],
+          index: i,
+        }
+      : uid;
     if (name === value) {
       if (returnOnlyLast) return returnMap;
       return [returnMap];

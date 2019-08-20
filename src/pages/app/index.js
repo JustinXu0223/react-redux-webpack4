@@ -76,16 +76,11 @@ class Index extends React.Component {
   }
   renderHeaderView = () => (
     <HeaderView>
-      {
-        HeaderList.map(v => (
-          <HeaderItemView
-            key={v.name}
-            to={v.path}
-          >
-            {v.name}
-          </HeaderItemView>
-        ))
-      }
+      {HeaderList.map(v => (
+        <HeaderItemView key={v.name} to={v.path}>
+          {v.name}
+        </HeaderItemView>
+      ))}
     </HeaderView>
   );
   render() {
