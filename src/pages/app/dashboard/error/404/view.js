@@ -2,7 +2,7 @@
  * @component index.js
  * @description 错误页
  * @time 2018/5/7
- * @author JUSTIN XU
+ * @author JUSTIN
  */
 import React from 'react';
 import PropTypes from 'prop-types';

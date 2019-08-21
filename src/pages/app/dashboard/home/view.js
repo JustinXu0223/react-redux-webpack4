@@ -1,5 +1,5 @@
 /**
- * @component index.js
+ * @component view.js
  * @description 首页
  * @time 2019/3/9
  * @author JUSTIN XU
@@ -9,13 +9,20 @@ import React from 'react';
 
 // components
 import { Button } from 'antd';
-import SvgIcon from 'components/svgIcon';
+import SvgIcon from 'components/svgIcon/index';
 import HocBasic from 'components/hocBasic';
+
+import { getUser } from 'services/demo';
 
 // styles
 import styles from './styles.less';
 
 class Home extends React.Component {
+  async componentDidMount() {
+    const data = await getUser();
+    alert(JSON.stringify(data));
+  }
+
   onToggleTheme = theme => {
     this.props.changeThemeReq(theme);
   };

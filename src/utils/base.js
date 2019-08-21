@@ -235,6 +235,11 @@ export function toNumber(data) {
   return stringToNumber(data);
 }
 
+// 获取高阶组件名字
+export function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+}
+
 // 禁止React Developer Tools
 export const disableReactDevTools = () => {
   const noop = () => undefined;

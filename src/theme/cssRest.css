@@ -1,6 +1,7 @@
 html,
 body,
-#root {
+#root,
+.ant-layout {
   width: 100%;
   height: 100%;
 }
@@ -15,7 +16,16 @@ a:focus {
   text-decoration: none;
 }
 
-div {
-  display: flex;
-  flex-direction: column;
+.ant-modal-close-x {
+  transition: transform 1s;
+}
+
+.ant-modal-close-x:hover {
+  transform: rotate(360deg);
+}
+
+.ant-layout-content {
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }

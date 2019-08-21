@@ -6,12 +6,16 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import hoistNonReactStatic from 'hoist-non-react-statics';
 
 // reduxs
 import { connect } from 'react-redux';
 import { CHANGE_THEME_NAME } from 'reduxs/actions/global';
 
-function HocBasic(WrappedComponent) {
+// utils
+import { getDisplayName } from 'utils/base';
+
+function HocBasic(Component) {
   @connect(
     state => ({
       styles: state.styles,
@@ -20,13 +24,16 @@ function HocBasic(WrappedComponent) {
       changeThemeReq: payload => dispatch({ type: CHANGE_THEME_NAME, payload }),
     }),
   )
-  class WrapperComponent extends React.Component {
+  class WrappedComponent extends React.Component {
+    static displayName = `WithAuth(${getDisplayName(Component)})`;
+
     render() {
-      return <WrappedComponent {...this.props} />;
+      return <Component {...this.props} />;
     }
   }
 
-  return WrapperComponent;
+  hoistNonReactStatic(WrappedComponent, Component);
+  return WrappedComponent;
 }
 
 HocBasic.defaultProps = {};
