@@ -8,11 +8,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
-import { injectGlobal } from 'styled-components';
 import { isDev } from 'config';
 import { disableReactDevTools } from 'utils/base';
 import history from 'utils/history';
 import store from 'reduxs/store';
+
+// styles
+import '../../theme/cssRest.css';
+
 import router from './router';
 
 // mock
@@ -23,25 +26,6 @@ if (isDev) {
 } else {
   disableReactDevTools();
 }
-
-/* eslint-disable no-unused-expressions */
-injectGlobal`
-  html, body, #root {
-    width: 100%;
-    height: 100%;
-  }
-  ol, ul {
-    list-style: none;
-    list-style-type: none;
-  }
-  a:focus {
-    text-decoration: none;
-  }
-  div {
-    display: flex;
-    flex-direction: column;
-  }
-`;
 
 function renderApp(Router) {
   ReactDOM.render(

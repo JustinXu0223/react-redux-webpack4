@@ -8,7 +8,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
-import { ThemeProvider } from 'styled-components';
 
 // constants
 import routerId from 'constants/routerId';
@@ -22,14 +21,14 @@ import { connect } from 'react-redux';
 import { INIT_LANGUAGE } from 'reduxs/actions/global';
 
 // components
-import LoadingComponent from '../../components/Loading';
+import LoadingComponent from 'components/loading';
 
 const AsyncApp = Loadable({
   loader: () => import('./index'),
   loading: LoadingComponent,
 });
 const AsyncNotFound = Loadable({
-  loader: () => import('./NotFound'),
+  loader: () => import('./notFound'),
   loading: LoadingComponent,
 });
 
@@ -49,16 +48,14 @@ class Router extends React.Component {
   }
   render() {
     const {
-      props: { history, styles },
+      props: { history },
     } = this;
     return (
       <ConnectedRouter history={history}>
-        <ThemeProvider theme={styles.theme}>
-          <Switch>
-            <Route exact path={routerId.notFound} component={AsyncNotFound} />
-            <Route path={routerId.app} component={AsyncApp} />
-          </Switch>
-        </ThemeProvider>
+        <Switch>
+          <Route exact path={routerId.notFound} component={AsyncNotFound} />
+          <Route path={routerId.app} component={AsyncApp} />
+        </Switch>
       </ConnectedRouter>
     );
   }
@@ -75,10 +72,9 @@ Router.propTypes = {
       state: PropTypes.any,
     }),
   }).isRequired,
-  styles: PropTypes.shape({
-    name: PropTypes.string,
-    theme: PropTypes.object,
-  }).isRequired,
+  // styles: PropTypes.shape({
+  //   name: PropTypes.string,
+  // }).isRequired,
   initLanguageReq: PropTypes.func.isRequired,
 };
 

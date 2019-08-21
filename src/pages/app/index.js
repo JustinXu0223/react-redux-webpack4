@@ -9,7 +9,7 @@ import { NavLink, Switch, Route, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
 // components
-import LoadingComponent from 'components/Loading';
+import LoadingComponent from 'components/loading';
 
 // constants
 import routerId from 'constants/routerId';
@@ -33,12 +33,12 @@ const HeaderList = [
 ];
 
 const AsyncHome = Loadable({
-  loader: () => import('./Home/index'),
+  loader: () => import('./home/index'),
   loading: LoadingComponent,
 });
 
 const AsyncDemo = Loadable({
-  loader: () => import('./Demo/index'),
+  loader: () => import('./demo/index'),
   loading: LoadingComponent,
 });
 

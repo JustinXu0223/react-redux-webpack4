@@ -5,6 +5,9 @@ const webpack = require('webpack');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+// https://github.com/webpack-contrib/stylelint-webpack-plugin/issues/166
+
 const base = require('./webpack.base.js');
 const utils = require('./webpack.util.js');
 const { port, output } = require('./webpack.config.js');
@@ -12,6 +15,11 @@ const { port, output } = require('./webpack.config.js');
 const plugins = [
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NamedModulesPlugin(),
+  new StyleLintPlugin({
+    // 正则匹配想要lint监测的文件 , 'src/**/*.l?(e|c)ss'
+    files: ['src/**/*.l?(e|c)ss'],
+    // syntax: 'less',
+  }),
   new OpenBrowserPlugin({ url: `http://localhost:${port}` }),
 ];
 

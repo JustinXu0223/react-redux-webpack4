@@ -195,6 +195,46 @@ export function getTreePathList(
   }
 }
 
+/**
+ * 获取随机数
+ * @param {number} max 最大数
+ * @return {*} 0-max的随机数
+ */
+export function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+/**
+ * key value对象转换成数组
+ * @param {object} obj 需要转化对象
+ * @param {string} name 映射的值
+ * @return {*} []
+ */
+export function mapToArray(obj, name = 'value') {
+  if (!(obj && Object.keys(obj).length)) return [];
+  return Object.keys(obj).map(key => ({ key, [name]: obj[key] }));
+}
+
+// 将string转为number
+function stringToNumber(data) {
+  if (typeof data !== 'string') return data;
+  const res = Number(data);
+  return Number.isNaN(res) ? data : res;
+}
+
+/**
+ * 将数据转为number
+ * @param {*} data 需要
+ * @return {*} * number / []
+ */
+export function toNumber(data) {
+  if (Array.isArray(data)) {
+    if (!data.length) return data;
+    return data.map(item => stringToNumber(item));
+  }
+  return stringToNumber(data);
+}
+
 // 禁止React Developer Tools
 export const disableReactDevTools = () => {
   const noop = () => undefined;
@@ -207,3 +247,13 @@ export const disableReactDevTools = () => {
     }
   }
 };
+
+/**
+ * 实现redux的compose方法 [用作组件多个高阶连接打平]
+ * 将hocA(hocB(Component))) ——> compose(hocA, hocB)(Component)
+ * @param {*} functions 多个func
+ * @return {*} function
+ */
+export function compose(...functions) {
+  return functions.reduce((a, b) => (...args) => a(b(...args)), arg => arg);
+}

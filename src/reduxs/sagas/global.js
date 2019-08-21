@@ -27,17 +27,10 @@ const initStylesSaga = function* saga() {
   yield put({ type: Types.CHANGE_THEME_NAME, payload: name });
 };
 
-const changeStylesSaga = function* saga({ payload }) {
-  localStorage.setItem('styles', payload);
-  const theme = yield import(`theme/${payload}`);
-  yield put({ type: Types.CHANGE_THEME, payload: theme.default });
-};
-
 export default function* rootFlow() {
   yield all([
     takeEvery(Types.INIT_LANGUAGE, initLanguageSaga),
     takeEvery(Types.CHANGE_LANGUAGE_NAME, changeLanguageSaga),
     takeEvery(Types.INIT_THEME, initStylesSaga),
-    takeEvery(Types.CHANGE_THEME_NAME, changeStylesSaga),
   ]);
 }

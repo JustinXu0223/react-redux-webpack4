@@ -1,5 +1,5 @@
 /**
- * @component SvgIcon
+ * @component svgIcon.js
  * @description
  * @time 2019/6/14
  * @author JUSTIN
@@ -7,29 +7,21 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 const requireAll = requireContext => requireContext.keys().map(requireContext);
 const req = require.context('assets/svg', true, /\.svg$/, 'lazy');
 requireAll(req);
 
-const ContainerView = styled.svg.attrs({
-  'aria-hidden': true,
-})`
-  width: ${props => `${props.width}px`};
-  height: ${props => `${props.height}px`};
-`;
-
 class SvgIcon extends React.PureComponent {
   render() {
     const {
-      props: { iconClass, fill, children, width, height },
+      props: { iconClass, fill, children, size, width = size, height = size | width },
     } = this;
     return (
-      <ContainerView className='svg-icon' width={width} height={height || width}>
+      <svg aria-hidden className='svg-icon' style={{ width: `${width}px`, height: `${height}px` }}>
         <use xlinkHref={`#icon-${iconClass}`} style={{ fill }} />
         {children}
-      </ContainerView>
+      </svg>
     );
   }
 }
@@ -37,13 +29,15 @@ class SvgIcon extends React.PureComponent {
 SvgIcon.defaultProps = {
   children: null,
   fill: 'red',
-  width: 20,
+  size: 20,
+  width: undefined,
   height: undefined,
 };
 
 SvgIcon.propTypes = {
   iconClass: PropTypes.string.isRequired,
   fill: PropTypes.string,
+  size: PropTypes.number,
   width: PropTypes.number,
   height: PropTypes.number,
   children: PropTypes.node,

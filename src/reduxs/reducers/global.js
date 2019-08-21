@@ -5,7 +5,6 @@
  * @author JUSTIN XU
  */
 import i18n from 'i18n/zh';
-import theme from 'theme/light';
 import * as types from '../actions/global';
 
 const initLanguage = {
@@ -36,7 +35,6 @@ export function language(state = initLanguage, action) {
 
 const initTheme = {
   name: 'light',
-  theme,
 };
 
 // theme
@@ -46,12 +44,6 @@ export function styles(state = initTheme, action) {
       return {
         ...state,
         name: action.payload,
-      };
-    }
-    case types.CHANGE_THEME: {
-      return {
-        ...state,
-        theme: action.payload,
       };
     }
     default: {

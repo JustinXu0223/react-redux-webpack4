@@ -6,12 +6,10 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 // components
 import { Button } from 'antd';
-import { ContainerView } from 'components/Layout/Styles';
-import HocBasic from 'components/HocBasic';
+import HocBasic from 'components/hocBasic';
 
 // reduxs
 import { connect } from 'react-redux';
@@ -19,25 +17,8 @@ import immutable from 'immutable';
 import { INCREMENT_REQ, DECREASE_REQ } from 'reduxs/actions/demo';
 import { getCounter } from 'reduxs/selectors/demo';
 
-const ButtonView = styled.div`
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-const CounterView = styled.div`
-  justify-content: center;
-  color: #fff;
-  font-size: 16px;
-  height: 40px;
-`;
-
-const DemoItemView = styled.div`
-  border-bottom: 1px solid red;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
+// styles
+import styles from './styles.less';
 
 @connect(
   state => ({
@@ -70,18 +51,18 @@ class Demo extends React.Component {
     return list.map(value => {
       const id = value.get('id');
       return (
-        <DemoItemView>
+        <div className={styles.demoItemView}>
           <div> name: {value.get('name')}</div>
           <div> number: {value.get('number')}</div>
-          <ButtonView>
+          <div className={styles.buttonView}>
             <Button type='primary' loading={loading} onClick={() => incrementReq(id)}>
               增加
             </Button>
             <Button type='danger' loading={loading} onClick={() => decreaseReq(id)}>
               减少
             </Button>
-          </ButtonView>
-        </DemoItemView>
+          </div>
+        </div>
       );
     });
   };
@@ -92,13 +73,17 @@ class Demo extends React.Component {
       props: { counter },
     } = this;
     return (
-      <ContainerView>
+      <div className={styles.demoPage}>
         Demo page
-        <CounterView style={{ backgroundColor, height: '30px' }} onClick={this.onToggleBg}>
+        <div
+          className={styles.sectionView}
+          style={{ backgroundColor, height: '30px' }}
+          onClick={this.onToggleBg}
+        >
           sum: {counter}
-        </CounterView>
+        </div>
         {this.renderList()}
-      </ContainerView>
+      </div>
     );
   }
 }

@@ -6,23 +6,14 @@
  */
 import React from 'react';
 // import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 // components
 import { Button } from 'antd';
-import { ContainerView } from 'components/Layout/Styles';
-import SvgIcon from 'components/SvgIcon';
-import HocBasic from 'components/HocBasic';
+import SvgIcon from 'components/svgIcon';
+import HocBasic from 'components/hocBasic';
 
-// reduxs
-// import { connect } from 'react-redux';
-// import { CHANGE_THEME_NAME } from 'reduxs/actions/global';
-
-const ButtonView = styled.div`
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
+// styles
+import styles from './styles.less';
 
 class Home extends React.Component {
   onToggleTheme = theme => {
@@ -32,15 +23,14 @@ class Home extends React.Component {
   render() {
     const {
       props: {
-        styles: { name, theme },
+        styles: { name },
       },
     } = this;
     return (
-      <ContainerView>
+      <div className={styles.homePage}>
         HomeHome
         <div>主题名称: {name}</div>
-        <div>主题颜色: {theme.primaryColor}</div>
-        <ButtonView>
+        <div className={styles.buttonView}>
           <Button
             type='primary'
             onClick={() => this.onToggleTheme(name === 'dark' ? 'light' : 'dark')}
@@ -48,8 +38,8 @@ class Home extends React.Component {
             按钮
           </Button>
           <SvgIcon iconClass='delete' fill={name === 'dark' ? 'red' : 'blue'} />
-        </ButtonView>
-      </ContainerView>
+        </div>
+      </div>
     );
   }
 }

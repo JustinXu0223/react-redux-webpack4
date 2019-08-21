@@ -1,5 +1,5 @@
 /**
- * @component Loading.js
+ * @component loading.js
  * @description 加载组件
  * @time 2018/5/2
  * @author JUSTIN XU
@@ -7,27 +7,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Spin } from 'antd';
-import styled from 'styled-components';
 
-const ContainerView = styled.div`
-  width: 100%;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-`;
+// styles
+import styles from './styles.less';
 
 const LoadingComponent = ({ isLoading, error }) => {
   // Handle the loading state
   if (isLoading) {
     return (
-      <ContainerView>
+      <div className={styles.loadingView}>
         <Spin size='large' />
-      </ContainerView>
+      </div>
     );
   }
   // Handle the error state
   if (error) {
-    return <ContainerView>Sorry, there was a problem loading the page...</ContainerView>;
+    return <div className={styles.loadingView}>Sorry, there was a problem loading the page...</div>;
   }
 
   return null;

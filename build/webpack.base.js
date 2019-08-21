@@ -2,8 +2,8 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 /* eslint import/no-dynamic-require: 0 */
 const webpack = require('webpack');
-// const fs = require('fs');
-// const lessToJs = require('less-vars-to-js');
+const fs = require('fs');
+const lessToJs = require('less-vars-to-js');
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // copy
 const HappyPack = require('happypack');
 const os = require('os'); // node 提供的系统操作模块
@@ -22,9 +22,9 @@ const { NODE_ENV, BABEL_ENV, npm_package_version } = process.env;
 
 const isProd = NODE_ENV === 'production';
 
-// const themeVariables = lessToJs(
-//   fs.readFileSync(utils.resolvePath('./src/config/ant-theme-vars.less'), 'utf8'),
-// );
+const themeVariables = lessToJs(
+  fs.readFileSync(utils.resolvePath('./src/theme/ant-theme-vars.less'), 'utf8'),
+);
 
 const entryList = utils.getEntryMap(utils.getAllFileList('./src/pages'));
 
@@ -66,7 +66,7 @@ const htmlPluginList = entryList.reduce((accumulator, { name }) => {
 const plugins = [
   new HappyPack({
     // 基础参数设置
-    id: 'babel', // 上面loader?后面指定的id
+    id: 'js', // 上面loader?后面指定的id
     loaders: ['babel-loader?cacheDirectory'], // 实际匹配处理的loader
     threadPool: happyThreadPool,
     verbose: true,
@@ -101,10 +101,9 @@ const plugins = [
     },
   }),
   new MiniCssExtractPlugin({
-    // Options similar to the same options in webpackOptions.output
-    // both options are optional
-    filename: '[name].[contenthash:8].css',
-    chunkFilename: '[id].[contenthash:8].css',
+    // If you need hmr, don't use hashing at development env
+    filename: isProd ? 'css/[name].[contenthash:8].css' : '[name].css',
+    chunkFilename: isProd ? 'css/[id].[contenthash:8].css' : '[name].css',
   }),
   new HardSourceWebpackPlugin(),
 ];
@@ -116,12 +115,20 @@ const modules = {
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       include: utils.resolvePath('src'),
-      use: 'happypack/loader?id=babel',
+      use: 'happypack/loader?id=js',
     },
     {
       test: /\.css$/,
       use: [
-        MiniCssExtractPlugin.loader,
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            // only enable hot in development
+            hmr: !isProd,
+            // if hmr does not work, this is a forceful method.
+            reloadAll: true,
+          },
+        },
         {
           loader: 'css-loader',
           options: {
@@ -133,30 +140,60 @@ const modules = {
     },
     {
       test: /\.less$/,
+      include: [
+        utils.resolvePath('src/theme/ant-theme-vars.less'),
+        utils.resolvePath('node_modules/antd'),
+      ],
       use: [
-        // MiniCssExtractPlugin.loader,
         'style-loader',
         {
           loader: 'css-loader',
           options: {
-            modules: true,
-            importLoaders: 2, // 关于该选项的解释 https://github.com/webpack-contrib/css-loader/issues/228#issuecomment-312885975
+            importLoaders: 2,
           },
         },
-        'postcss-loader', // 已经将postcss.config.js移动到项目根目录
+        'postcss-loader',
         {
           loader: 'less-loader',
           options: {
-            // modifyVars: themeVariables,
-            javascriptEnabled: true,
+            modifyVars: themeVariables,
+            javascriptEnabled: true, // https://github.com/ant-design/ant-motion/issues/44
           },
         },
-        // {
-        //   loader: 'style-resources-loader',
-        //   options: {
-        //     patterns: ['./src/theme/index.less'],
-        //   },
-        // },
+      ],
+    },
+    {
+      test: /\.less$/,
+      exclude: [
+        utils.resolvePath('src/theme/ant-theme-vars.less'),
+        utils.resolvePath('node_modules/antd'),
+      ],
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            // only enable hot in development
+            hmr: !isProd,
+            // if hmr does not work, this is a forceful method.
+            reloadAll: true,
+          },
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            importLoaders: 2, // https://github.com/webpack-contrib/css-loader/issues/228#issuecomment-312885975
+            localIdentName: isProd ? '[hash:base64:8]' : '[local]_[hash:base64:8]', // you see local name at development env
+          },
+        },
+        'postcss-loader',
+        'less-loader',
+        {
+          loader: 'style-resources-loader',
+          options: {
+            patterns: ['./src/theme/index.less'],
+          },
+        },
       ],
     },
     {
@@ -176,7 +213,8 @@ const modules = {
       },
     },
     {
-      test: /\.(png|jpe?g|gif)(\?.*)?$/,
+      test: /\.(png|jpe?g|svg|gif)(\?.*)?$/,
+      exclude: [utils.resolvePath('src/assets/svg')],
       loader: 'url-loader',
       options: {
         limit: 10000,

@@ -6,61 +6,29 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 import { Button } from 'antd';
 import { connect } from 'react-redux';
 
 // components
-import SvgIcon from 'components/SvgIcon';
+import SvgIcon from 'components/svgIcon';
 
 // utils
 import history from 'utils/history';
 
-const ContainerView = styled.div`
-  text-align: center;
-  height: 100%;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-const SectionView = styled.div`
-  width: 400px;
-  padding-top: 80px;
-  padding-left: 60px;
-`;
-
-const TitleView = styled.h2`
-  font-size: 72px;
-  font-weight: 600;
-  line-height: 72px;
-  margin-bottom: 24px;
-`;
-
-const MessageView = styled.p`
-  color: rgba(0, 0, 0, 0.45);
-  font-size: 20px;
-  line-height: 28px;
-  margin-bottom: 16px;
-`;
-
-const ButtonView = styled.div`
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
+// styles
+import styles from './styles.less';
 
 const NotFound = ({ language: { i18n = {} } }) => (
-  <ContainerView>
-    <SvgIcon iconClass='not-found' width={250} />
+  <div className={styles.notFoundPage}>
+    <SvgIcon iconClass='not-found' size={250} />
     <Helmet>
       <title>{i18n.helmet_title('Not Found')}</title>
     </Helmet>
-    <SectionView>
-      <TitleView>404</TitleView>
-      <MessageView>{i18n.not_found_message}</MessageView>
-      <ButtonView>
+    <div className={styles.sectionView}>
+      <div className={styles.titleView}>404</div>
+      <div className={styles.messageView}>{i18n.not_found_message}</div>
+      <div className={styles.buttonView}>
         <Button
           style={{ marginRight: '7px' }}
           onClick={() => {
@@ -72,9 +40,9 @@ const NotFound = ({ language: { i18n = {} } }) => (
         <Button type='primary'>
           <a href={`${window.location.origin}`}>{i18n.not_found_home_button}</a>
         </Button>
-      </ButtonView>
-    </SectionView>
-  </ContainerView>
+      </div>
+    </div>
+  </div>
 );
 
 const mapStateToProps = state => ({
