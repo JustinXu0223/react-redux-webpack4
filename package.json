@@ -12,8 +12,8 @@
   "private": true,
   "scripts": {
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
-    "lint:js": "env-cmd pre:lint eslint \"src/**/*.{js,jsx}\" --quiet",
-    "lint:style": "stylelint src/**/*.{css,less} --syntax less",
+    "lint:js": "env-cmd -e pre:lint eslint \"src/**/*.{js,jsx}\" --quiet",
+    "lint:style": "stylelint src/**/*.{css,scss} --syntax less",
     "setup": "yarn && yarn build-dll",
     "build-dll": "webpack --config build/webpack_dll.config.js --mode production",
     "dev": "webpack-dev-server --progress --colors --config build/webpack.dev.js",
