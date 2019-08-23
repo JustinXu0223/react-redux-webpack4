@@ -17,17 +17,17 @@ import SvgIcon from 'components/svgIcon';
 import history from 'utils/history';
 
 // styles
-import styles from './styles.less';
+import styles from './styles.scss';
 
 const NotFound = ({ language: { i18n = {} } }) => (
   <div className={styles.notFoundPage}>
     <SvgIcon iconClass='not-found' size={250} />
     <Helmet>
-      <title>{i18n.helmet_title('Not Found')}</title>
+      <title>{i18n.helmet_title('500')}</title>
     </Helmet>
     <div className={styles.sectionView}>
-      <div className={styles.titleView}>404</div>
-      <div className={styles.messageView}>{i18n.not_found_message}</div>
+      <div className={styles.titleView}>500</div>
+      <div className={styles.messageView}>{i18n.server_error_message}</div>
       <div className={styles.buttonView}>
         <Button
           style={{ marginRight: '7px' }}
@@ -35,10 +35,10 @@ const NotFound = ({ language: { i18n = {} } }) => (
             history.go(-1);
           }}
         >
-          {i18n.not_found_back_button}
+          {i18n.server_error_back_button}
         </Button>
         <Button type='primary'>
-          <a href={`${window.location.origin}`}>{i18n.not_found_home_button}</a>
+          <a href={`${window.location.origin}`}>{i18n.server_error_home_button}</a>
         </Button>
       </div>
     </div>

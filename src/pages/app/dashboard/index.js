@@ -42,7 +42,7 @@ const contentStyle = {
   minHeight: 280,
 };
 
-class App extends React.Component {
+class Dashboard extends React.Component {
   state = {
     isCollapsed: false,
   };
@@ -93,6 +93,6 @@ class App extends React.Component {
   }
 }
 
-App.propTypes = {};
+Dashboard.propTypes = {};
 
-export default App;
+export default Dashboard;

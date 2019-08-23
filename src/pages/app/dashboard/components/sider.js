@@ -13,7 +13,7 @@ import { Layout, Menu, Icon } from 'antd';
 import { getTreePathList } from 'utils/base';
 
 // style
-import styles from './silder.less';
+import styles from './silder.scss';
 
 class Sider extends React.Component {
   getDefaultOpenKeys = () => {

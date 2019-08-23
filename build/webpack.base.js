@@ -140,10 +140,10 @@ const modules = {
     },
     {
       test: /\.less$/,
-      include: [
-        utils.resolvePath('src/theme/ant-theme-vars.less'),
-        utils.resolvePath('node_modules/antd'),
-      ],
+      // include: [
+      //   utils.resolvePath('src/theme/ant-theme-vars.less'),
+      //   utils.resolvePath('node_modules/antd'),
+      // ],
       use: [
         'style-loader',
         {
@@ -163,11 +163,7 @@ const modules = {
       ],
     },
     {
-      test: /\.less$/,
-      exclude: [
-        utils.resolvePath('src/theme/ant-theme-vars.less'),
-        utils.resolvePath('node_modules/antd'),
-      ],
+      test: /\.scss$/,
       use: [
         {
           loader: MiniCssExtractPlugin.loader,
@@ -187,11 +183,11 @@ const modules = {
           },
         },
         'postcss-loader',
-        'less-loader',
+        'sass-loader',
         {
-          loader: 'style-resources-loader',
+          loader: 'sass-resources-loader',
           options: {
-            patterns: ['./src/theme/index.less'],
+            resources: ['./src/theme/index.scss'],
           },
         },
       ],
@@ -286,7 +282,7 @@ module.exports = {
   },
   resolve: {
     modules: [utils.resolvePath('node_modules')],
-    extensions: ['.js', '.jsx', '.json', '.css', '.less'],
+    extensions: ['.js', '.jsx'],
     alias: {
       assets: utils.resolvePath('src/assets'),
       components: utils.resolvePath('src/components'),

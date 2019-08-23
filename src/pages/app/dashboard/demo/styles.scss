@@ -2,6 +2,7 @@
   flex: 1;
 
   .sectionView {
+    display: flex;
     justify-content: center;
     color: #fff;
     font-size: 16px;
@@ -10,13 +11,13 @@
 
   .demoItemView {
     border-bottom: 1px solid red;
-    flex-direction: row;
+    display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
   .buttonView {
-    flex-direction: row;
+    display: flex;
     justify-content: center;
     align-items: center;
   }

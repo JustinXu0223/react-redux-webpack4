@@ -9,7 +9,7 @@ import React from 'react';
 import { Spin } from 'antd';
 
 // style
-import styles from './styles.less';
+import styles from './styles.scss';
 
 function Loading() {
   return (

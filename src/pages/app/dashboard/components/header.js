@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { Icon, Layout, Dropdown, Menu } from 'antd';
 
 // styles
-import styles from './header.less';
+import styles from './header.scss';
 
 class Header extends React.PureComponent {
   render() {
@@ -27,7 +27,7 @@ class Header extends React.PureComponent {
     return (
       <Layout.Header className={styles.headerView}>
         <Icon
-          style={{ fontSize: 18 }}
+          style={{ fontSize: 18, color: '#fff' }}
           type={isCollapsed ? 'menu-unfold' : 'menu-fold'}
           onClick={onToggle}
         />

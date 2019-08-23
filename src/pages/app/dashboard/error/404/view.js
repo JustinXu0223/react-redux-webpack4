@@ -17,13 +17,13 @@ import SvgIcon from 'components/svgIcon';
 import history from 'utils/history';
 
 // styles
-import styles from './styles.less';
+import styles from './styles.scss';
 
 const NotFound = ({ language: { i18n = {} } }) => (
   <div className={styles.notFoundPage}>
     <SvgIcon iconClass='not-found' size={250} />
     <Helmet>
-      <title>{i18n.helmet_title('Not Found')}</title>
+      <title>{i18n.helmet_title('404')}</title>
     </Helmet>
     <div className={styles.sectionView}>
       <div className={styles.titleView}>404</div>

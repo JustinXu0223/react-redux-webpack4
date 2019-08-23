@@ -16,9 +16,9 @@ const plugins = [
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NamedModulesPlugin(),
   new StyleLintPlugin({
-    // 正则匹配想要lint监测的文件 , 'src/**/*.l?(e|c)ss'
-    files: ['src/**/*.l?(e|c)ss'],
-    // syntax: 'less',
+    // 正则匹配想要lint监测的文件
+    files: ['src/**/*.s?(e|c)ss'],
+    syntax: 'scss',
   }),
   new OpenBrowserPlugin({ url: `http://localhost:${port}` }),
 ];

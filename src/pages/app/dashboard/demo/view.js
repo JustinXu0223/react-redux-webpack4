@@ -6,6 +6,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 
 // components
 import { Button } from 'antd';
@@ -18,10 +19,11 @@ import { INCREMENT_REQ, DECREASE_REQ } from 'reduxs/actions/demo';
 import { getCounter } from 'reduxs/selectors/demo';
 
 // styles
-import styles from './styles.less';
+import styles from './styles.scss';
 
 @connect(
   state => ({
+    language: state.language,
     demo: state.demo,
     counter: getCounter(state),
   }),
@@ -70,10 +72,16 @@ class Demo extends React.Component {
   render() {
     const {
       state: { backgroundColor },
-      props: { counter },
+      props: {
+        counter,
+        language: { i18n = {} },
+      },
     } = this;
     return (
       <div className={styles.demoPage}>
+        <Helmet>
+          <title>{i18n.helmet_title('Demo')}</title>
+        </Helmet>
         Demo page
         <div
           className={styles.sectionView}
@@ -91,6 +99,10 @@ class Demo extends React.Component {
 Demo.defaultProps = {};
 
 Demo.propTypes = {
+  language: PropTypes.shape({
+    code: PropTypes.string,
+    i18n: PropTypes.object,
+  }).isRequired,
   counter: PropTypes.number.isRequired,
   demo: PropTypes.instanceOf(immutable.Map).isRequired,
   incrementReq: PropTypes.func.isRequired,
