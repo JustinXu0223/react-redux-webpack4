@@ -1,5 +1,5 @@
 /**
- * @component Styles.js
+ * @component styles.js
  * @description 样式
  * @time 2019/3/9
  * @author JUSTIN XU

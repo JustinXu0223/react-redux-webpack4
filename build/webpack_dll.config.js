@@ -15,7 +15,7 @@ module.exports = {
       // 'react-router-dom',
       // 'history',
       // 'react-redux',
-      // 'react-router-redux',
+      // 'connected-react-router',
       // 'redux',
       // 'redux-saga',
       // 'reselect',

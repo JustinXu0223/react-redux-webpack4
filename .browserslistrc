@@ -1,0 +1,11 @@
+# Browsers that we support https://github.com/browserslist/browserslist
+
+# 生产环境和测试环境
+# [production staging]
+> 1%
+ie 10
+
+# 开发环境
+# [development]
+> 1%
+ie 10

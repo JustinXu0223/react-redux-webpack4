@@ -23,7 +23,7 @@ const ContainerView = styled.svg.attrs({
 class SvgIcon extends React.PureComponent {
   render() {
     const {
-      props: { iconClass, fill, children, width, height },
+      props: { iconClass, fill, children, size, width = size, height = size | width },
     } = this;
     return (
       <ContainerView className='svg-icon' width={width} height={height || width}>
@@ -37,13 +37,15 @@ class SvgIcon extends React.PureComponent {
 SvgIcon.defaultProps = {
   children: null,
   fill: 'red',
-  width: 20,
+  size: 20,
+  width: undefined,
   height: undefined,
 };
 
 SvgIcon.propTypes = {
   iconClass: PropTypes.string.isRequired,
   fill: PropTypes.string,
+  size: PropTypes.number,
   width: PropTypes.number,
   height: PropTypes.number,
   children: PropTypes.node,

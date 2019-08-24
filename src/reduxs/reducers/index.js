@@ -5,12 +5,14 @@
  * @author JUSTIN XU
  */
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
+import { connectRouter } from 'connected-react-router';
+
+import history from '../../utils/history';
 
 const req = require.context('./', false, /\.js$/);
 const context = req.keys().filter(item => item !== './initialState.js');
 
 export default combineReducers({
-  routes: routerReducer,
+  router: connectRouter(history),
   ...context.reduce((prevValue, currValue) => Object.assign(prevValue, req(currValue)), {}),
 });

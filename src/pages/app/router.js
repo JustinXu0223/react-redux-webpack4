@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
-import Loadable from 'react-loadable';
+import Loadable from '@loadable/component';
 import { ThemeProvider } from 'styled-components';
 
 // constants
@@ -17,20 +17,18 @@ import routerId from 'constants/routerId';
 import { delay } from 'utils/base';
 
 // reduxs
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import { connect } from 'react-redux';
 import { INIT_LANGUAGE } from 'reduxs/actions/global';
 
 // components
-import LoadingComponent from '../../components/Loading';
+import Loading from 'components/loading';
 
-const AsyncApp = Loadable({
-  loader: () => import('./index'),
-  loading: LoadingComponent,
+const AsyncApp = Loadable(() => import('./index'), {
+  fallback: <Loading />,
 });
-const AsyncNotFound = Loadable({
-  loader: () => import('./NotFound'),
-  loading: LoadingComponent,
+const AsyncNotFound = Loadable(() => import('./notFound'), {
+  fallback: <Loading />,
 });
 
 @connect(

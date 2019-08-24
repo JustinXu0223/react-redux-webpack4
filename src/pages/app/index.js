@@ -7,10 +7,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink, Switch, Route, Redirect } from 'react-router-dom';
-import Loadable from 'react-loadable';
+import Loadable from '@loadable/component';
 
 // components
-import LoadingComponent from 'components/Loading';
+import Loading from 'components/loading';
 
 // constants
 import routerId from 'constants/routerId';
@@ -58,14 +58,11 @@ const HeaderList = [
   },
 ];
 
-const AsyncHome = Loadable({
-  loader: () => import('./Home/index'),
-  loading: LoadingComponent,
+const AsyncHome = Loadable(() => import('./home'), {
+  fallback: <Loading />,
 });
-
-const AsyncDemo = Loadable({
-  loader: () => import('./Demo/index'),
-  loading: LoadingComponent,
+const AsyncDemo = Loadable(() => import('./demo'), {
+  fallback: <Loading />,
 });
 
 class Index extends React.Component {

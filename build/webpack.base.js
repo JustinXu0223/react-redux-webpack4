@@ -2,7 +2,6 @@
 /* eslint import/no-extraneous-dependencies: 0 */
 /* eslint import/no-dynamic-require: 0 */
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
 const fs = require('fs');
 const lessToJs = require('less-vars-to-js');
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // copy
@@ -116,21 +115,14 @@ const modules = {
       test: /\.css$/,
       exclude: /src/,
       use: [
-        {
-          loader: 'style-loader',
-        },
+        'style-loader',
         {
           loader: 'css-loader',
           options: {
             importLoaders: 1,
           },
         },
-        {
-          loader: 'postcss-loader',
-          options: {
-            plugins: [autoprefixer],
-          },
-        },
+        'postcss-loader',
       ],
     },
     {
@@ -192,14 +184,9 @@ const modules = {
     {
       test: /\.less$/,
       use: [
-        { loader: 'style-loader' },
+        'style-loader',
         { loader: 'css-loader' },
-        {
-          loader: 'postcss-loader',
-          options: {
-            plugins: [autoprefixer],
-          },
-        },
+        'postcss-loader',
         {
           loader: 'less-loader',
           options: {

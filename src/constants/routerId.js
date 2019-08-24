@@ -6,10 +6,14 @@
  */
 
 export default {
-  // app container
-  app: '/',
+  // auth stack
+  signIn: '/signIn',
+  // app layout
+  dashboard: '/',
   home: '/home',
   demo: '/demo',
-  signIn: '/signIn',
+  // app layout -> error stack
+  error: '/error',
   notFound: '/404',
+  serverError: '/500',
 };

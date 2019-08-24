@@ -6,7 +6,7 @@
  * @author JUSTIN XU
  */
 import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
+import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware, { END } from 'redux-saga';
 import { isDev } from 'config';
 import rootReducer from './reducers';

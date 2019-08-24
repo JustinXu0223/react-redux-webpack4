@@ -12,7 +12,7 @@ import { Button } from 'antd';
 import { connect } from 'react-redux';
 
 // components
-import SvgIcon from 'components/SvgIcon';
+import SvgIcon from 'components/svgIcon';
 
 // utils
 import history from 'utils/history';

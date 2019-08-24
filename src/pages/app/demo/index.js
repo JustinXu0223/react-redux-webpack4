@@ -10,8 +10,8 @@ import styled from 'styled-components';
 
 // components
 import { Button } from 'antd';
-import { ContainerView } from 'components/Layout/Styles';
-import HocBasic from 'components/HocBasic';
+import { ContainerView } from 'components/layout/styles';
+import HocBasic from 'components/hocBasic';
 
 // reduxs
 import { connect } from 'react-redux';
