@@ -15,7 +15,7 @@
     "lint:js": "env-cmd -e pre:lint eslint \"src/**/*.{js,jsx}\" --quiet",
     "lint:style": "stylelint src/**/*.{css,scss} --syntax less",
     "setup": "yarn && yarn build-dll",
-    "build-dll": "webpack --config build/webpack_dll.config.js --mode production",
+    "build-dll": "webpack --config build/webpack_dll.config.js",
     "dev": "webpack-dev-server --progress --colors --config build/webpack.dev.js",
     "start": "env-cmd -e start:dev yarn dev",
     "start-b": "BUNDLE=1 yarn dev",
