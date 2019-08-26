@@ -48,7 +48,7 @@ module.exports = merge(base, {
       // gzip 压缩
       filename: '[path].gz[query]',
       algorithm: 'gzip',
-      test: new RegExp('\\.(js|css|html|svg)$'), // 压缩 js 与 css
+      test: new RegExp('\\.(js|css|html|svg)$'), // 压缩
       compressionOptions: { level: 9 },
       threshold: 8192,
       minRatio: 0.8,

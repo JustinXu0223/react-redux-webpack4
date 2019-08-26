@@ -6,11 +6,11 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 
 // components
 import { Button } from 'antd';
-import { ContainerView } from 'components/layout/styles';
 import HocBasic from 'components/hocBasic';
 
 // reduxs
@@ -19,13 +19,12 @@ import immutable from 'immutable';
 import { INCREMENT_REQ, DECREASE_REQ } from 'reduxs/actions/demo';
 import { getCounter } from 'reduxs/selectors/demo';
 
-const ButtonView = styled.div`
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+const DemoPage = styled.div`
+  flex: 1;
 `;
 
-const CounterView = styled.div`
+const SectionView = styled.div`
+  display: flex;
   justify-content: center;
   color: #fff;
   font-size: 16px;
@@ -34,13 +33,20 @@ const CounterView = styled.div`
 
 const DemoItemView = styled.div`
   border-bottom: 1px solid red;
-  flex-direction: row;
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+`;
+
+const ButtonView = styled.div`
+  display: flex;
+  justify-content: center;
   align-items: center;
 `;
 
 @connect(
   state => ({
+    language: state.language,
     demo: state.demo,
     counter: getCounter(state),
   }),
@@ -89,16 +95,22 @@ class Demo extends React.Component {
   render() {
     const {
       state: { backgroundColor },
-      props: { counter },
+      props: {
+        counter,
+        language: { i18n = {} },
+      },
     } = this;
     return (
-      <ContainerView>
+      <DemoPage>
+        <Helmet>
+          <title>{i18n.helmet_title('Demo')}</title>
+        </Helmet>
         Demo page
-        <CounterView style={{ backgroundColor, height: '30px' }} onClick={this.onToggleBg}>
+        <SectionView style={{ backgroundColor, height: '30px' }} onClick={this.onToggleBg}>
           sum: {counter}
-        </CounterView>
+        </SectionView>
         {this.renderList()}
-      </ContainerView>
+      </DemoPage>
     );
   }
 }
@@ -106,6 +118,10 @@ class Demo extends React.Component {
 Demo.defaultProps = {};
 
 Demo.propTypes = {
+  language: PropTypes.shape({
+    code: PropTypes.string,
+    i18n: PropTypes.object,
+  }).isRequired,
   counter: PropTypes.number.isRequired,
   demo: PropTypes.instanceOf(immutable.Map).isRequired,
   incrementReq: PropTypes.func.isRequired,

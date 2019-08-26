@@ -26,7 +26,11 @@ if (isDev) {
 
 /* eslint-disable no-unused-expressions */
 injectGlobal`
-  html, body, #root {
+  html,
+  body,
+  #root,
+  .app-container-view,
+  .ant-layout {
     width: 100%;
     height: 100%;
   }
@@ -36,10 +40,6 @@ injectGlobal`
   }
   a:focus {
     text-decoration: none;
-  }
-  div {
-    display: flex;
-    flex-direction: column;
   }
 `;
 

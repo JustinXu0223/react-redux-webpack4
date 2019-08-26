@@ -7,62 +7,58 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 import Loadable from '@loadable/component';
-import { ThemeProvider } from 'styled-components';
 
 // constants
 import routerId from 'constants/routerId';
 
-// utils
-import { delay } from 'utils/base';
-
 // reduxs
-import { ConnectedRouter } from 'connected-react-router';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { INIT_LANGUAGE } from 'reduxs/actions/global';
 
 // components
 import Loading from 'components/loading';
+import HocBasic from 'components/hocBasic';
 
-const AsyncApp = Loadable(() => import('./index'), {
-  fallback: <Loading />,
-});
-const AsyncNotFound = Loadable(() => import('./notFound'), {
-  fallback: <Loading />,
+const AsyncApp = Loadable(() => import('./dashboard'), {
+  fallback: Loading,
 });
 
 @connect(
   state => ({
     language: state.language,
-    styles: state.styles,
   }),
   dispatch => ({
     initLanguageReq: () => dispatch({ type: INIT_LANGUAGE }),
   }),
 )
-class Router extends React.Component {
-  async componentDidMount() {
-    await delay(2000);
+class MyRouter extends React.Component {
+  componentDidMount() {
     this.props.initLanguageReq('zh');
   }
   render() {
     const {
-      props: { history, styles },
+      props: {
+        history,
+        styles: { name },
+      },
     } = this;
     return (
       <ConnectedRouter history={history}>
-        <ThemeProvider theme={styles.theme}>
+        <div className={`app-container-view theme-${name}-view`}>
           <Switch>
-            <Route exact path={routerId.notFound} component={AsyncNotFound} />
+            {/* <Route exact path={routerId.notFound} component={AsyncNotFound} />*/}
             <Route path={routerId.app} component={AsyncApp} />
           </Switch>
-        </ThemeProvider>
+        </div>
       </ConnectedRouter>
     );
   }
 }
 
-Router.propTypes = {
+MyRouter.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
     replace: PropTypes.func,
@@ -73,11 +69,7 @@ Router.propTypes = {
       state: PropTypes.any,
     }),
   }).isRequired,
-  styles: PropTypes.shape({
-    name: PropTypes.string,
-    theme: PropTypes.object,
-  }).isRequired,
   initLanguageReq: PropTypes.func.isRequired,
 };
 
-export default Router;
+export default compose(HocBasic)(MyRouter);

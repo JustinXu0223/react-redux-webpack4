@@ -65,7 +65,7 @@ const htmlPluginList = entryList.reduce((accumulator, { name }) => {
 const plugins = [
   new HappyPack({
     // 基础参数设置
-    id: 'babel', // 上面loader?后面指定的id
+    id: 'js', // 上面loader?后面指定的id
     loaders: ['babel-loader?cacheDirectory'], // 实际匹配处理的loader
     threadPool: happyThreadPool,
     verbose: true,
@@ -109,7 +109,7 @@ const modules = {
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       include: utils.resolvePath('src'),
-      use: 'happypack/loader?id=babel',
+      use: 'happypack/loader?id=js',
     },
     {
       test: /\.css$/,
@@ -142,7 +142,8 @@ const modules = {
       },
     },
     {
-      test: /\.(png|jpe?g|gif)(\?.*)?$/,
+      test: /\.(png|jpe?g|svg|gif)(\?.*)?$/,
+      exclude: [utils.resolvePath('src/assets/svg')],
       loader: 'url-loader',
       options: {
         limit: 10000,
@@ -229,7 +230,7 @@ module.exports = {
   },
   resolve: {
     modules: [utils.resolvePath('node_modules')],
-    extensions: ['.js', '.jsx', '.json', '.css', '.less'],
+    extensions: ['.js', '.jsx'],
     alias: {
       assets: utils.resolvePath('src/assets'),
       components: utils.resolvePath('src/components'),

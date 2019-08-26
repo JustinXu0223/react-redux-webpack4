@@ -7,9 +7,10 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Button } from 'antd';
+import { compose } from 'redux';
 
 // components
-import { Button } from 'antd';
 import { ContainerView } from 'components/layout/styles';
 import SvgIcon from 'components/svgIcon';
 import HocBasic from 'components/hocBasic';
@@ -58,4 +59,4 @@ Home.defaultProps = {};
 
 Home.propTypes = {};
 
-export default HocBasic(Home);
+export default compose(HocBasic)(Home);
