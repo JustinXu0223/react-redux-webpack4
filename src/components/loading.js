@@ -10,35 +10,36 @@ import { Spin } from 'antd';
 import styled from 'styled-components';
 
 const ContainerView = styled.div`
-  position: fixed;
   width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  display: flex;
+  height: 100vh;
   align-items: center;
   justify-content: center;
-  z-index: 99;
-  background-color: rgba(0, 0, 0, 0.3);
-  transition: background-color 0.5s;
 `;
 
-function Loading({ isLoading }) {
-  if (!isLoading) return null;
+const LoadingComponent = ({ isLoading, error }) => {
   // Handle the loading state
-  return (
-    <ContainerView>
-      <Spin size='large' />
-    </ContainerView>
-  );
-}
+  if (isLoading) {
+    return (
+      <ContainerView>
+        <Spin size='large' />
+      </ContainerView>
+    );
+  }
+  // Handle the error state
+  if (error) {
+    return <ContainerView>Sorry, there was a problem loading the page...</ContainerView>;
+  }
 
-Loading.defaultProps = {
-  isLoading: true,
+  return null;
 };
 
-Loading.propTypes = {
-  isLoading: PropTypes.bool,
+LoadingComponent.defaultProps = {
+  error: null,
 };
 
-export default Loading;
+LoadingComponent.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+};
+
+export default LoadingComponent;
