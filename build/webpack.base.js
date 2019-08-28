@@ -33,7 +33,7 @@ const svgoColorfulConfig = require('../svgo-colorful-config');
 
 // ==============entry================
 const entry = entryList.reduce((accumulator, { name, currPath }) => {
-  accumulator[name] = ['@babel/polyfill', utils.resolvePath(currPath)];
+  accumulator[name] = [utils.resolvePath(currPath)];
   return accumulator;
 }, {});
 

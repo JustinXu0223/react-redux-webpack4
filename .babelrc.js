@@ -5,7 +5,11 @@ module.exports = {
     [
       '@babel/preset-env',
       {
-        modules: false,
+        // https://babeljs.io/docs/en/babel-polyfill#docsNav
+        // babel v7弃用babel-polyfill 推荐使用core-js
+        // useBuiltIns: 'usage',
+        modules: false, // 不启用将ES6模块语法转换为其他模块类型
+        // 使用.browserslistrc配置
         targets: {
           browsers: ['last 2 versions', 'safari >= 7'],
         },
@@ -27,12 +31,14 @@ module.exports = {
     },
   },
   plugins: [
-    ['@babel/plugin-proposal-decorators', { legacy: true }],
-    ['@babel/plugin-transform-runtime'],
+    ['@babel/plugin-transform-runtime', { corejs: 3 }], // https://juejin.im/post/5bfe541bf265da6179748834#heading-5
     ['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
     ['babel-plugin-styled-components', { displayName: isDev, fileName: isDev }],
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-syntax-import-meta',
+    // legacy 使用遗留(阶段1) 装饰器语法和行为 兼容 https://babeljs.io/docs/en/babel-plugin-proposal-decorators
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
+    // 对象属性编译不使用Object.defineProperty https://babeljs.io/docs/en/babel-plugin-proposal-class-properties
     ['@babel/plugin-proposal-class-properties', { loose: true }],
     '@babel/plugin-proposal-json-strings',
     '@babel/plugin-proposal-function-sent',

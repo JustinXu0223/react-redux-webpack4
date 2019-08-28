@@ -21,14 +21,13 @@ npm 5.0+(v6.2.0)
 ```
 
 >  Start
-1. Run 'yarn setup'
 
 ### Dos development
-2. Run 'yarn start'
+1. Run 'yarn start'
 
 
 >  Dos production
-* Run 'yarn build'
+* Run 'yarn build-s'
 
 * OR
 

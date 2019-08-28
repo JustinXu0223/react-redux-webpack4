@@ -3,9 +3,11 @@
 # 生产环境和测试环境
 # [production staging]
 > 1%
+last 2 version
 ie 10
 
 # 开发环境
 # [development]
 > 1%
+last 2 version
 ie 10
