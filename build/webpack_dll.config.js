@@ -6,8 +6,6 @@ const utils = require('./webpack.util');
 const { reactDll } = require('./webpack.config');
 
 module.exports = {
-  mode: 'production',
-  devtool: 'nosources-source-map',
   entry: {
     [reactDll.name]: [
       'react',
