@@ -1,6 +1,6 @@
 /**
  * @component index.js
- * @description Demo页面
+ * @description react sticky 页面
  * @time 2019/3/9
  * @author JUSTIN XU
  */
@@ -14,7 +14,7 @@ import styled from 'styled-components';
 // reduxs
 import { connect } from 'react-redux';
 
-const DemoPage = styled.div`
+const StickyPage = styled.div`
   flex: 1;
 `;
 
@@ -31,12 +31,12 @@ class ReactSticky extends React.Component {
       },
     } = this;
     return (
-      <DemoPage>
+      <StickyPage>
         <Helmet>
           <title>{i18n.helmet_title('react-sticky')}</title>
         </Helmet>
         ReactSticky page
-      </DemoPage>
+      </StickyPage>
     );
   }
 }
