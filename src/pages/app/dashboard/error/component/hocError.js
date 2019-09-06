@@ -81,7 +81,7 @@ function WithError(Component) {
           </Helmet>
           <SectionView>
             <Button type='primary' onClick={() => changeLanguageReq(name === 'en' ? 'zh' : 'en')}>
-              切换主题
+              切换语言
             </Button>
             <TitleText>{i18n[`${i18nName}_name`]}</TitleText>
             <MessageText>{i18n[`${i18nName}_message`]}</MessageText>

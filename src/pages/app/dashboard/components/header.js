@@ -17,7 +17,7 @@ const HeaderView = styled(Layout.Header)`
   background-color: #fff;
 `;
 
-const UserNameView = styled.div`
+const UserNameView = styled.span`
   padding-right: 5px;
 `;
 

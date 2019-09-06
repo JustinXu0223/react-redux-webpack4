@@ -23,7 +23,7 @@ import Error, { navigation as errorRouter } from './error';
 // 路由配置
 const routerList = [
   Home, // 必须放在最前面
-  Demo,
+  ...Demo,
   ...Error, // 必须放在最后
 ];
 

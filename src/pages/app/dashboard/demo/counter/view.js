@@ -55,7 +55,7 @@ const ButtonView = styled.div`
     decreaseReq: payload => dispatch({ type: DECREASE_REQ, payload }),
   }),
 )
-class Demo extends React.Component {
+class Counter extends React.Component {
   state = {
     backgroundColor: 'red',
   };
@@ -103,7 +103,7 @@ class Demo extends React.Component {
     return (
       <DemoPage>
         <Helmet>
-          <title>{i18n.helmet_title('Demo')}</title>
+          <title>{i18n.helmet_title('Counter')}</title>
         </Helmet>
         Demo page
         <SectionView style={{ backgroundColor, height: '30px' }} onClick={this.onToggleBg}>
@@ -115,9 +115,9 @@ class Demo extends React.Component {
   }
 }
 
-Demo.defaultProps = {};
+Counter.defaultProps = {};
 
-Demo.propTypes = {
+Counter.propTypes = {
   language: PropTypes.shape({
     code: PropTypes.string,
     i18n: PropTypes.object,
@@ -128,4 +128,4 @@ Demo.propTypes = {
   decreaseReq: PropTypes.func.isRequired,
 };
 
-export default HocBasic(Demo);
+export default HocBasic(Counter);

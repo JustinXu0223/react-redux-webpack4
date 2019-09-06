@@ -11,7 +11,10 @@ export default {
   // app layout
   dashboard: '/',
   home: '/home',
+  // app layout -> demo stack
   demo: '/demo',
+  counter: '/counter',
+  sticky: '/sticky',
   // app layout -> error stack
   error: '/error',
   notFound: '/404',

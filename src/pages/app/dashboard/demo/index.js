@@ -1,27 +1,24 @@
-/**
+/*
  * @component index.js
- * @description home路由导航
- * @time 2019/3/9
- * @author JUSTIN XU
+ * @description demo路由和规则输出
+ * @time 2019/8/11
+ * @author JUSTIN
  */
-import React from 'react';
-import { Route } from 'react-router-dom';
-import loadable from '@loadable/component';
-
 // constants
 import routerId from 'constants/routerId';
 
-// components
-import Loading from 'components/loading';
+import Counter, { navigation as counterRouter } from './counter';
+import Sticky, { navigation as stickyRouter } from './react-sticky';
 
-const View = loadable(() => import('./view'), {
-  fallback: <Loading />,
-});
-
-export const navigation = {
+const errorNav = {
   path: routerId.demo,
-  name: 'DEMO',
-  icon: 'home',
+  name: 'Demo',
+  icon: 'area-chart',
 };
 
-export default <Route exact path={navigation.path} key={navigation.path} component={View} />;
+export const navigation = {
+  ...errorNav,
+  children: [counterRouter, stickyRouter],
+};
+
+export default [Counter, Sticky];

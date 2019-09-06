@@ -5,15 +5,16 @@
  * @author JUSTIN XU
  */
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Button } from 'antd';
-import { compose } from 'redux';
 
 // components
 import { ContainerView } from 'components/layout/styles';
 import SvgIcon from 'components/svgIcon';
 import HocBasic from 'components/hocBasic';
+import { connect } from 'react-redux';
 
 // reduxs
 // import { connect } from 'react-redux';
@@ -25,6 +26,10 @@ const ButtonView = styled.div`
   justify-content: center;
 `;
 
+@HocBasic
+@connect(state => ({
+  language: state.language,
+}))
 class Home extends React.Component {
   onToggleTheme = theme => {
     this.props.changeThemeReq(theme);
@@ -34,10 +39,14 @@ class Home extends React.Component {
     const {
       props: {
         styles: { name, theme },
+        language: { i18n = {} },
       },
     } = this;
     return (
       <ContainerView>
+        <Helmet>
+          <title>{i18n.helmet_title('Home')}</title>
+        </Helmet>
         HomeHome
         <div>主题名称: {name}</div>
         <div>主题颜色: {theme.primaryColor}</div>
@@ -57,6 +66,11 @@ class Home extends React.Component {
 
 Home.defaultProps = {};
 
-Home.propTypes = {};
+Home.propTypes = {
+  language: PropTypes.shape({
+    code: PropTypes.string,
+    i18n: PropTypes.object,
+  }).isRequired,
+};
 
-export default compose(HocBasic)(Home);
+export default Home;

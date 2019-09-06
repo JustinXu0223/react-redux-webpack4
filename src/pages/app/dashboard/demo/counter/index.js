@@ -2,10 +2,10 @@
  * @component index.js
  * @description home路由导航
  * @time 2019/3/9
- * @author JUSTIN
+ * @author JUSTIN XU
  */
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import loadable from '@loadable/component';
 
 // constants
@@ -19,12 +19,9 @@ const View = loadable(() => import('./view'), {
 });
 
 export const navigation = {
-  path: routerId.notFound,
-  name: '404',
-  icon: 'pie-chart',
+  path: routerId.counter,
+  name: 'Counter',
+  icon: 'area-chart',
 };
 
-export default [
-  <Route exact path={navigation.path} key={navigation.path} component={View} />,
-  <Route key='/notFound' path='*' component={() => <Redirect to={navigation.path} />} />,
-];
+export default <Route exact path={navigation.path} key={navigation.path} component={View} />;
