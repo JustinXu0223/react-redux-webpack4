@@ -65,6 +65,14 @@ function WithError(Component) {
     }),
   )
   class WrappedComponent extends Component {
+    static propTypes = {
+      language: PropTypes.shape({
+        name: PropTypes.string,
+        i18n: PropTypes.object,
+      }).isRequired,
+      changeLanguageReq: PropTypes.func.isRequired,
+    };
+
     render() {
       const {
         props: {
@@ -103,14 +111,6 @@ function WithError(Component) {
       );
     }
   }
-
-  WrappedComponent.propTypes = {
-    language: PropTypes.shape({
-      name: PropTypes.string,
-      i18n: PropTypes.object,
-    }).isRequired,
-    changeLanguageReq: PropTypes.func.isRequired,
-  };
 
   return WrappedComponent;
 }

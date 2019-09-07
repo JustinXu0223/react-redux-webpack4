@@ -8,7 +8,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
-import { injectGlobal } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import { isDev } from 'config';
 import { disableReactDevTools } from 'utils/base';
 import history from 'utils/history';
@@ -24,8 +24,7 @@ if (isDev) {
   disableReactDevTools();
 }
 
-/* eslint-disable no-unused-expressions */
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   html,
   body,
   #root,
@@ -46,9 +45,12 @@ injectGlobal`
 function renderApp(Router) {
   ReactDOM.render(
     <AppContainer>
-      <Provider store={store}>
-        <Router history={history} />
-      </Provider>
+      <React.Fragment>
+        <Provider store={store}>
+          <Router history={history} />
+        </Provider>
+        <GlobalStyle />
+      </React.Fragment>
     </AppContainer>,
     document.getElementById('root'),
   );

@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { injectGlobal } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import { isDev } from 'config';
 import { disableReactDevTools } from 'utils/base';
 
@@ -14,8 +14,7 @@ if (!isDev) {
   disableReactDevTools();
 }
 
-/* eslint-disable no-unused-expressions */
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   html, body, #root {
     width: 100%;
     height: 100%;
@@ -34,7 +33,13 @@ injectGlobal`
 `;
 
 function renderApp() {
-  ReactDOM.render(<div>下载页面</div>, document.getElementById('root'));
+  ReactDOM.render(
+    <React.Fragment>
+      <div>下载页面</div>
+      <GlobalStyle />
+    </React.Fragment>,
+    document.getElementById('root'),
+  );
 }
 
 renderApp();

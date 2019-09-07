@@ -76,7 +76,7 @@ class Counter extends React.Component {
     return list.map(value => {
       const id = value.get('id');
       return (
-        <DemoItemView>
+        <DemoItemView key={id}>
           <div> name: {value.get('name')}</div>
           <div> number: {value.get('number')}</div>
           <ButtonView>
@@ -115,9 +115,9 @@ class Counter extends React.Component {
   }
 }
 
-Counter.defaultProps = {};
+Counter.WrappedComponent.defaultProps = {};
 
-Counter.propTypes = {
+Counter.WrappedComponent.propTypes = {
   language: PropTypes.shape({
     code: PropTypes.string,
     i18n: PropTypes.object,

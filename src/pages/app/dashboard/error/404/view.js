@@ -5,12 +5,13 @@
  * @author JUSTIN
  */
 import React from 'react';
-import { compose } from 'redux';
 
 // components
 import HocBasic from 'components/hocBasic';
 import HocError from '../component/hocError';
 
+@HocBasic
+@HocError
 class ServerError extends React.Component {
   i18nName = 'not_found';
 
@@ -19,7 +20,4 @@ class ServerError extends React.Component {
   }
 }
 
-export default compose(
-  HocBasic,
-  HocError,
-)(ServerError);
+export default ServerError;

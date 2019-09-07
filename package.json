@@ -13,7 +13,6 @@
   "scripts": {
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "lint:js": "env-cmd -e pre:lint eslint \"src/**/*.{js,jsx}\" --quiet",
-    "lint:style": "stylelint src/**/*.{css,scss} --syntax less",
     "setup:dev": "yarn && yarn build-dll:dev",
     "setup:prod": "yarn && yarn build-dll:prod",
     "build-dll:dev": "webpack --config build/webpack_dll.config.js --mode development --devtool eval-source-map",

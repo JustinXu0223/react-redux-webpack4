@@ -14,7 +14,6 @@ import Loadable from '@loadable/component';
 import routerId from 'constants/routerId';
 
 // reduxs
-import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { INIT_LANGUAGE } from 'reduxs/actions/global';
 
@@ -34,6 +33,7 @@ const AsyncApp = Loadable(() => import('./dashboard'), {
     initLanguageReq: () => dispatch({ type: INIT_LANGUAGE }),
   }),
 )
+@HocBasic
 class MyRouter extends React.Component {
   componentDidMount() {
     this.props.initLanguageReq('zh');
@@ -58,7 +58,7 @@ class MyRouter extends React.Component {
   }
 }
 
-MyRouter.propTypes = {
+MyRouter.WrappedComponent.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
     replace: PropTypes.func,
@@ -72,4 +72,4 @@ MyRouter.propTypes = {
   initLanguageReq: PropTypes.func.isRequired,
 };
 
-export default compose(HocBasic)(MyRouter);
+export default MyRouter;

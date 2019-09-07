@@ -26,10 +26,10 @@ const ButtonView = styled.div`
   justify-content: center;
 `;
 
-@HocBasic
 @connect(state => ({
   language: state.language,
 }))
+@HocBasic
 class Home extends React.Component {
   onToggleTheme = theme => {
     this.props.changeThemeReq(theme);
@@ -64,9 +64,9 @@ class Home extends React.Component {
   }
 }
 
-Home.defaultProps = {};
+Home.WrappedComponent.defaultProps = {};
 
-Home.propTypes = {
+Home.WrappedComponent.propTypes = {
   language: PropTypes.shape({
     code: PropTypes.string,
     i18n: PropTypes.object,

@@ -7,6 +7,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import { Layout, Modal, BackTop } from 'antd';
+import styled from 'styled-components';
 
 // utils
 import history from 'utils/history';
@@ -41,6 +42,10 @@ const contentStyle = {
   background: '#fff',
   minHeight: 280,
 };
+
+const SectionView = styled(Layout.Content)`
+  overflow-y: scroll;
+`;
 
 class Dashboard extends React.Component {
   state = {
@@ -83,10 +88,10 @@ class Dashboard extends React.Component {
         <Sider {...siderProps} />
         <Layout>
           <Header {...headerProps} />
-          <Layout.Content className='layout-scroll-view' style={contentStyle}>
+          <SectionView className='layout-scroll-view' style={contentStyle}>
             <Switch>{routerList}</Switch>
             <BackTop {...backTopProps} />
-          </Layout.Content>
+          </SectionView>
         </Layout>
       </Layout>
     );

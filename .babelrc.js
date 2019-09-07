@@ -10,9 +10,9 @@ module.exports = {
         // useBuiltIns: 'usage',
         modules: false, // 不启用将ES6模块语法转换为其他模块类型
         // 使用.browserslistrc配置
-        targets: {
-          browsers: ['last 2 versions', 'safari >= 7'],
-        },
+        // targets: {
+        //   browsers: ['last 2 versions', 'safari >= 7'],
+        // },
       },
     ],
     '@babel/preset-react',
