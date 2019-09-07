@@ -12,7 +12,7 @@ const eventList = ['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'p
 
 const hardwareAcceleration = { transform: 'translateZ(0)' };
 
-class Sticky extends React.Component {
+class Sticky extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
