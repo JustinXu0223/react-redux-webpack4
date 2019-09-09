@@ -179,7 +179,9 @@ const modules = {
           options: {
             modules: true,
             importLoaders: 2, // https://github.com/webpack-contrib/css-loader/issues/228#issuecomment-312885975
-            localIdentName: isProd ? '[hash:base64:8]' : '[local]_[hash:base64:8]', // you see local name at development env
+            localIdentName: isProd
+              ? '[path][name]__[local]--[hash:base64:8]' // https://webpack.docschina.org/loaders/css-loader/#localidentname
+              : '[local]_[hash:base64:8]', // you see local name at development env
           },
         },
         'postcss-loader',
