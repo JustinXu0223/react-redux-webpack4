@@ -10,6 +10,7 @@ import raf from 'raf';
 
 const eventList = ['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'];
 
+// 创建context容器
 export const SubscriberContext = React.createContext({});
 
 class StickyContainer extends React.PureComponent {
@@ -45,6 +46,7 @@ class StickyContainer extends React.PureComponent {
 
   getCurrentTarget = () => {
     const { currentTarget, relative } = this.props;
+    // 这是使用relative模式
     if (relative) {
       const node = this.getParent();
       return {
@@ -52,6 +54,7 @@ class StickyContainer extends React.PureComponent {
         offsetTop: node.offsetTop,
       };
     }
+    // 这是使用window滚动条
     if (currentTarget === window) {
       return {
         node: currentTarget,
@@ -67,10 +70,12 @@ class StickyContainer extends React.PureComponent {
 
   getParent = () => this.scrollView.current;
 
+  // 处理子组件返回事件处理
   subscribe = handler => {
     this.subscribers = this.subscribers.concat(handler);
   };
 
+  // 移除子组件返回事件处理
   unsubscribe = handler => {
     this.subscribers = this.subscribers.filter(current => current !== handler);
   };
@@ -79,10 +84,12 @@ class StickyContainer extends React.PureComponent {
     if (!this.framePending) {
       this.rafHandle = raf(() => {
         this.framePending = false;
-        // 获取容器滚动高度 -> 为联系人多列表使用
+        // 获取容器滚动高度
         const { offsetTop } = this.getCurrentTarget();
+        const { bottom } = this.getParent().getBoundingClientRect();
         this.subscribers.forEach(handler =>
           handler({
+            distanceFromBottom: bottom,
             offsetTop,
           }),
         );
@@ -99,6 +106,7 @@ class StickyContainer extends React.PureComponent {
       subscribe: this.subscribe,
       unsubscribe: this.unsubscribe,
     };
+    // 使用context传递subscribe和unsubscribe两个方法
     return (
       <SubscriberContext.Provider value={subscribeValue}>
         <div ref={this.scrollView} style={relative ? { overflowY: 'auto', height: '100%' } : {}}>

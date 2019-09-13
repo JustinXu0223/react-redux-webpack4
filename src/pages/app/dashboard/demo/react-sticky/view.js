@@ -58,7 +58,7 @@ class ReactSticky extends React.Component {
           <title>{i18n.helmet_title('react-sticky')}</title>
         </Helmet>
         {/*<StickyContainer relative>*/}
-        {Array.from(Array(1)).map((item, index) => (
+        {Array.from(Array(3)).map((item, index) => (
           <StickyContainer currentTarget='.layout-scroll-view'>
             <HeaderView>ReactSticky page {index}</HeaderView>
             <Sticky>
@@ -67,9 +67,6 @@ class ReactSticky extends React.Component {
             <SectionView>123123</SectionView>
           </StickyContainer>
         ))}
-        <SectionView>2</SectionView>
-        <SectionView>3</SectionView>
-        <SectionView>4</SectionView>
       </StickyPage>
     );
   }

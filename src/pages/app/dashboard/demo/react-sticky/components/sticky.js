@@ -6,11 +6,13 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+// 引入context内容
 import { SubscriberContext } from './stickyContainer';
 
 const hardwareAcceleration = { transform: 'translateZ(0)' };
 
 class Sticky extends React.PureComponent {
+  // 将context绑定在contextType上面
   static contextType = SubscriberContext;
 
   constructor(props) {
@@ -20,33 +22,32 @@ class Sticky extends React.PureComponent {
       placeholderHeight: 0,
     };
 
-    this.placeholder = React.createRef();
     this.container = React.createRef();
+    this.placeholder = React.createRef();
   }
 
   componentDidMount() {
     if (!this.context.subscribe)
       throw new TypeError('Expected Sticky to be mounted within StickyContainer');
 
+    // 使用context，将处理事件handleContainerEvent传递给父组件
     this.context.subscribe(this.handleContainerEvent);
   }
 
   componentWillUnmount() {
+    // 使用context，移除父组件的监听
     this.context.unsubscribe(this.handleContainerEvent);
   }
 
-  handleContainerEvent = ({ offsetTop }) => {
-    const { top, height } = this.container.current.getBoundingClientRect();
+  handleContainerEvent = ({ offsetTop, distanceFromBottom }) => {
     /* 判断是否吸顶条件
-    1. 由于container只包裹着placeholder和吸顶元素，且container的定位属性不会改变
+    由于container只包裹着placeholder和吸顶元素，且container的定位属性不会改变
     因此container.getBoundingClientRect().top大于0则吸顶元素处于正常文档流
     小于0则吸顶元素进行fixed定位，同时placeholder撑开吸顶元素原有的空间
     * */
+    const { top, height } = this.container.current.getBoundingClientRect();
     const { width, left } = this.placeholder.current.getBoundingClientRect();
-    // console.log('@top:', top);
-    if (!this.firstTop) {
-      this.firstTop = top;
-    }
+    const bottomDifference = distanceFromBottom - offsetTop - height;
     if (top - offsetTop > 0) {
       this.setState({
         style: {
@@ -59,10 +60,9 @@ class Sticky extends React.PureComponent {
     this.setState({
       style: {
         position: 'fixed',
-        top: offsetTop,
+        top: bottomDifference > 0 ? offsetTop + 0 : offsetTop + bottomDifference,
         width,
         left,
-        zIndex: 1,
         ...hardwareAcceleration,
       },
       placeholderHeight: height,
@@ -76,6 +76,7 @@ class Sticky extends React.PureComponent {
     return (
       <div ref={this.container}>
         <div style={{ height: placeholderHeight }} ref={this.placeholder} />
+        {/* 目前使用children为func模式，传入style */}
         {this.props.children({ style })}
       </div>
     );
