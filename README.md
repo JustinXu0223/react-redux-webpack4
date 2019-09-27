@@ -41,12 +41,10 @@ npm 5.0+(v6.2.0)
   |--components     Only common & Layout
   |--config              
   |--constants     
-  |--entries        Multi-page entry     
-    |--index.js       Entry of Program
   |--i18n
   |--library        
   |--mock        
-  |--pages          Container & Self component
+  |--pages          多页面入口
   |--reduxs
   |--services
   |--theme          
