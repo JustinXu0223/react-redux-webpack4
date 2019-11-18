@@ -1,23 +1,26 @@
 # Ignore resource:
 
-# dist文件
+# react dist文件
 dist*/**
 
-# webpack
-public/*.html
+# output 文件
+www/**
 
-dist*/
-.DS_Store
-*/.DS_Store
-*/*/.DS_Store
+# 静态文件
+public/**
 
-*.log
-stats.json
+# vscode
+.vscode/**
+
+# idea
 *.iml
-.idea/
-.cache/
+.idea/**
+
+# 配置文件
+.cache/**
 *.log*
-www/
+
+# lock 文件
 package-lock.json
 yarn.lock
 
