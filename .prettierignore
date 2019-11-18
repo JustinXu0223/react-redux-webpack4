@@ -1,8 +1,16 @@
-node_modules/
+# Ignore resource:
+
+# dist文件
+dist*/**
+
+# webpack
+public/*.html
+
 dist*/
 .DS_Store
 */.DS_Store
 */*/.DS_Store
+
 *.log
 stats.json
 *.iml
@@ -11,3 +19,5 @@ stats.json
 *.log*
 www/
 package-lock.json
+yarn.lock
+
