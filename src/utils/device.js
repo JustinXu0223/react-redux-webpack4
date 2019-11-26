@@ -86,13 +86,15 @@ export const modalHelper = {
  * @param {object} 配置
  * {
  *  {string} id div的id
- *  {string} target 打开方式 设置为_blank打开新窗口/设置为_self可以用作在一个a链接点击在当前页面下载文件
+ *  {boolean} isDownload 下载，不需要打开新页面
  * }
  * */
-export function openWindow(url = '', { id = 'download', target = '_blank' } = {}) {
+export function openWindow(url = '', { id = 'download', isDownload = false } = {}) {
   const a = document.createElement('a');
   a.setAttribute('href', url);
-  a.setAttribute('target', target);
+  if (isDownload) {
+    a.setAttribute('target', '_blank');
+  }
   a.setAttribute('id', id);
 
   try {
