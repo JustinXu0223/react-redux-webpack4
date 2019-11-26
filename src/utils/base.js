@@ -260,3 +260,21 @@ export const disableReactDevTools = () => {
 export function compose(...functions) {
   return functions.reduce((a, b) => (...args) => a(b(...args)), arg => arg);
 }
+
+export function getUrlParam(key) {
+  const { search } = window.location;
+  if (!(key && search)) return null;
+  const reg = new RegExp(`(^|&)${key}=([^&]*)(&|$)`);
+  const r = search.substr(1).match(reg);
+  if (r != null) return unescape(r[2]);
+  return null;
+}
+
+export function loadScript(url) {
+  if (!url) return null;
+  const hm = document.createElement('script');
+  hm.type = 'text/javascript';
+  hm.src = url;
+  const s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(hm, s);
+}

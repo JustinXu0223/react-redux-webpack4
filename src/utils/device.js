@@ -80,3 +80,25 @@ export const modalHelper = {
     window.scrollTo(0, this.top); // 回到原先的top
   },
 };
+
+/*
+ *  打开窗口
+ * @param {string} url 跳转地址
+ * @param {string} id div的id
+ * @param {string} target 打开方式 设置为_blank打开新窗口/设置为_self可以用作在一个a链接点击在当前页面下载文件
+ **/
+export function openWindow({ url = '', id = 'download', target = '_blank' } = {}) {
+  const a = document.createElement('a');
+  a.setAttribute('href', url);
+  a.setAttribute('target', target);
+  const resId = isAndroid() ? id : `ios-${id}`;
+  a.setAttribute('id', resId);
+
+  try {
+    const e = document.createEvent('MouseEvents');
+    e.initEvent('click', true, true);
+    a.dispatchEvent(e);
+  } catch (e) {
+    window.open(url);
+  }
+}
