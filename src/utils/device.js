@@ -81,13 +81,15 @@ export const modalHelper = {
   },
 };
 
-/*
- *  打开窗口
+/* 打开窗口
  * @param {string} url 跳转地址
- * @param {string} id div的id
- * @param {string} target 打开方式 设置为_blank打开新窗口/设置为_self可以用作在一个a链接点击在当前页面下载文件
- **/
-export function openWindow({ url = '', id = 'download', target = '_blank' } = {}) {
+ * @param {object} 配置
+ * {
+ *  {string} id div的id
+ *  {string} target 打开方式 设置为_blank打开新窗口/设置为_self可以用作在一个a链接点击在当前页面下载文件
+ * }
+ * */
+export function openWindow(url = '', { id = 'download', target = '_blank' } = {}) {
   const a = document.createElement('a');
   a.setAttribute('href', url);
   a.setAttribute('target', target);
