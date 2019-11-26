@@ -91,8 +91,7 @@ export function openWindow({ url = '', id = 'download', target = '_blank' } = {}
   const a = document.createElement('a');
   a.setAttribute('href', url);
   a.setAttribute('target', target);
-  const resId = isAndroid() ? id : `ios-${id}`;
-  a.setAttribute('id', resId);
+  a.setAttribute('id', id);
 
   try {
     const e = document.createEvent('MouseEvents');
