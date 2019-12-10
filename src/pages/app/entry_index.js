@@ -13,7 +13,7 @@ import { isDev } from 'config';
 import { disableReactDevTools } from 'utils/base';
 import history from 'utils/history';
 import store from 'reduxs/store';
-import router from './router';
+import router from './appRouter';
 
 // mock
 import mock from '../../mock';
@@ -59,21 +59,21 @@ function renderApp(Router) {
 renderApp(router);
 
 if (module.hot) {
-  module.hot.accept('./router.js', () => {
-    const Router = require('./router.js').default;
+  module.hot.accept('./appRouter.js', () => {
+    const Router = require('./appRouter.js').default;
     renderApp(Router);
   });
 }
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register('/service-worker.js')
-      .then(registration => {
-        console.warn('SW registered: ', registration);
-      })
-      .catch(registrationError => {
-        console.error('SW registration failed: ', registrationError);
-      });
-  });
-}
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', () => {
+//     navigator.serviceWorker
+//       .register('/service-worker.js')
+//       .then(registration => {
+//         console.warn('SW registered: ', registration);
+//       })
+//       .catch(registrationError => {
+//         console.error('SW registration failed: ', registrationError);
+//       });
+//   });
+// }

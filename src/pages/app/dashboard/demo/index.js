@@ -7,7 +7,7 @@
 // constants
 import routerId from 'constants/routerId';
 
-import Counter, { navigation as counterRouter } from './counter';
+import Counter, { navigation as counterRouter } from './counterView';
 import Sticky, { navigation as stickyRouter } from './react-sticky';
 
 const errorNav = {

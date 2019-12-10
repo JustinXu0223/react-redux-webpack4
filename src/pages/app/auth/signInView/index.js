@@ -5,7 +5,7 @@
  * @author JUSTIN XU
  */
 import React from 'react';
-import { Route } from 'react-router-dom';
+// import { Route } from 'react-router-dom';
 import loadable from '@loadable/component';
 
 // constants
@@ -14,7 +14,7 @@ import routerId from 'constants/routerId';
 // components
 import Loading from 'components/loading';
 
-const View = loadable(() => import('./view'), {
+export const view = loadable(() => import('./view'), {
   fallback: <Loading />,
 });
 
@@ -24,4 +24,4 @@ export const navigation = {
   icon: '',
 };
 
-export default <Route exact path={navigation.path} key={navigation.path} component={View} />;
+// export default <Route exact path={navigation.path} key={navigation.path} component={view} />;

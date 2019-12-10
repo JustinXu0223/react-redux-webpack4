@@ -9,14 +9,14 @@ export default {
   // auth stack
   signIn: '/signIn',
   // app layout
-  dashboard: '/',
-  home: '/home',
+  dashboard: '/dashboard',
+  home: '/dashboard/home',
   // app layout -> demo stack
-  demo: '/demo',
-  counter: '/counter',
-  sticky: '/sticky',
+  demo: '/dashboard/demo',
+  counter: '/dashboard/counter',
+  sticky: '/dashboard/sticky',
   // app layout -> error stack
-  error: '/error',
-  notFound: '/404',
-  serverError: '/500',
+  error: '/dashboard/error',
+  notFound: '/dashboard/404',
+  serverError: '/dashboard/500',
 };

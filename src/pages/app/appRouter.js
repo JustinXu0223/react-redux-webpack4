@@ -17,13 +17,18 @@ import routerId from 'constants/routerId';
 import { connect } from 'react-redux';
 import { INIT_LANGUAGE } from 'reduxs/actions/global';
 
+// utils
+import { getPageList, getLayoutList } from 'utils/scanner';
+
 // components
 import Loading from 'components/loading';
 import HocBasic from 'components/hocBasic';
 
-const AsyncApp = Loadable(() => import('./dashboard'), {
+const AsyncApp = Loadable(() => import('./dashboard/dashboardRouter'), {
   fallback: Loading,
 });
+
+export const name = 'app';
 
 @connect(
   state => ({
@@ -37,6 +42,8 @@ const AsyncApp = Loadable(() => import('./dashboard'), {
 class MyRouter extends React.Component {
   componentDidMount() {
     this.props.initLanguageReq('zh');
+    getPageList();
+    getLayoutList();
   }
   render() {
     const {

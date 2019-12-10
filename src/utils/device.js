@@ -105,3 +105,14 @@ export function openWindow(url = '', { id = 'download', isDownload = false } = {
     window.open(url);
   }
 }
+
+/* 滚动到顶部 -> 使用定时器兼容火狐
+ * */
+export function scrollToTop() {
+  const time = isFireFox() ? 250 : 0;
+  setTimeout(() => {
+    window.document.body.scrollIntoView({
+      behavior: 'smooth',
+    });
+  }, time);
+}

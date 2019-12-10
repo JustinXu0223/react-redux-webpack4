@@ -17,7 +17,7 @@ import Sider from './components/sider';
 import Header from './components/header';
 
 // pages
-import Home, { navigation as homeRouter } from './home';
+import Home, { navigation as homeRouter } from './homeView';
 import Demo, { navigation as channelRouter } from './demo';
 import Error, { navigation as errorRouter } from './error';
 

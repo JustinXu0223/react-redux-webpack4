@@ -10,7 +10,7 @@ const os = require('os'); // node 提供的系统操作模块
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin'); // 加速构建
-const WorkboxPlugin = require('workbox-webpack-plugin');
+// const WorkboxPlugin = require('workbox-webpack-plugin');
 
 const utils = require('./webpack.util.js');
 const { staticDir, output, reactDll } = require('./webpack.config');
@@ -101,13 +101,13 @@ const plugins = [
     },
   }),
   new HardSourceWebpackPlugin(),
-  new WorkboxPlugin.GenerateSW({
-    // 这些选项帮助快速启用 ServiceWorkers
-    // 不允许遗留任何“旧的” ServiceWorkers
-    clientsClaim: true,
-    // skipWaiting: true,
-    navigateFallback: '/',
-  }),
+  // new WorkboxPlugin.GenerateSW({
+  //   // 这些选项帮助快速启用 ServiceWorkers
+  //   // 不允许遗留任何“旧的” ServiceWorkers
+  //   clientsClaim: true,
+  //   // skipWaiting: true,
+  //   navigateFallback: '/',
+  // }),
 ];
 
 // ==============modules================
