@@ -1,6 +1,6 @@
 /**
  * @component index.js
- * @description signIn路由导航
+ * @description home路由导航
  * @time 2019/3/9
  * @author JUSTIN XU
  */
@@ -13,13 +13,13 @@ import routerId from 'constants/routerId';
 // components
 import Loading from 'components/loading';
 
-export const view = loadable(() => import(/* webpackChunkName: "signIn" */ './view'), {
+export const view = loadable(() => import(/* webpackChunkName: "reactTicky" */ './view'), {
   fallback: <Loading />,
 });
 
 export const navigation = {
-  path: routerId.signIn,
-  name: '登录',
-  icon: '',
+  path: routerId.sticky,
+  name: 'Sticky',
+  icon: 'area-chart',
   exact: true,
 };

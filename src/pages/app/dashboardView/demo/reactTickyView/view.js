@@ -59,7 +59,8 @@ class ReactSticky extends React.Component {
         </Helmet>
         {/*<StickyContainer relative>*/}
         {Array.from(Array(3)).map((item, index) => (
-          <StickyContainer currentTarget='.layout-scroll-view'>
+          // eslint-disable-next-line react/no-array-index-key
+          <StickyContainer currentTarget='.layout-scroll-view' key={index}>
             <HeaderView>ReactSticky page {index}</HeaderView>
             <Sticky>
               {({ style }) => <StickyHeaderView style={style}>吸顶{index}</StickyHeaderView>}

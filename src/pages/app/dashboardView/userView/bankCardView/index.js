@@ -13,13 +13,13 @@ import routerId from 'constants/routerId';
 // components
 import Loading from 'components/loading';
 
-export const view = loadable(() => import(/* webpackChunkName: "signIn" */ './view'), {
+export const view = loadable(() => import(/* webpackChunkName: "bankCard" */ './view'), {
   fallback: <Loading />,
 });
 
 export const navigation = {
-  path: routerId.signIn,
-  name: '登录',
-  icon: '',
+  path: routerId.userBankCard,
+  name: '用户银行卡',
+  icon: 'home',
   exact: true,
 };

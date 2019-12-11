@@ -6,29 +6,28 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
-import Loadable from '@loadable/component';
 
 // constants
-import routerId from 'constants/routerId';
+import routerId, { layoutType } from 'constants/routerId';
 
 // reduxs
 import { connect } from 'react-redux';
 import { INIT_LANGUAGE } from 'reduxs/actions/global';
 
 // utils
-import { getPageList, getLayoutList } from 'utils/scanner';
+import { SubscriberContext, getFormatRouterTree } from 'utils/scanner';
 
 // components
-import Loading from 'components/loading';
 import HocBasic from 'components/hocBasic';
 
-const AsyncApp = Loadable(() => import('./dashboard/dashboardRouter'), {
-  fallback: Loading,
-});
+export const name = layoutType.root;
 
-export const name = 'app';
+// 路由规则map
+const routerTree = getFormatRouterTree();
+// 顶层路由规则
+const rootRouterMap = routerTree[name];
 
 @connect(
   state => ({
@@ -42,9 +41,12 @@ export const name = 'app';
 class MyRouter extends React.Component {
   componentDidMount() {
     this.props.initLanguageReq('zh');
-    getPageList();
-    getLayoutList();
+    // TODO 权限验证 增加loading页面，鉴权进行路由跳转
+    if (this.props.history.location.pathname === '/') {
+      this.props.history.replace(routerId.dashboard);
+    }
   }
+
   render() {
     const {
       props: {
@@ -54,12 +56,11 @@ class MyRouter extends React.Component {
     } = this;
     return (
       <ConnectedRouter history={history}>
-        <div className={`app-container-view theme-${name}-view`}>
-          <Switch>
-            {/* <Route exact path={routerId.notFound} component={AsyncNotFound} />*/}
-            <Route path={routerId.app} component={AsyncApp} />
-          </Switch>
-        </div>
+        <SubscriberContext.Provider value={routerTree}>
+          <div className={`app-container-view theme-${name}-view`}>
+            <Switch>{rootRouterMap}</Switch>
+          </div>
+        </SubscriberContext.Provider>
       </ConnectedRouter>
     );
   }

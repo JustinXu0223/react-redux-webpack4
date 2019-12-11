@@ -11,10 +11,13 @@ import loadable from '@loadable/component';
 // constants
 import routerId from 'constants/routerId';
 
+// utils
+import { sortType } from 'utils/scanner';
+
 // components
 import Loading from 'components/loading';
 
-const View = loadable(() => import('./view'), {
+export const view = loadable(() => import(/* webpackChunkName: "home" */ './view'), {
   fallback: <Loading />,
 });
 
@@ -22,6 +25,8 @@ export const navigation = {
   path: routerId.home,
   name: '首页',
   icon: 'home',
+  exact: true,
+  sort: sortType.start, // 排序位置
 };
 
 export default [
@@ -31,5 +36,5 @@ export default [
     key={`home: ${routerId.dashboard}`}
     component={() => <Redirect to={navigation.path} />}
   />,
-  <Route exact path={navigation.path} key={navigation.path} component={View} />,
+  <Route exact path={navigation.path} key={navigation.path} component={view} />,
 ];

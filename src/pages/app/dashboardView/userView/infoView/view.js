@@ -1,34 +1,30 @@
 /*
  * @component index.js
- * @description 登录页
+ * @description 用户信息
  * @time 2019/8/21
  * @author JUSTIN
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'antd';
 
 // constants
-import routerId from 'constants/routerId';
+// import routerId from 'constants/routerId';
 
-class SignIn extends React.Component {
+class UserInfo extends React.Component {
   state = {};
 
   render() {
     return (
       <div>
-        SignInSignIn
-        <Button type='primary' onClick={() => this.props.history.push(routerId.signUp)}>
-          去注册
-        </Button>
+        <p>用户信息用户信息</p>
       </div>
     );
   }
 }
 
-SignIn.defaultProps = {};
+UserInfo.defaultProps = {};
 
-SignIn.propTypes = {
+UserInfo.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
     replace: PropTypes.func,
@@ -41,4 +37,4 @@ SignIn.propTypes = {
   }).isRequired,
 };
 
-export default SignIn;
+export default UserInfo;

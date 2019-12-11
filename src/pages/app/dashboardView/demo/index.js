@@ -8,7 +8,7 @@
 import routerId from 'constants/routerId';
 
 import Counter, { navigation as counterRouter } from './counterView';
-import Sticky, { navigation as stickyRouter } from './react-sticky';
+import Sticky, { navigation as stickyRouter } from './reactTickyView';
 
 const errorNav = {
   path: routerId.demo,

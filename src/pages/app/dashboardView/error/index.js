@@ -7,18 +7,12 @@
 // constants
 import routerId from 'constants/routerId';
 
-import ServerErrorContent, { navigation as serverErrorRouter } from './500';
-import NotFoundContent, { navigation as notFoundRouter } from './404';
+import { navigation as serverErrorRouter } from './500View';
+import { navigation as notFoundRouter } from './404View';
 
-const errorNav = {
+export const navigation = {
   path: routerId.error,
   name: '错误页',
   icon: 'pie-chart',
-};
-
-export const navigation = {
-  ...errorNav,
   children: [notFoundRouter, serverErrorRouter],
 };
-
-export default [ServerErrorContent, NotFoundContent];

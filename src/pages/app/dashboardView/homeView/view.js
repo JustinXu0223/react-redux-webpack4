@@ -7,6 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Button } from 'antd';
 
@@ -14,7 +15,6 @@ import { Button } from 'antd';
 import { ContainerView } from 'components/layout/styles';
 import SvgIcon from 'components/svgIcon';
 import HocBasic from 'components/hocBasic';
-import { connect } from 'react-redux';
 
 // reduxs
 // import { connect } from 'react-redux';

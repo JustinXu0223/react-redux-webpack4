@@ -1,6 +1,6 @@
 /*
  * @component index.js
- * @description 登录页
+ * @description 注册页
  * @time 2019/8/21
  * @author JUSTIN
  */
@@ -8,29 +8,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
 
-// constants
-import routerId from 'constants/routerId';
-
-class SignIn extends React.Component {
+class SignUp extends React.Component {
   state = {};
 
   render() {
     return (
       <div>
         SignInSignIn
-        <Button type='primary' onClick={() => this.props.history.push(routerId.signUp)}>
-          去注册
+        <Button type='primary' onClick={() => this.props.history.goBack()}>
+          去登录
         </Button>
       </div>
     );
   }
 }
 
-SignIn.defaultProps = {};
+SignUp.defaultProps = {};
 
-SignIn.propTypes = {
+SignUp.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
+    go: PropTypes.func,
+    goBack: PropTypes.func,
     replace: PropTypes.func,
     location: PropTypes.shape({
       hash: PropTypes.string,
@@ -41,4 +40,4 @@ SignIn.propTypes = {
   }).isRequired,
 };
 
-export default SignIn;
+export default SignUp;

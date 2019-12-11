@@ -13,7 +13,7 @@ import { isDev } from 'config';
 import { disableReactDevTools } from 'utils/base';
 import history from 'utils/history';
 import store from 'reduxs/store';
-import router from './appRouter';
+import router from './rootRouter';
 
 // mock
 import mock from '../../mock';
@@ -59,8 +59,8 @@ function renderApp(Router) {
 renderApp(router);
 
 if (module.hot) {
-  module.hot.accept('./appRouter.js', () => {
-    const Router = require('./appRouter.js').default;
+  module.hot.accept('./rootRouter.js', () => {
+    const Router = require('./rootRouter.js').default;
     renderApp(Router);
   });
 }

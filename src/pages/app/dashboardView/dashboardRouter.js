@@ -5,31 +5,30 @@
  * @author JUSTIN XU
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Switch } from 'react-router-dom';
 import { Layout, Modal, BackTop } from 'antd';
 import styled from 'styled-components';
 
+// constants
+import routerId, { layoutType } from 'constants/routerId';
+
 // utils
 import history from 'utils/history';
+import { SubscriberContext } from 'utils/scanner';
 
 // components
 import Sider from './components/sider';
 import Header from './components/header';
 
 // pages
-import Home, { navigation as homeRouter } from './homeView';
-import Demo, { navigation as channelRouter } from './demo';
-import Error, { navigation as errorRouter } from './error';
-
-// 路由配置
-const routerList = [
-  Home, // 必须放在最前面
-  ...Demo,
-  ...Error, // 必须放在最后
-];
+import { navigation as homeRouter } from './homeView';
+import { navigation as channelRouter } from './demo';
+import { navigation as userRouter } from './userView';
+import { navigation as errorRouter } from './error';
 
 // 路由导航
-const navList = [homeRouter, channelRouter, errorRouter];
+const navList = [homeRouter, channelRouter, userRouter, errorRouter];
 
 const backTopProps = {
   target: () => document.querySelector('.layout-scroll-view'),
@@ -47,7 +46,12 @@ const SectionView = styled(Layout.Content)`
   overflow-y: scroll;
 `;
 
+export const name = layoutType.dashboard;
+
 class Dashboard extends React.Component {
+  // 将context绑定在contextType上面
+  static contextType = SubscriberContext;
+
   state = {
     isCollapsed: false,
   };
@@ -82,6 +86,7 @@ class Dashboard extends React.Component {
     const headerProps = {
       isCollapsed,
       onToggle: this.onToggle,
+      onSignOut: () => this.props.history.push(routerId.signIn),
     };
     return (
       <Layout>
@@ -89,7 +94,7 @@ class Dashboard extends React.Component {
         <Layout>
           <Header {...headerProps} />
           <SectionView className='layout-scroll-view' style={contentStyle}>
-            <Switch>{routerList}</Switch>
+            <Switch>{this.context[name]}</Switch>
             <BackTop {...backTopProps} />
           </SectionView>
         </Layout>
@@ -98,6 +103,17 @@ class Dashboard extends React.Component {
   }
 }
 
-Dashboard.propTypes = {};
+Dashboard.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+    replace: PropTypes.func,
+    location: PropTypes.shape({
+      hash: PropTypes.string,
+      pathname: PropTypes.string,
+      search: PropTypes.string,
+      state: PropTypes.any,
+    }),
+  }).isRequired,
+};
 
 export default Dashboard;
