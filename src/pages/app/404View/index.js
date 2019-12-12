@@ -19,7 +19,7 @@ const View = loadable(() => import(/* webpackChunkName: "404" */ './view'), {
 });
 
 export const navigation = {
-  path: routerId.dashNotFound,
+  path: routerId.notFound,
   name: '404',
   icon: 'pie-chart',
   exact: true,

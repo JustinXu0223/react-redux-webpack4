@@ -11,7 +11,7 @@ import { navigation as serverErrorRouter } from './500View';
 import { navigation as notFoundRouter } from './404View';
 
 export const navigation = {
-  path: routerId.error,
+  path: routerId.dashError,
   name: '错误页',
   icon: 'pie-chart',
   children: [notFoundRouter, serverErrorRouter],

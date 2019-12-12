@@ -7,10 +7,8 @@
 import React from 'react';
 
 // components
-import HocBasic from 'components/hocBasic';
 import HocError from 'components/hocError';
 
-@HocBasic
 @HocError
 class ServerError extends React.Component {
   i18nName = 'not_found';

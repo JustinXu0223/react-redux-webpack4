@@ -11,7 +11,7 @@ import { Layout, Modal, BackTop } from 'antd';
 import styled from 'styled-components';
 
 // constants
-import routerId, { layoutType } from 'constants/routerId';
+import routerId, { layoutEnum } from 'constants/routerId';
 
 // utils
 import history from 'utils/history';
@@ -46,7 +46,7 @@ const SectionView = styled(Layout.Content)`
   overflow-y: scroll;
 `;
 
-export const name = layoutType.dashboard;
+export const layoutType = layoutEnum.dashboard;
 
 class Dashboard extends React.Component {
   // 将context绑定在contextType上面
@@ -94,7 +94,7 @@ class Dashboard extends React.Component {
         <Layout>
           <Header {...headerProps} />
           <SectionView className='layout-scroll-view' style={contentStyle}>
-            <Switch>{this.context[name]}</Switch>
+            <Switch>{this.context[layoutType]}</Switch>
             <BackTop {...backTopProps} />
           </SectionView>
         </Layout>

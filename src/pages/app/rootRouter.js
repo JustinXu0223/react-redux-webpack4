@@ -10,7 +10,7 @@ import { Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 
 // constants
-import routerId, { layoutType } from 'constants/routerId';
+import routerId, { layoutEnum } from 'constants/routerId';
 
 // reduxs
 import { connect } from 'react-redux';
@@ -22,12 +22,12 @@ import { SubscriberContext, getFormatRouterTree } from 'utils/scanner';
 // components
 import HocBasic from 'components/hocBasic';
 
-export const name = layoutType.root;
+export const layoutType = layoutEnum.root;
 
 // 路由规则map
 const routerTree = getFormatRouterTree();
 // 顶层路由规则
-const rootRouterMap = routerTree[name];
+const rootRouterMap = routerTree[layoutType];
 
 @connect(
   state => ({

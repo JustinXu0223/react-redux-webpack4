@@ -10,9 +10,6 @@ import loadable from '@loadable/component';
 // constants
 import routerId from 'constants/routerId';
 
-// utils
-// import { sortType } from 'utils/scanner';
-
 // components
 import Loading from 'components/loading';
 

@@ -1,8 +1,8 @@
 /**
  * @component index.js
- * @description 500路由导航
+ * @description 用户权限路由导航
  * @time 2019/3/9
- * @author JUSTIN
+ * @author JUSTIN XU
  */
 import React from 'react';
 import loadable from '@loadable/component';
@@ -13,13 +13,14 @@ import routerId from 'constants/routerId';
 // components
 import Loading from 'components/loading';
 
-export const view = loadable(() => import(/* webpackChunkName: "500" */ './view'), {
+export const view = loadable(() => import(/* webpackChunkName: "authRouter" */ './authRouter'), {
   fallback: <Loading />,
 });
 
 export const navigation = {
-  path: routerId.dashServerError,
-  name: '500',
-  icon: 'pie-chart',
-  exact: true,
+  path: routerId.auth,
+  name: '权限信息',
+  icon: 'home',
+  exact: false,
+  sort: 9,
 };

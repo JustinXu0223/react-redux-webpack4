@@ -15,7 +15,7 @@ import routerId, { layoutEnum } from 'constants/routerId';
 // utils
 import { SubscriberContext } from 'utils/scanner';
 
-export const layoutType = layoutEnum.user;
+export const layoutType = layoutEnum.auth;
 
 const SectionView = styled.div`
   border: 1px solid red;
@@ -42,7 +42,7 @@ const HeaderItemView = styled(NavLink)`
   }
 `;
 
-class User extends React.Component {
+class Auth extends React.Component {
   // 将context绑定在contextType上面
   static contextType = SubscriberContext;
 
@@ -51,11 +51,11 @@ class User extends React.Component {
     return (
       <SectionView>
         <HeaderView>
-          <HeaderItemView activeClassName='activeView' to={routerId.userInfo}>
-            个人信息
+          <HeaderItemView activeClassName='activeView' to={routerId.signIn}>
+            登陆
           </HeaderItemView>
-          <HeaderItemView activeClassName='activeView' to={routerId.userBankCard}>
-            银行卡
+          <HeaderItemView activeClassName='activeView' to={routerId.signUp}>
+            注册
           </HeaderItemView>
         </HeaderView>
         <Switch>{this.context[layoutType]}</Switch>
@@ -64,7 +64,7 @@ class User extends React.Component {
   }
 }
 
-User.propTypes = {
+Auth.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
     replace: PropTypes.func,
@@ -77,4 +77,4 @@ User.propTypes = {
   }).isRequired,
 };
 
-export default User;
+export default Auth;
