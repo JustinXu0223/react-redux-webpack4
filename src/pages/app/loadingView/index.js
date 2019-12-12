@@ -1,8 +1,8 @@
 /**
  * @component index.js
- * @description 维护路由导航
+ * @description 加载路由导航
  * @time 2019/3/9
- * @author JUSTIN XU
+ * @author JUSTIN
  */
 import React from 'react';
 import loadable from '@loadable/component';
@@ -15,7 +15,7 @@ import routerId from 'constants/routerId';
 // components
 import Loading from 'components/loading';
 
-export const view = loadable(() => import(/* webpackChunkName: "maintain" */ './view'), {
+export const view = loadable(() => import(/* webpackChunkName: "loading" */ './view'), {
   fallback: <Loading />,
 });
 

@@ -14,7 +14,7 @@ import routerId from 'constants/routerId';
 // components
 import Loading from 'components/loading';
 
-const View = loadable(() => import(/* webpackChunkName: "404" */ './view'), {
+const view = loadable(() => import(/* webpackChunkName: "404" */ './view'), {
   fallback: <Loading />,
 });
 
@@ -27,6 +27,6 @@ export const navigation = {
 };
 
 export default [
-  <Route exact path={navigation.path} key={navigation.path} component={View} />,
+  <Route exact path={navigation.path} key={navigation.path} component={view} />,
   <Route key='/notFound' path='*' component={() => <Redirect to={navigation.path} />} />,
 ];

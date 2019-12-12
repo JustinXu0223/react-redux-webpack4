@@ -28,5 +28,5 @@ export const navigation = {
 
 export default [
   <Route exact path={navigation.path} key={navigation.path} component={View} />,
-  <Route key='/notFound' path='*' component={() => <Redirect to={navigation.path} />} />,
+  <Route key='/notFound' path='*' component={() => <Redirect to={routerId.loading} />} />,
 ];

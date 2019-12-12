@@ -10,6 +10,7 @@ export const layoutEnum = {
   auth: '/auth', // 一层路由
   dashboard: '/dashboard', // 二层路由，
   user: '/user', // 三层路由，
+  game: '/game', // 三层路由，
 };
 
 export const layoutTree = [
@@ -24,6 +25,9 @@ export const layoutTree = [
         children: [
           {
             name: layoutEnum.user,
+          },
+          {
+            name: layoutEnum.game,
           },
         ],
       },
@@ -53,6 +57,10 @@ export default {
   user: `${layoutEnum.dashboard}${layoutEnum.user}`,
   userInfo: `${layoutEnum.dashboard}${layoutEnum.user}/info`,
   userBankCard: `${layoutEnum.dashboard}${layoutEnum.user}/bankCard`,
+  // dashboard stack -> game stack
+  game: `${layoutEnum.dashboard}${layoutEnum.game}`,
+  gameList: `${layoutEnum.dashboard}${layoutEnum.game}/list`,
+  gameHelp: `${layoutEnum.dashboard}${layoutEnum.game}/help`,
   // dashboard stack -> error stack
   dashError: `${layoutEnum.dashboard}/error`,
   dashNotFound: `${layoutEnum.dashboard}/404`,

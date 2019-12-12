@@ -24,11 +24,12 @@ import Header from './components/header';
 // pages
 import { navigation as homeRouter } from './homeView';
 import { navigation as channelRouter } from './demo';
+import { navigation as gameRouter } from './gameView';
 import { navigation as userRouter } from './userView';
 import { navigation as errorRouter } from './error';
 
 // 路由导航
-const navList = [homeRouter, channelRouter, userRouter, errorRouter];
+const navList = [homeRouter, channelRouter, gameRouter, userRouter, errorRouter];
 
 const backTopProps = {
   target: () => document.querySelector('.layout-scroll-view'),

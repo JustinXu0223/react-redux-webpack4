@@ -1,10 +1,11 @@
 /**
  * @component index.js
- * @description signIn路由导航
+ * @description 用户信息路由导航
  * @time 2019/3/9
- * @author JUSTIN XU
+ * @author JUSTIN
  */
 import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 import loadable from '@loadable/component';
 
 // constants
@@ -22,4 +23,15 @@ export const navigation = {
   name: '用户信息',
   icon: 'home',
   exact: true,
+  sort: 0, // 排序位置
 };
+
+export default [
+  <Route
+    exact
+    path={routerId.user}
+    key={routerId.user}
+    component={() => <Redirect to={navigation.path} />}
+  />,
+  <Route exact path={navigation.path} key={navigation.path} component={view} />,
+];

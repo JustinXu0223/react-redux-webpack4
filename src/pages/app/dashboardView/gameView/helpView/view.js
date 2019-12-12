@@ -1,30 +1,32 @@
 /*
  * @component index.js
- * @description 加载页
+ * @description 游戏帮助
  * @time 2019/8/21
  * @author JUSTIN
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// components
-import MyLoading from 'components/loading';
+// constants
+// import routerId from 'constants/routerId';
 
-class Loading extends React.Component {
+class GameHelp extends React.Component {
   state = {};
 
   render() {
-    return <MyLoading />;
+    return (
+      <div>
+        <p>游戏帮助游戏帮助</p>
+      </div>
+    );
   }
 }
 
-Loading.defaultProps = {};
+GameHelp.defaultProps = {};
 
-Loading.propTypes = {
+GameHelp.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
-    go: PropTypes.func,
-    goBack: PropTypes.func,
     replace: PropTypes.func,
     location: PropTypes.shape({
       hash: PropTypes.string,
@@ -35,4 +37,4 @@ Loading.propTypes = {
   }).isRequired,
 };
 
-export default Loading;
+export default GameHelp;

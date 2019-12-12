@@ -29,6 +29,9 @@ const routerTree = getFormatRouterTree();
 // 顶层路由规则
 const rootRouterMap = routerTree[layoutType];
 
+// 初次加载页面的顶层无路由和权限页面逻辑
+const rootList = ['/', routerId.loading];
+
 @connect(
   state => ({
     language: state.language,
@@ -42,7 +45,7 @@ class MyRouter extends React.Component {
   componentDidMount() {
     this.props.initLanguageReq('zh');
     // TODO 权限验证 增加loading页面，鉴权进行路由跳转
-    if (this.props.history.location.pathname === '/') {
+    if (rootList.includes(this.props.history.location.pathname)) {
       this.props.history.replace(routerId.dashboard);
     }
   }
