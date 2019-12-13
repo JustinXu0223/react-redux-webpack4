@@ -18,8 +18,8 @@ class SignIn extends React.Component {
     return (
       <div>
         SignInSignIn
-        <Button type='primary' onClick={() => this.props.history.push(routerId.signUp)}>
-          去注册
+        <Button type='primary' onClick={() => this.props.history.replace(routerId.dashboard)}>
+          去首页
         </Button>
       </div>
     );

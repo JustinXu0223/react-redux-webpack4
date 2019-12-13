@@ -12,11 +12,11 @@ import { createGlobalStyle } from 'styled-components';
 import { isDev } from 'config';
 import { disableReactDevTools } from 'utils/base';
 import history from 'utils/history';
-import store from 'reduxs/store';
+import rootStore from 'pages/app/redux/rootStore';
 import router from './rootRouter';
 
 // mock
-import mock from '../../mock';
+import mock from './mock';
 
 if (isDev) {
   mock.start();
@@ -46,7 +46,7 @@ function renderApp(Router) {
   ReactDOM.render(
     <AppContainer>
       <React.Fragment>
-        <Provider store={store}>
+        <Provider store={rootStore}>
           <Router history={history} />
         </Provider>
         <GlobalStyle />

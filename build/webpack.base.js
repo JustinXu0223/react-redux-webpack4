@@ -237,20 +237,15 @@ module.exports = {
     },
   },
   resolve: {
-    modules: [utils.resolvePath('node_modules')],
+    modules: [utils.resolvePath('src'), 'node_modules'], // https://github.com/babel/babel/issues/10036
     extensions: ['.js', '.jsx'],
     alias: {
       assets: utils.resolvePath('src/assets'),
       components: utils.resolvePath('src/components'),
       config: utils.resolvePath('src/config'),
       constants: utils.resolvePath('src/constants'),
-      i18n: utils.resolvePath('src/i18n'),
       library: utils.resolvePath('src/library'),
-      mock: utils.resolvePath('src/mock'),
       pages: utils.resolvePath('src/pages'),
-      reduxs: utils.resolvePath('src/reduxs'),
-      services: utils.resolvePath('src/services'),
-      theme: utils.resolvePath('src/theme'),
       utils: utils.resolvePath('src/utils'),
     },
   },

@@ -1,11 +1,11 @@
 /**
- * @component global.js
+ * @component globalSaga.js
  * @description global saga
  * @time 2018/5/2
  * @author JUSTIN XU
  */
 import { takeEvery, all, put } from 'redux-saga/effects';
-import * as Types from '../actions/global';
+import * as Types from './globalAction';
 
 // language saga
 const initLanguageSaga = function* saga() {
@@ -16,7 +16,7 @@ const initLanguageSaga = function* saga() {
 
 const changeLanguageSaga = function* saga({ payload }) {
   localStorage.setItem('language', payload);
-  const i18n = yield import(`i18n/${payload}`);
+  const i18n = yield import(`../i18n/${payload}`);
   yield put({ type: Types.CHANGE_I18N, payload: i18n.default });
 };
 
@@ -29,7 +29,7 @@ const initStylesSaga = function* saga() {
 
 const changeStylesSaga = function* saga({ payload }) {
   localStorage.setItem('styles', payload);
-  const theme = yield import(`theme/${payload}`);
+  const theme = yield import(`../theme/${payload}`);
   yield put({ type: Types.CHANGE_THEME, payload: theme.default });
 };
 

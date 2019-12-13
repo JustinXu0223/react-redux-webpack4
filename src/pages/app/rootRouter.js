@@ -14,13 +14,13 @@ import routerId, { layoutEnum } from 'constants/routerId';
 
 // reduxs
 import { connect } from 'react-redux';
-import { INIT_LANGUAGE } from 'reduxs/actions/global';
+import { INIT_LANGUAGE } from 'pages/app/redux/globalAction';
 
 // utils
 import { SubscriberContext, getFormatRouterTree } from 'utils/scanner';
 
 // components
-import HocBasic from 'components/hocBasic';
+import HocBasic from 'pages/app/components/hocBasic';
 
 export const layoutType = layoutEnum.root;
 

@@ -12,7 +12,7 @@ import { Button } from 'antd';
 import { connect } from 'react-redux';
 
 // reudxs
-import { CHANGE_LANGUAGE_NAME } from 'reduxs/actions/global';
+import { CHANGE_LANGUAGE_NAME } from 'pages/app/redux/globalAction';
 
 // components
 import SvgIcon from 'components/svgIcon';

@@ -1,5 +1,5 @@
 /**
- * @component demo.js
+ * @component demoSaga.js
  * @description demo selectors
  * @time 2019/6/15
  * @author JUSTIN XU

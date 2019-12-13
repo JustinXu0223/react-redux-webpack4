@@ -10,7 +10,7 @@ import hoistNonReactStatic from 'hoist-non-react-statics';
 
 // reduxs
 import { connect } from 'react-redux';
-import { CHANGE_THEME_NAME } from 'reduxs/actions/global';
+import { CHANGE_THEME_NAME } from 'pages/app/redux/globalAction';
 
 // utils
 import { getDisplayName } from 'utils/base';

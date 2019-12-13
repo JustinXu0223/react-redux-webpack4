@@ -7,7 +7,7 @@
 import React from 'react';
 
 // components
-import HocError from 'components/hocError';
+import HocError from 'pages/app/components/hocError';
 
 @HocError
 class ServerError extends React.Component {

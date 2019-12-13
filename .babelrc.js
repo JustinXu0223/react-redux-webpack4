@@ -7,12 +7,15 @@ module.exports = {
       {
         // https://babeljs.io/docs/en/babel-polyfill#docsNav
         // babel v7弃用babel-polyfill 推荐使用core-js
-        // useBuiltIns: 'usage',
+        // https://stackoverflow.com/questions/52625979/confused-about-usebuiltins-option-of-babel-preset-env-using-browserslist-integ
+        useBuiltIns: 'usage',
+        corejs: 3,
         modules: false, // 不启用将ES6模块语法转换为其他模块类型
         // 使用.browserslistrc配置
         // targets: {
         //   browsers: ['last 2 versions', 'safari >= 7'],
         // },
+        // debug: true,
       },
     ],
     '@babel/preset-react',

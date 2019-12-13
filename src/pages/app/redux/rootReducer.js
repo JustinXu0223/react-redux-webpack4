@@ -7,10 +7,10 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 
-import history from '../../utils/history';
+import history from 'utils/history';
 
-const req = require.context('./', false, /\.js$/);
-const context = req.keys().filter(item => item !== './initialState.js');
+const req = require.context('../', true, /\w+Reducer.[a-z]+$/i);
+const context = req.keys().filter(item => item !== './redux/rootReducer.js');
 
 export default combineReducers({
   router: connectRouter(history),

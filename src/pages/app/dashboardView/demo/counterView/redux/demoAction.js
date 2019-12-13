@@ -1,5 +1,5 @@
 /**
- * @component demo.js
+ * @component demoAction.js
  * @description demo 动作常量
  * @time 2019/6/15
  * @author JUSTIN XU

@@ -1,5 +1,5 @@
 /**
- * @component chart.js  basic bizcharts
+ * @component chartSelector.js.js  basic bizcharts
  * @description chart selector
  * @time 2018/5/25
  * @author JUSTIN XU

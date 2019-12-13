@@ -1,12 +1,12 @@
 /**
- * @component demo.js
+ * @component demoReducer.js
  * @description demo reducer
  * @time 2019/6/15
  * @author JUSTIN XU
  */
-import { initList } from './initialState';
-import * as types from '../actions/demo';
-import { RESET_REDUX_STORE } from '../actions/auth';
+import { initList } from 'constants/initialState';
+import { RESET_REDUX_STORE } from 'pages/app/authView/redux/authAction';
+import * as types from './demoAction';
 
 const initDemo = initList([
   {

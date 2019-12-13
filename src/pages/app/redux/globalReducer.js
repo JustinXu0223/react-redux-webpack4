@@ -1,12 +1,12 @@
 /**
- * @component reducer.js
+ * @component globalReducer.js
  * @description app reducer
  * @time 2018/5/2
  * @author JUSTIN XU
  */
-import i18n from 'i18n/zh';
-import theme from 'theme/light';
-import * as types from '../actions/global';
+import i18n from '../i18n/zh';
+import theme from '../theme/light';
+import * as types from './globalAction';
 
 const initLanguage = {
   name: 'zh',

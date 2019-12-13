@@ -7,8 +7,8 @@
 import React from 'react';
 
 // components
-import HocBasic from 'components/hocBasic';
-import HocError from 'components/hocError';
+import HocBasic from 'pages/app/components/hocBasic';
+import HocError from 'pages/app/components/hocError';
 
 @HocBasic
 @HocError

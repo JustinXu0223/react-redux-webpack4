@@ -1,13 +1,13 @@
 /**
- * @component demo.js
+ * @component demoSaga.js
  * @description demo saga
  * @time 2019/6/15
  * @author JUSTIN XU
  */
 import { takeEvery, all, put, call, select } from 'redux-saga/effects';
-import { delay } from 'services/demo';
-import * as Types from '../actions/demo';
-import { getDemo } from '../selectors/demo';
+import { delay } from '../demoService';
+import * as Types from './demoAction';
+import { getDemo } from './demoSelector';
 
 export function* incrementSaga({ payload }) {
   try {

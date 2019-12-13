@@ -14,7 +14,7 @@ import { Button } from 'antd';
 // components
 import { ContainerView } from 'components/layout/styles';
 import SvgIcon from 'components/svgIcon';
-import HocBasic from 'components/hocBasic';
+import HocBasic from 'pages/app/components/hocBasic';
 
 // reduxs
 // import { connect } from 'react-redux';

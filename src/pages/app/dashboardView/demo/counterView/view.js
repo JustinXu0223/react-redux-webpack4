@@ -11,13 +11,13 @@ import styled from 'styled-components';
 
 // components
 import { Button } from 'antd';
-import HocBasic from 'components/hocBasic';
+import HocBasic from 'pages/app/components/hocBasic';
 
 // reduxs
 import { connect } from 'react-redux';
 import immutable from 'immutable';
-import { INCREMENT_REQ, DECREASE_REQ } from 'reduxs/actions/demo';
-import { getCounter } from 'reduxs/selectors/demo';
+import { INCREMENT_REQ, DECREASE_REQ } from './redux/demoAction';
+import { getCounter } from './redux/demoSelector';
 
 const DemoPage = styled.div`
   flex: 1;

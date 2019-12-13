@@ -92,7 +92,7 @@ function getRouteRule(page) {
  */
 export function getRouterTree() {
   const pageList = getPageList();
-  console.log('@pageList:', pageList);
+  // console.log('@pageList:', pageList);
   return pageList.reduce((prev, curr) => {
     const { layout, page } = getPagePath(curr, 1);
     if (prev[layout]) {
@@ -118,7 +118,7 @@ export function getRouterTree() {
  */
 export function getFormatRouterTree() {
   const routerTree = getRouterTree();
-  console.log('@routerTree:', routerTree);
+  // console.log('@routerTree:', routerTree);
   const res = Object.keys(routerTree).reduce((prev, curr) => {
     prev[curr] = routerTree[curr]
       // 为sort默认附值
@@ -134,6 +134,6 @@ export function getFormatRouterTree() {
       .flat(1);
     return prev;
   }, {});
-  console.log('@res:', res);
+  // console.log('@res:', res);
   return res;
 }

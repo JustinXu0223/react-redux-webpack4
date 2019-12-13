@@ -47,7 +47,6 @@ class User extends React.Component {
   static contextType = SubscriberContext;
 
   render() {
-    console.log('@context:', this.context);
     return (
       <SectionView>
         <HeaderView>

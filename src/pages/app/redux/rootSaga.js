@@ -6,8 +6,8 @@
  */
 import { all, fork } from 'redux-saga/effects';
 
-const req = require.context('./', false, /\.js$/);
-const context = req.keys().filter(item => item !== './index.js');
+const req = require.context('../', true, /\w+Saga.js$/i);
+const context = req.keys().filter(item => item !== './redux/rootSaga.js');
 
 export default function* rootSaga() {
   yield all(context.map(key => fork(req(key).default)));

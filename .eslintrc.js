@@ -82,7 +82,7 @@ module.exports = {
       },
     ],
     'no-debugger': isProd ? 2 : 0,
-    // 'no-console': isProd ? [2, { allow: ['warn', 'error'] }] : 0,
-    'no-console': 0,
+    'no-console': isProd ? [2, { allow: ['warn', 'error'] }] : 0,
+    // 'no-console': 0,
   },
 };
