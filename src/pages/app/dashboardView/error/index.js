@@ -5,7 +5,7 @@
  * @author JUSTIN
  */
 // constants
-import routerId from 'constants/routerId';
+import routerId from 'pages/app/constants/routerId';
 
 import { navigation as serverErrorRouter } from './500View';
 import { navigation as notFoundRouter } from './404View';

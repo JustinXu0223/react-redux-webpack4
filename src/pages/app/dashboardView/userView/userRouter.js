@@ -10,10 +10,10 @@ import { NavLink, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
 // constants
-import routerId, { layoutEnum } from 'constants/routerId';
+import routerId, { layoutEnum } from 'pages/app/constants/routerId';
 
 // utils
-import { SubscriberContext } from 'utils/scanner';
+import { SubscriberContext } from 'pages/app/viewScanner';
 
 export const layoutType = layoutEnum.user;
 

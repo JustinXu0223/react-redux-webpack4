@@ -5,7 +5,7 @@
  * @author JUSTIN
  */
 // constants
-import routerId from 'constants/routerId';
+import routerId from 'pages/app/constants/routerId';
 
 import Counter, { navigation as counterRouter } from './counterView';
 import Sticky, { navigation as stickyRouter } from './reactTickyView';

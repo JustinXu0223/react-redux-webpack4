@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'antd';
 
 // constants
-import routerId from 'constants/routerId';
+import routerId from 'pages/app/constants/routerId';
 
 class SignIn extends React.Component {
   state = {};

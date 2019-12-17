@@ -7,29 +7,14 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-// constants
-import { layoutEnum, layoutList, layoutTree } from 'constants/routerId';
-
 // utils
 import { getTreePathList } from 'utils/base';
-
-// 创建context容器
-export const SubscriberContext = React.createContext({});
-
-/*
- * 视图扫描
- * @returns {Array}
- */
-export function getPageList() {
-  const req = require.context('../', true, /\w+View\/index\.[a-z]+$/i);
-  return req.keys().map(item => req(item));
-}
 
 /*
  * 获取当前视图layout和page的对应
  * @returns {Object}
  */
-function getPagePath(curr, index) {
+function getPagePath(curr, index, { layoutList, layoutTree, layoutEnum }) {
   // 当前layout数组长度
   const len = layoutList.length;
   // 取出最后一个
@@ -64,7 +49,7 @@ function getPagePath(curr, index) {
   }
   // 当index没达到列表长度，递归查询
   if (index !== len) {
-    return getPagePath(curr, index + 1);
+    return getPagePath(curr, index + 1, { layoutList, layoutTree, layoutEnum });
   }
 }
 
@@ -89,12 +74,12 @@ function getRouteRule(page) {
 
 /*
  * 获取当前视图layout和view的对应路由规则
+ * @params {array} pageList 页面list
+ * @returns {*}
  */
-export function getRouterTree() {
-  const pageList = getPageList();
-  // console.log('@pageList:', pageList);
+export const getRouterTree = pageList => ({ layoutList, layoutTree, layoutEnum }) => {
   return pageList.reduce((prev, curr) => {
-    const { layout, page } = getPagePath(curr, 1);
+    const { layout, page } = getPagePath(curr, 1, { layoutList, layoutTree, layoutEnum });
     if (prev[layout]) {
       prev[layout].push({
         navigation: curr.navigation,
@@ -110,16 +95,15 @@ export function getRouterTree() {
     }
     return prev;
   }, {});
-}
+};
 
 /*
  * 序列化路由树
- * @returns {Array}
+ * @params {array} routerTree 页面tree
+ * @returns {*}
  */
-export function getFormatRouterTree() {
-  const routerTree = getRouterTree();
-  // console.log('@routerTree:', routerTree);
-  const res = Object.keys(routerTree).reduce((prev, curr) => {
+export const getFormatRouterTree = routerTree => {
+  return Object.keys(routerTree).reduce((prev, curr) => {
     prev[curr] = routerTree[curr]
       // 为sort默认附值
       .map(item => {
@@ -134,6 +118,4 @@ export function getFormatRouterTree() {
       .flat(1);
     return prev;
   }, {});
-  // console.log('@res:', res);
-  return res;
-}
+};

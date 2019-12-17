@@ -11,11 +11,11 @@ import { Layout, Modal, BackTop } from 'antd';
 import styled from 'styled-components';
 
 // constants
-import routerId, { layoutEnum } from 'constants/routerId';
+import routerId, { layoutEnum } from 'pages/app/constants/routerId';
 
 // utils
 import history from 'utils/history';
-import { SubscriberContext } from 'utils/scanner';
+import { SubscriberContext } from 'pages/app/viewScanner';
 
 // components
 import Sider from './components/sider';

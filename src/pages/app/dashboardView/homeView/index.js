@@ -9,7 +9,7 @@ import { Route, Redirect } from 'react-router-dom';
 import loadable from '@loadable/component';
 
 // constants
-import routerId from 'constants/routerId';
+import routerId from 'pages/app/constants/routerId';
 
 // components
 import Loading from 'components/loading';

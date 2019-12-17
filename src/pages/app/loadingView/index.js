@@ -8,7 +8,7 @@ import React from 'react';
 import loadable from '@loadable/component';
 
 // constants
-import routerId from 'constants/routerId';
+import routerId from 'pages/app/constants/routerId';
 
 // utils
 

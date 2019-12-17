@@ -10,14 +10,14 @@ import { Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 
 // constants
-import routerId, { layoutEnum } from 'constants/routerId';
+import routerId, { layoutEnum } from 'pages/app/constants/routerId';
 
 // reduxs
 import { connect } from 'react-redux';
 import { INIT_LANGUAGE } from 'pages/app/redux/globalAction';
 
 // utils
-import { SubscriberContext, getFormatRouterTree } from 'utils/scanner';
+import { SubscriberContext, getAppRouterTree } from 'pages/app/viewScanner';
 
 // components
 import HocBasic from 'pages/app/components/hocBasic';
@@ -25,7 +25,7 @@ import HocBasic from 'pages/app/components/hocBasic';
 export const layoutType = layoutEnum.root;
 
 // 路由规则map
-const routerTree = getFormatRouterTree();
+const routerTree = getAppRouterTree();
 // 顶层路由规则
 const rootRouterMap = routerTree[layoutType];
 
