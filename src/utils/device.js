@@ -8,6 +8,9 @@ import Fingerprint from 'fingerprintjs';
 
 const ua = navigator.userAgent;
 
+// 是否为ios
+export const isIos = () => /iphone/gi.test(ua);
+
 // 是否为mac系统
 export const isMac = () => /macintosh|mac os x/i.test(ua);
 
@@ -116,3 +119,36 @@ export function scrollToTop() {
     });
   }, time);
 }
+
+// 兼容ios webview
+class FixIosInputClass {
+  flag;
+  timeout;
+  addEventListener() {
+    if (!isIos()) {
+      return;
+    }
+    document.body.addEventListener('focusin', () => {
+      // 软键盘弹起事件
+      this.flag = true;
+      clearTimeout(this.timeout);
+    });
+    document.body.addEventListener('focusout', () => {
+      // 软键盘关闭事件
+      this.flag = false;
+      if (!this.flag) {
+        this.timeout = setTimeout(() => {
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); // 重点  =======当键盘收起的时候让页面回到原始位置(这里的top可以根据你们个人的需求改变，并不一定要回到页面顶部)
+        }, 200);
+      }
+    });
+  }
+  removeEventListener() {
+    if (!isIos()) {
+      return;
+    }
+    document.body.removeEventListener('focusin', () => null);
+    document.body.removeEventListener('focusout', () => null);
+  }
+}
+export const fixIosInput = new FixIosInputClass();
