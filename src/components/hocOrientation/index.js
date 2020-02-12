@@ -5,6 +5,7 @@ function getClient() {
   return {
     clientWidth: document.body.clientWidth,
     clientHeight: document.body.clientHeight,
+    orientation: window.orientation,
   };
 }
 
@@ -28,17 +29,7 @@ function WithOrientation(Component) {
       window.removeEventListener('resize', this.handleOrientationThrottle);
     };
 
-    lastOrientation;
     handleOrientation = () => {
-      if (typeof this.lastOrientation === 'undefined') {
-        this.lastOrientation = window.orientation;
-        return;
-      }
-      if (window.orientation === this.lastOrientation) {
-        return;
-      }
-      this.lastOrientation = window.orientation;
-      // 重新渲染整个页面
       this.setState(() => getClient());
     };
     handleOrientationThrottle = throttle(this.handleOrientation, 100);
