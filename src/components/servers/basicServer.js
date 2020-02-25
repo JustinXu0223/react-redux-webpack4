@@ -24,7 +24,7 @@ class BasicServer extends React.PureComponent {
     api = {}, // api请求
     action = api.name, // 给doAction使用
     type = '', // 提供getAll 遍历一起使用
-    formatBindingData = () => null, // 格式化绑定在state的值
+    formatBindingData = v => v, // 格式化绑定在state的值
     bindingData = '', // 绑定在state的值
     sendingData = {}, // 发送的数据
     polling = false, // 当前接口是否轮询
@@ -43,26 +43,27 @@ class BasicServer extends React.PureComponent {
   };
 
   // 执行单一请求
-  doAction = ({ action = '', type = '' } = {}) => {
+  doAction = ({ action = '', type = '' } = {}, restProps = {}) => {
     const bindList = this.getBindList({ action, type });
     if (!(Array.isArray(bindList) && bindList.length)) {
       console.error('你还未绑定action');
       return Promise.resolve(true);
     }
-    return this.handleCommand(bindList);
+    return this.handleCommand(bindList, restProps);
   };
 
-  handleCommand = async bindList => {
+  handleCommand = async (bindList, restProps = {}) => {
     try {
       const bindPromise = bindList.map(item => {
+        const resItem = { ...item, ...restProps };
         if (item.polling) {
           this.pollingApiList.push(
             setInterval(() => {
-              this.handleRequest(item);
-            }, item.polling),
+              this.handleRequest(resItem);
+            }, resItem.polling),
           );
         }
-        return this.handleRequest(item);
+        return this.handleRequest(resItem);
       });
 
       return Promise.all(bindPromise);

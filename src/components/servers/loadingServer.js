@@ -46,16 +46,16 @@ class LoadingServer extends BasicServer {
     });
   };
   // 请求数据, 多个一起
-  getAll = ({ bindLoading = loadingType.global, type = this.bindType.all } = {}) => {
+  getAll = ({ bindLoading = loadingType.global, type = this.bindType.all, ...restProps } = {}) => {
     this.handleRequestLoading(bindLoading);
-    return this.doAction({ type }).finally(() => {
+    return this.doAction({ type }, restProps).finally(() => {
       this.handleResponseLoading(bindLoading);
     });
   };
   // 请求数据, 读取单个
-  getSingle = ({ bindLoading = loadingType.loading, action = '' } = {}) => {
+  getSingle = ({ bindLoading = loadingType.loading, action = '', ...restProps } = {}) => {
     this.handleRequestLoading(bindLoading);
-    return this.doAction({ action }).finally(() => {
+    return this.doAction({ action }, restProps).finally(() => {
       this.handleResponseLoading(bindLoading);
     });
   };
