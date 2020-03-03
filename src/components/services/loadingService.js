@@ -1,4 +1,4 @@
-import BasicServer from './basicServer';
+import BasicServer from './basicService';
 
 const loadingType = {
   global: 'global', // 全局
@@ -13,7 +13,7 @@ class LoadingServer extends BasicServer {
   };
 
   // 处理loading
-  handleRequestLoading = bindLoading => {
+  $_handleRequestLoading = bindLoading => {
     if (bindLoading === loadingType.global) {
       // TODO 全局loading
     } else if (bindLoading) {
@@ -22,7 +22,7 @@ class LoadingServer extends BasicServer {
       });
     }
   };
-  handleResponseLoading = bindLoading => {
+  $_handleResponseLoading = bindLoading => {
     if (bindLoading === loadingType.global) {
       // TODO 全局loading
     } else if (bindLoading) {
@@ -47,17 +47,21 @@ class LoadingServer extends BasicServer {
   };
   // 请求数据, 多个一起
   getAll = ({ bindLoading = loadingType.global, type = this.bindType.all, ...restProps } = {}) => {
-    this.handleRequestLoading(bindLoading);
+    this.$_handleRequestLoading(bindLoading);
     return this.doAction({ type }, restProps).finally(() => {
-      this.handleResponseLoading(bindLoading);
+      this.$_handleResponseLoading(bindLoading);
     });
   };
   // 请求数据, 读取单个
   getSingle = ({ bindLoading = loadingType.loading, action = '', ...restProps } = {}) => {
-    this.handleRequestLoading(bindLoading);
-    return this.doAction({ action }, restProps).finally(() => {
-      this.handleResponseLoading(bindLoading);
-    });
+    this.$_handleRequestLoading(bindLoading);
+    return this.doAction({ action }, restProps)
+      .catch(err => {
+        return Promise.reject(err);
+      })
+      .finally(() => {
+        this.$_handleResponseLoading(bindLoading);
+      });
   };
 
   render() {

@@ -12,7 +12,7 @@ try {
 } catch (e) {
   //
 }
-let handleTouchmove = (evt) => {
+let handleTouchmove = evt => {
   let el = evt.target;
   const zoom = window.innerWidth / window.document.documentElement.clientWidth;
   if (evt.touches.length > 1 || zoom !== 1) {
@@ -44,7 +44,7 @@ let handleTouchmove = (evt) => {
   }
   evt.preventDefault();
 };
-const handleTouchstart = (evt) => {
+const handleTouchstart = evt => {
   startY = evt.touches ? evt.touches[0].screenY : evt.screenY;
 };
 const enable = () => {

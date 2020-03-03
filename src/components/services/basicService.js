@@ -49,21 +49,21 @@ class BasicServer extends React.PureComponent {
       console.error('你还未绑定action');
       return Promise.resolve(true);
     }
-    return this.handleCommand(bindList, restProps);
+    return this.$_handleCommand(bindList, restProps);
   };
 
-  handleCommand = async (bindList, restProps = {}) => {
+  $_handleCommand = async (bindList, restProps = {}) => {
     try {
       const bindPromise = bindList.map(item => {
         const resItem = { ...item, ...restProps };
         if (item.polling) {
           this.pollingApiList.push(
             setInterval(() => {
-              this.handleRequest(resItem);
+              this.$_handleRequest(resItem);
             }, resItem.polling),
           );
         }
-        return this.handleRequest(resItem);
+        return this.$_handleRequest(resItem);
       });
 
       return Promise.all(bindPromise);
@@ -72,7 +72,7 @@ class BasicServer extends React.PureComponent {
     }
   };
 
-  handleRequest = async ({ api, sendingData, formatBindingData, bindingData, callback }) => {
+  $_handleRequest = async ({ api, sendingData, formatBindingData, bindingData, callback }) => {
     try {
       const result = await api(sendingData);
       // TODO 处理返回信息

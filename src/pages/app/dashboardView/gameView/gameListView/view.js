@@ -10,8 +10,24 @@ import PropTypes from 'prop-types';
 // constants
 // import routerId from 'constants/routerId';
 
-class GameList extends React.Component {
+import LoadingService from 'components/services/loadingService';
+
+// services
+import { getDemo1 } from './services';
+
+class GameList extends LoadingService {
   state = {};
+
+  async componentDidMount() {
+    this.bindAction({ api: getDemo1 });
+
+    /*try {
+      const data = await this.getSingle({ action: getDemo1.name });
+      console.log('@data:', data);
+    } catch (e) {
+      console.log('@e:', e);
+    }*/
+  }
 
   render() {
     return (
