@@ -40,7 +40,7 @@
     "history": "^4.9.0",
     "hoist-non-react-statics": "^3.3.0",
     "immutable": "^3.8.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "lodash.isequal": "^4.5.0",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.22.1",
