@@ -238,19 +238,6 @@ export function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
-// 禁止React Developer Tools
-export const disableReactDevTools = () => {
-  const noop = () => undefined;
-  /* eslint-disable no-underscore-dangle */
-  const DEV_TOOLS = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
-
-  if (typeof DEV_TOOLS === 'object') {
-    for (const [key, value] of Object.entries(DEV_TOOLS)) {
-      DEV_TOOLS[key] = typeof value === 'function' ? noop : null;
-    }
-  }
-};
-
 /**
  * 实现redux的compose方法 [用作组件多个高阶连接打平]
  * 将hocA(hocB(Component))) ——> compose(hocA, hocB)(Component)
